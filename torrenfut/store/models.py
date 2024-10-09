@@ -9,7 +9,10 @@ class Camiseta(models.Model):
     marca = models.CharField(max_length=100, blank=True, null=True)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
     imagem = models.ImageField(upload_to='camisetas/', blank=True, null=True)
-
+    @property
+    def estoque_total(self):
+        return sum(tamanho.quantidade_em_estoque for tamanho in self.tamanhos.all())
+    
 class CamisetaTamanho(models.Model):
     TAMANHOS = [
         ('P', 'Pequeno'),
