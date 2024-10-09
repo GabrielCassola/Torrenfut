@@ -1,0 +1,14 @@
+.gallery {
+    display: flex;                      /* Ativa o Flexbox */
+    flex-wrap: wrap;                   /* Permite que os itens quebrem para a próxima linha */
+    justify-content: center;           /* Centraliza os itens */
+}
+.gallery li {
+    margin: 15px;                      /* Espaço entre as camisetas */
+    list-style: none;                  /* Remove os marcadores da lista */
+    width: 250px;                      /* Largura fixa para cada item */                  
+}
+img {
+    max-width: 100%;                   /* Imagem ocupa 100% do espaço disponível */
+    height: 300px;                      /* Mantém a proporção da imagem */
+}
