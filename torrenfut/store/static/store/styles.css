@@ -1,4 +1,3 @@
-<style>
 .gallery {
     display: flex;                      /* Ativa o Flexbox */
     flex-wrap: wrap;                   /* Permite que os itens quebrem para a próxima linha */
@@ -13,4 +12,3 @@ img {
     max-width: 100%;                   /* Imagem ocupa 100% do espaço disponível */
     height: 300px;                      /* Mantém a proporção da imagem */
 }
-</style>
