@@ -17,7 +17,7 @@
    ```bash
    python -m venv venv
    source venv/bin/activate  # Linux/MacOS
-   venv\\Scripts\\activate     # Windows
+   venv\Scripts\activate     # Windows
    ```   
 3. **Instale as dependências:**
 
@@ -31,4 +31,4 @@
    python manage.py runserver
    ```
 
-   O servidor estará disponível em \`http://127.0.0.1:8000/\store`.
+   O servidor estará disponível em http://127.0.0.1:8000/store.
