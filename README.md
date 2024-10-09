@@ -31,4 +31,4 @@
    python manage.py runserver
    ```
 
-   O servidor estará disponível em \http://127.0.0.1:8000/store.
+   O servidor estará disponível em http://127.0.0.1:8000/store.
