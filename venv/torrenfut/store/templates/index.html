@@ -6,6 +6,14 @@
     <title>Torrenfut</title>
 </head>
 <body>
-    <h1>Torrenfut</h1>
+    <h1 style="text-align: center;">Torrenfut</h1>
+    <ul>
+        {% for camiseta in camisetas %}
+            <li>
+                <img src="{{camiseta.imagem}}">
+                <br>{{ camiseta.time }} {{camiseta.estilo}} {{ camiseta.temporada }} - {{camiseta.preco}}
+            </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
