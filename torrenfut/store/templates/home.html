@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torrenfut</title>
+    <link rel="stylesheet" href="{% static 'store/home.css' %}">
+</head>
+<body>
+    <h1 style="text-align: center;">Torrenfut</h1>
+    <ul class="gallery">
+        {% for camiseta in camisetas %}
+            <li>
+                <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }}" width="100%">
+                <br>
+                <a href="{% url 'produto' camiseta.time camiseta.estilo camiseta.temporada %}">
+                    {{ camiseta.time }} {{ camiseta.estilo }} {{ camiseta.temporada }}
+                </a> - R${{ camiseta.preco }}
+            </li>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>
