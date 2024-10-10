@@ -1,0 +1,29 @@
+/* styles.css */
+
+.container {
+    display: flex; /* Usando flexbox para alinhar os itens */
+    align-items: flex-start; /* Alinha os itens ao topo */
+    margin: 20px; /* Espaçamento ao redor do container */
+}
+
+.container img {
+    max-width: 200px; /* Limita a largura da imagem */
+    margin-right: 20px; /* Espaço entre a imagem e o texto */
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column; /* Mantém o texto em coluna */
+}
+
+.product-info h1 {
+    font-size: 24px; /* Tamanho da fonte para o título */
+    font-weight: bold; /* Define o texto como negrito */
+    margin: 0; /* Remove a margem padrão do h1 */
+}
+
+.product-info .price {
+    margin-top: 10px; /* Espaçamento acima do preço */
+    font-size: 18px; /* Tamanho da fonte para o preço */
+    color: #007BFF; /* Cor do texto do preço */
+}
