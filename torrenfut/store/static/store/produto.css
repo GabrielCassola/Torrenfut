@@ -59,6 +59,11 @@ body {
     cursor: not-allowed;
 }
 
+.btn-tamanho.selected {
+    background-color: #007bff;  /* cor para indicar o botão selecionado */
+    color: white;
+}
+
 .stock-info h4 {
     font-size: 1.25rem;
     color: #333;

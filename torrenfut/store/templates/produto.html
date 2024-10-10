@@ -24,7 +24,7 @@
                 {% for tamanho in tamanhos %}
                     <button type="button"
                             class="btn-tamanho {% if tamanho.quantidade_em_estoque == 0 %}btn-desabilitado{% endif %}"
-                            onclick="exibirEstoque('{{ tamanho.tamanho }}', {{ tamanho.quantidade_em_estoque }})"
+                            onclick="exibirEstoque('{{ tamanho.tamanho }}', '{{ tamanho.quantidade_em_estoque }}')"
                             {% if tamanho.quantidade_em_estoque == 0 %}disabled{% endif %}>
                         {{ tamanho.tamanho }}
                     </button>
@@ -40,9 +40,19 @@
     <p>Voltar para <a href="/store">página inicial</a></p>
 
     <script>
+        const buttons = document.querySelectorAll('.btn-tamanho')
+
         function exibirEstoque(tamanho, quantidade) {
             document.getElementById('estoque').textContent = quantidade;
         }
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function(){
+                buttons.forEach(btn => btn.classList.remove('selected'));
+                this.classList.add('selected')
+            })
+        })
+
     </script>
 </body>
 </html>
