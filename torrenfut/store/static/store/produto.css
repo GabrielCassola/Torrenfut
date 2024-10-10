@@ -35,6 +35,35 @@ body {
     margin-bottom: 20px;
 }
 
+.btn-group {
+    margin-bottom: 20px;
+}
+
+.btn-tamanho {
+    background-color: #FFA500; /* Laranja */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-tamanho:hover {
+    background-color: #FF8C00; /* Laranja escuro no hover */
+}
+
+.btn-tamanho:disabled, .btn-desabilitado {
+    background-color: #A9A9A9; /* Cinza se desabilitado */
+    cursor: not-allowed;
+}
+
+.stock-info h4 {
+    font-size: 1.25rem;
+    color: #333;
+}
+
 a {
     text-decoration: none;
     color: #007bff;
