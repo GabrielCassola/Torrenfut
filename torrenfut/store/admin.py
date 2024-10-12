@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import Camiseta, CamisetaTamanho
-from fornecedores.models import Fornecedor, Taxa
 
 class CamisetaTamanhoInline(admin.TabularInline):
     model = CamisetaTamanho
