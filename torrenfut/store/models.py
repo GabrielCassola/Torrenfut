@@ -52,3 +52,10 @@ class CamisetaTamanho(models.Model):
     camiseta = models.ForeignKey(Camiseta, related_name='tamanhos', on_delete=models.CASCADE)
     tamanho = models.CharField(max_length=2, choices=TAMANHOS)
     quantidade_em_estoque = models.IntegerField()
+    estoque_minimo = models.IntegerField(default=5) # Valor minimo para alerta de estoque
+
+    def __str__(self):
+        return self.tamanho
+
+    def estoque_baixo(self):
+        return self.quantidade_em_estoque <= self.estoque_minimo
