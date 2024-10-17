@@ -10,12 +10,15 @@
 </head>
 <body>
     <h1 style="text-align: center;">Torrenfut</h1>
+
     <ul class="gallery">
         {% for camiseta in camisetas %}
             <li>
+                <!-- Certifique-se de que a imagem está sendo carregada corretamente -->
                 <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }}" width="100%">
                 <br>
-                <a href="{% url 'produto' camiseta.time camiseta.estilo camiseta.temporada %}">
+                <!-- Link para o produto usando urlencode na temporada -->
+                <a href="{% url 'produto' time=camiseta.time estilo=camiseta.estilo temporada=camiseta.temporada|urlencode %}">
                     {{ camiseta.time }} {{ camiseta.estilo }} {{ camiseta.temporada }}
                 </a> - R$ {{ camiseta.valor_final|floatformat:2 }}
             </li>

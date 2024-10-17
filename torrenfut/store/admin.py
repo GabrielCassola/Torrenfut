@@ -3,7 +3,7 @@ from .models import Camiseta, CamisetaTamanho
 
 class CamisetaTamanhoInline(admin.TabularInline):
     model = CamisetaTamanho
-    extra = 1  # Quantas linhas extras mostrar
+    extra = 0  # Quantas linhas extras mostrar
 
     # Mostrar no Django que o estoque esta abaixo de 5
     def estoque_baixo_alerta(self, obj):
@@ -14,9 +14,8 @@ class CamisetaTamanhoInline(admin.TabularInline):
 
 class CamisetasAdmin(admin.ModelAdmin):
     list_display = ("time", "temporada", "estilo", "estoque_total", "valor_final")
+    list_filter = ("time", "temporada")
     inlines = [CamisetaTamanhoInline]
-
-
 
 # Register your models here.
 admin.site.register(Camiseta, CamisetasAdmin)
