@@ -77,3 +77,18 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.btn-comprar {
+    background-color: #FFA500; /* Laranja */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-comprar:hover {
+    background-color: #FF8C00; /* Laranja escuro no hover */
+}
