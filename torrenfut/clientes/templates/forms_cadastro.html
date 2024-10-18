@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente</title>
+    <link rel="stylesheet" href="{% static 'forms.css' %}">
+</head>
+<body>
+    {% if messages %}
+    <div class="alert">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    <script>
+        // Aguarde 3 segundos (3000 ms) e então redirecione
+        setTimeout(function() {
+            window.location.href = "{% url 'store' %}"; 
+        }, 2000);
+    </script>
+    {% endif %}
+
+    <div class="container">
+        <h1>Cadastro de Cliente</h1>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Renderiza o formulário -->
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        {% if form.errors %}
+            <div class="errors">
+                <h2>Erros no Formulário:</h2>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
