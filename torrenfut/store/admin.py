@@ -25,7 +25,7 @@ def exportar_estoque_csv(modeladmin, request, queryset):
     ws.title = "Relatório de Estoque"
 
     # Cabeçalhos do arquivo Excel
-    ws.append(['Produto', 'Tamanho', 'Estoque_Atual', 'Estoque_Minimo', 'Fornecedor', 'Categoria', 'Preco_de_Venda'])
+    ws.append(['Time', 'Cor', 'Marca', 'Patrocinador', 'Tamanho', 'Estoque_Atual', 'Estoque_Minimo', 'Fornecedor', 'Categoria', 'Preco_de_Venda'])
 
     # Define a fonte vermelha e o preenchimento para estoque abaixo do mínimo
     fonte_vermelha = Font(color="FF0000")
@@ -36,6 +36,9 @@ def exportar_estoque_csv(modeladmin, request, queryset):
         for tamanho_instance in camiseta.tamanhos.all():
             row = [
                 camiseta.time,
+                camiseta.cor_principal,
+                camiseta.marca,
+                camiseta.patrocinador,
                 tamanho_instance.tamanho,
                 tamanho_instance.quantidade_em_estoque,
                 tamanho_instance.estoque_minimo,
