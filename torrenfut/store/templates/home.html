@@ -11,6 +11,19 @@
 <body>
     <h1 style="text-align: center;">Torrenfut</h1>
 
+    <!-- Botões de login e cadastro, ou exibe o nome do usuário logado -->
+    <div style="text-align: right; margin-bottom: 20px;">
+        {% if user.is_authenticated %}
+            <!-- Exibe o ícone do usuário com um link para o perfil -->
+            <a href="{% url 'perfil' %}" style="text-decoration: none; color: black;">
+            <span>{{ user.first_name }} {{ user.last_name }}</span>
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}" class="button">Login</a>
+            <a href="{% url 'cadastro' %}" class="button">Cadastro</a>
+        {% endif %}
+    </div>
+
     <ul class="gallery">
         {% for camiseta in camisetas %}
             <li>

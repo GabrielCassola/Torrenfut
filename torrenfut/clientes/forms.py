@@ -1,17 +1,12 @@
 from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
-from .models import Cliente
+class ClienteRegistrationForm(UserCreationForm):
+    first_name = forms.CharField(max_length=50, required=True, label='Nome')
+    last_name = forms.CharField(max_length=50, required=True, label='Sobrenome')
+    email = forms.EmailField(required=True, label='Email')
 
-
-class PersonForm(forms.ModelForm):
     class Meta:
-        model = Cliente
-        fields = '__all__'
-
-    def __init__(self, user=None, *args, **kwargs):
-        super(PersonForm, self).__init__(*args, **kwargs)
-        # my_field = MyModel.objects.filter(user=user)
-        if user.is_authenticated:
-            print(user)
-        else:
-            print('Não')
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')

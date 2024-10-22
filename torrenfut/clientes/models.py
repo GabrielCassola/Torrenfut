@@ -1,9 +1,11 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 class Cliente(models.Model):
-    first_name = models.CharField('nome', max_length=50, default='-')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    first_name = models.CharField('nome', max_length=50, null=True)
     last_name = models.CharField('sobrenome', max_length=50, null=True) 
-    email = models.EmailField(null=True)
+    email = models.EmailField(unique=True, null=False)  # E-mail único
 
     class Meta:
         ordering = ('first_name',)

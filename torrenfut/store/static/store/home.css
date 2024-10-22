@@ -12,3 +12,20 @@ img {
     max-width: 100%;                   /* Imagem ocupa 100% do espaço disponível */
     height: 300px;                      /* Mantém a proporção da imagem */
 }
+
+.button {
+    background-color: #4CAF50; /* Cor verde */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
