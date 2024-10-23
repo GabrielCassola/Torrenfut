@@ -30,7 +30,7 @@ def adicionar_ao_carrinho(request, camiseta_id):
         tamanho.quantidade_em_estoque -= 1
         tamanho.save()
 
-        messages.success(request, f'{camiseta.time} foi adicionado ao carrinho.')
+        #messages.success(request, f'{camiseta.time} foi adicionado ao carrinho.')
     else:
         messages.error(request, 'Estoque insuficiente para adicionar mais itens.')
 
