@@ -18,6 +18,9 @@
             <a href="{% url 'perfil' %}" style="text-decoration: none; color: black;">
             <span>{{ user.first_name }} {{ user.last_name }}</span>
             </a>
+
+            <!-- Botão para ir ao carrinho -->
+            <a href="{% url 'ver_carrinho' %}" class="button" style="margin-left: 15px;">Ir para o Carrinho</a>
         {% else %}
             <a href="{% url 'login' %}" class="button">Login</a>
             <a href="{% url 'cadastro' %}" class="button">Cadastro</a>
