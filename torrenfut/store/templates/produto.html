@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ camiseta.time }} {{ camiseta.estilo }} {{ camiseta.temporada }}</title>
     <link rel="stylesheet" href="{% static 'store/produto.css' %}">
@@ -11,12 +11,14 @@
 <body>
     <div class="container">
         <!-- Imagem da camisa -->
-        <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }} {{ camiseta.estilo }}" />
+        <div class="image-container">
+            <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }} {{ camiseta.estilo }}" />
+        </div>
         
         <!-- Informações do produto -->
         <div class="product-info">
             <h1>{{ camiseta.time }} {{ camiseta.estilo }} {{ camiseta.temporada }}</h1>
-            <p class="price">Preço: R${{ camiseta.valor_final|floatformat:2 }}</p>
+            <p class="price">Preço: R$ {{ camiseta.valor_final|floatformat:2 }}</p>
 
             <!-- Botões de seleção de tamanhos -->
             <h3>Escolha o tamanho:</h3>
@@ -53,7 +55,8 @@
             </form>            
         </div>
     </div>
-    <p>Voltar para <a href="/store">página inicial</a></p>
+    <p class="back-link">Voltar para <a href="/store">página inicial</a></p>
+
 
     <script>
         const buttons = document.querySelectorAll('.btn-tamanho');

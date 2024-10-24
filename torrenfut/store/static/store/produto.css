@@ -119,3 +119,17 @@ a:hover {
     background-color: #ccc;
     cursor: not-allowed;
 }
+
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-link a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
