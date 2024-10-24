@@ -1,36 +1,58 @@
+/* Estilo Geral do Corpo */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #f0f4f8, #d9e2ec); /* Gradiente suave de fundo */
+    color: #333; /* Cor do texto */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container do Perfil */
 .perfil-cliente {
-    margin: 20px;
+    background: white; /* Fundo branco para o perfil */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 20px;
+    max-width: 600px; /* Largura máxima */
+    margin: auto; /* Centraliza o container */
 }
 
-.perfil-cliente h2 {
-    color: #333;
+/* Estilo do Título */
+h2 {
+    color: #007bff; /* Cor azul para o título */
+    text-align: center; /* Centraliza o título */
+    margin-bottom: 20px; /* Espaço abaixo do título */
 }
 
-.perfil-cliente p {
-    font-size: 18px;
+/* Estilo dos Parágrafos */
+p {
+    font-size: 16px; /* Tamanho da fonte */
+    line-height: 1.6; /* Altura da linha para melhor legibilidade */
+    margin: 10px 0; /* Margem entre os parágrafos */
 }
 
-.perfil-cliente form {
-    margin-top: 20px;
+/* Estilo do Link */
+a {
+    color: #007bff; /* Cor azul para links */
+    text-decoration: none; /* Remove o sublinhado */
 }
 
-button {
-    padding: 10px 15px;
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+a:hover {
+    text-decoration: underline; /* Sublinhado ao passar o mouse */
 }
 
-button:hover {
-    background-color: #4cae4c;
-}
-
+/* Estilo do Botão de Logout */
 .btn-logout {
-    background-color: #d9534f;
+    background-color: #dc3545; /* Vermelho para o botão de logout */
+    color: white; /* Texto branco */
+    border: none; /* Remove a borda */
+    padding: 10px 15px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor em forma de mão */
+    transition: background-color 0.3s ease; /* Transição suave */
+    width: 100%; /* Botão ocupa toda a largura */
 }
 
 .btn-logout:hover {
-    background-color: #c9302c;
+    background-color: #c82333; /* Tom mais escuro ao passar o mouse */
 }

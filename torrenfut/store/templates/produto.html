@@ -24,7 +24,7 @@
                 {% for tamanho in tamanhos %}
                     <button type="button"
                             class="btn-tamanho {% if tamanho.quantidade_em_estoque == 0 %}btn-desabilitado{% endif %}"
-                            onclick="exibirEstoque('{{ tamanho.tamanho }}', '{{ tamanho.quantidade_em_estoque }}')"
+                            onclick="exibirEstoque('{{ tamanho.tamanho }}', '{{ tamanho.quantidade_em_estoque }}', '{{ tamanho.id }}')"
                             {% if tamanho.quantidade_em_estoque == 0 %}disabled{% endif %}>
                         {{ tamanho.tamanho }}
                     </button>
@@ -35,19 +35,28 @@
             <div class="stock-info">
                 <h4>Quantidade em estoque: <span id="estoque">Selecione um tamanho</span></h4>
             </div>
-             <!-- Botão solicitar compra -->
-             <div>
-                <button type="button" class="btn-comprar">Comprar</button>
-            </div>
+
+            <!-- Formulário para adicionar ao carrinho -->
+            <form action="{% url 'adicionar_ao_carrinho' camiseta.id %}" method="POST" id="formCarrinho">
+                {% csrf_token %}
+                <input type="hidden" name="tamanho_id" id="tamanho_id" value="">
+                <button type="submit" class="btn-comprar" disabled id="btnComprar">Adicionar ao Carrinho</button>
+            </form>
         </div>
     </div>
     <p>Voltar para <a href="/store">página inicial</a></p>
 
     <script>
-        const buttons = document.querySelectorAll('.btn-tamanho')
+        const buttons = document.querySelectorAll('.btn-tamanho');
+        const btnComprar = document.getElementById('btnComprar');
+        const tamanhoInput = document.getElementById('tamanho_id');
 
-        function exibirEstoque(tamanho, quantidade) {
+        function exibirEstoque(tamanho, quantidade, tamanho_id) {
             document.getElementById('estoque').textContent = quantidade;
+            tamanhoInput.value = tamanho_id;
+
+            // Habilita o botão de compra se houver estoque
+            btnComprar.disabled = quantidade == 0;
         }
 
         buttons.forEach(button => {
@@ -55,7 +64,7 @@
                 buttons.forEach(btn => btn.classList.remove('selected'));
                 this.classList.add('selected')
             })
-        })
+        });
 
     </script>
 </body>

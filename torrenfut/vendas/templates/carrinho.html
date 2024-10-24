@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %} 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho</title>
+    <link rel="stylesheet" href="{% static 'carrinho.css' %}">
+
+</head>
+<body>
+    {% block content %}
+    <h2>Carrinho de Compras</h2>
+
+    {% if carrinho.itens.count > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Tamanho</th>
+                    <th>Quantidade</th>
+                    <th>Preço Unitário</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in carrinho.itens.all %}
+                <tr>
+                    <td>{{ item.camiseta.time }}</td>
+                    <td>{{ item.tamanho.tamanho }}</td>
+                    <td>{{ item.quantidade }}</td>
+                    <td>R$ {{ item.camiseta.valor_final|floatformat:2 }}</td>
+                    <td>R$ {{ item.subtotal|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3>Total: R$ {{ carrinho.total_preco|floatformat:2 }}</h3>
+        <a href="{% url 'confirmar_compra' %}" class="btn btn-success">Confirmar Compra</a>
+    {% else %}
+        <p>Seu carrinho está vazio.</p>
+    {% endif %}
+    {% endblock %}
+    <p>Voltar para <a href="/store">página inicial</a></p>
+</body>
+</html>
