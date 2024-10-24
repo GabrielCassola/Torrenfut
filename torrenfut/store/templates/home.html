@@ -30,8 +30,8 @@
     <ul class="gallery">
         {% for camiseta in camisetas %}
             <li>
-                <!-- Certifique-se de que a imagem está sendo carregada corretamente -->
-                <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }}" width="100%">
+                <a href="{% url 'produto' time=camiseta.time estilo=camiseta.estilo temporada=camiseta.temporada|urlencode %}">
+                <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }}" width="100%"></a>
                 <br>
                 <!-- Link para o produto usando urlencode na temporada -->
                 <a href="{% url 'produto' time=camiseta.time estilo=camiseta.estilo temporada=camiseta.temporada|urlencode %}">
