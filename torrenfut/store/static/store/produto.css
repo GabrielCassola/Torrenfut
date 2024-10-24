@@ -92,3 +92,30 @@ a:hover {
 .btn-comprar:hover {
     background-color: #FF8C00; /* Laranja escuro no hover */
 }
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.quantity-selector input {
+    width: 60px;
+    text-align: center;
+    font-size: 16px;
+    padding: 5px;
+    margin: 0 10px;
+}
+
+.quantity-selector button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.quantity-selector button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

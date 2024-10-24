@@ -4,6 +4,10 @@ from .models import Carrinho, ItemCarrinho
 from store.models import Camiseta, CamisetaTamanho
 from django.contrib import messages
 
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 @login_required
 def adicionar_ao_carrinho(request, camiseta_id):
     camiseta = get_object_or_404(Camiseta, id=camiseta_id)
@@ -11,6 +15,14 @@ def adicionar_ao_carrinho(request, camiseta_id):
     # Obter o tamanho do formulário
     tamanho_id = request.POST.get('tamanho_id')
     tamanho = get_object_or_404(CamisetaTamanho, id=tamanho_id)
+
+    # Obter a quantidade do formulário
+    quantidade = int(request.POST.get('quantidade', 1))  # Pega a quantidade do input, padrão 1
+
+    # Verifica se a quantidade solicitada está disponível no estoque
+    if quantidade > tamanho.quantidade_em_estoque:
+        messages.error(request, f'Estoque insuficiente. Apenas {tamanho.quantidade_em_estoque} unidades disponíveis.')
+        return redirect('ver_camiseta', camiseta_id=camiseta_id)
 
     # Obter ou criar o carrinho do usuário
     carrinho, created = Carrinho.objects.get_or_create(usuario=request.user)
@@ -21,25 +33,26 @@ def adicionar_ao_carrinho(request, camiseta_id):
         camiseta=camiseta,
         tamanho=tamanho
     )
-    
+
     if created:
-        # Se o item foi criado, a quantidade inicial deve ser 1
-        item_carrinho.quantidade = 1
+        # Se o item foi criado, a quantidade inicial deve ser a solicitada
+        item_carrinho.quantidade = quantidade
     else:
-        # Se o item já estava no carrinho, verificar se há estoque e incrementar a quantidade
-        if item_carrinho.quantidade < tamanho.quantidade_em_estoque:
-            item_carrinho.quantidade += 1
+        # Se o item já estava no carrinho, somar a quantidade solicitada à atual, verificando o estoque
+        nova_quantidade = item_carrinho.quantidade + quantidade
+        if nova_quantidade <= tamanho.quantidade_em_estoque:
+            item_carrinho.quantidade = nova_quantidade
         else:
-            messages.error(request, 'Estoque insuficiente para adicionar mais itens.')
+            messages.error(request, f'Estoque insuficiente. Você já possui {item_carrinho.quantidade} no carrinho.')
             return redirect('ver_carrinho')
-    
+
     item_carrinho.save()
 
-    # Reduzir o estoque momentaneamente
-    tamanho.quantidade_em_estoque -= 1
+    # Atualizar o estoque
+    tamanho.quantidade_em_estoque -= quantidade
     tamanho.save()
 
-    #messages.success(request, f'{camiseta.time} foi adicionado ao carrinho.')
+    #messages.success(request, f'{quantidade} unidade(s) de {camiseta.time} foram adicionadas ao carrinho.')
     return redirect('ver_carrinho')
 
 
