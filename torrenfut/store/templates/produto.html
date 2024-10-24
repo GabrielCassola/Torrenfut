@@ -40,8 +40,8 @@
             <form action="{% url 'adicionar_ao_carrinho' camiseta.id %}" method="POST" id="formCarrinho">
                 {% csrf_token %}
                 <input type="hidden" name="tamanho_id" id="tamanho_id" value="">
-                <button type="submit" class="btn-comprar" disabled id="btnComprar">Adicionar ao Carrinho</button>
-            </form>
+                <button type="submit" class="btn-comprar" disabled id="btnComprar" onclick="this.disabled=true; this.form.submit();">Adicionar ao Carrinho</button>
+            </form>            
         </div>
     </div>
     <p>Voltar para <a href="/store">página inicial</a></p>

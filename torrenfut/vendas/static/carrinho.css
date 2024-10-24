@@ -1,3 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -5,32 +32,85 @@ table {
 }
 
 th, td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
+    padding: 12px 15px;
+    text-align: left;
 }
 
-.btn-remover {
-    background-color: #e74c3c;
+th {
+    background-color: #007BFF;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+td {
+    font-size: 14px;
+}
+
+td button {
+    background-color: #dc3545;
     color: white;
     border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+    padding: 6px 12px;
     border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.btn-remover:hover {
-    background-color: #c0392b;
+td button:hover {
+    background-color: #c82333;
 }
 
-.btn-finalizar {
-    background-color: #2ecc71;
+.btn-success {
+    background-color: #28a745;
     color: white;
+    text-align: center;
     padding: 10px 20px;
+    display: inline-block;
     text-decoration: none;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-.btn-finalizar:hover {
-    background-color: #27ae60;
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.total {
+    text-align: right;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-link a {
+    color: #007BFF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.back-link a:hover {
+    color: #0056b3;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    th, td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .btn-success {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
 }

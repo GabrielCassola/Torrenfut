@@ -22,18 +22,24 @@ def adicionar_ao_carrinho(request, camiseta_id):
         tamanho=tamanho
     )
     
-    if item_carrinho.quantidade < tamanho.quantidade_em_estoque:
-        item_carrinho.quantidade += 1
-        item_carrinho.save()
-
-        # Reduzir momentaneamente o estoque
-        tamanho.quantidade_em_estoque -= 1
-        tamanho.save()
-
-        #messages.success(request, f'{camiseta.time} foi adicionado ao carrinho.')
+    if created:
+        # Se o item foi criado, a quantidade inicial deve ser 1
+        item_carrinho.quantidade = 1
     else:
-        messages.error(request, 'Estoque insuficiente para adicionar mais itens.')
+        # Se o item já estava no carrinho, verificar se há estoque e incrementar a quantidade
+        if item_carrinho.quantidade < tamanho.quantidade_em_estoque:
+            item_carrinho.quantidade += 1
+        else:
+            messages.error(request, 'Estoque insuficiente para adicionar mais itens.')
+            return redirect('ver_carrinho')
+    
+    item_carrinho.save()
 
+    # Reduzir o estoque momentaneamente
+    tamanho.quantidade_em_estoque -= 1
+    tamanho.save()
+
+    #messages.success(request, f'{camiseta.time} foi adicionado ao carrinho.')
     return redirect('ver_carrinho')
 
 
@@ -58,3 +64,16 @@ def confirmar_compra(request):
 
     messages.success(request, 'Compra confirmada com sucesso!')
     return redirect('perfil')
+
+@login_required
+def remover_item(request, item_id):
+    item = get_object_or_404(ItemCarrinho, id=item_id, carrinho__usuario=request.user)
+    
+    # Restaurar o estoque do tamanho removido
+    item.tamanho.quantidade_em_estoque += item.quantidade
+    item.tamanho.save()
+    
+    item.delete()
+    messages.success(request, 'Item removido com sucesso do carrinho.')
+    
+    return redirect('ver_carrinho')
