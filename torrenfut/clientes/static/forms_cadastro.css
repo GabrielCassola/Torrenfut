@@ -18,33 +18,10 @@ body {
     text-align: left; /* Alinhamento à esquerda */
 }
 
-h2 {
+h1 {
     margin-bottom: 20px;
     text-align: center;
     color: #28a745; /* Verde */
-}
-
-.form-group {
-    margin-bottom: 15px; /* Espaço entre os grupos */
-}
-
-label {
-    display: block; /* Muda para block para empilhar rótulo e input */
-    margin-bottom: 5px; /* Espaço abaixo do rótulo */
-}
-
-input[type="email"],
-input[type="password"] {
-    width: 90%; /* Largura total do container */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: border 0.3s;
-}
-
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-color: #28a745; /* Verde */
 }
 
 button {
@@ -56,10 +33,20 @@ button {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px; /* Espaço acima do botão */
 }
 
 button:hover {
     background-color: #218838; /* Verde mais escuro */
+}
+
+.errors {
+    margin-top: 15px;
+    background: #ffdddd; /* Fundo vermelho claro para erros */
+    color: #d8000c; /* Texto vermelho */
+    padding: 10px;
+    border: 1px solid #d8000c; /* Borda vermelha */
+    border-radius: 4px;
 }
 
 .back-link {
@@ -77,5 +64,11 @@ button:hover {
     text-decoration: underline;
 }
 
-
-
+.alert {
+    background: #fff3cd; /* Fundo amarelo claro para alertas */
+    color: #856404; /* Texto amarelo escuro */
+    padding: 10px;
+    border: 1px solid #ffeeba; /* Borda amarelo claro */
+    border-radius: 4px;
+    margin-bottom: 20px; /* Espaço abaixo do alerta */
+}
