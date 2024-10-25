@@ -43,7 +43,7 @@
         </table>
         <h3>Total: R$ {{ carrinho.total_preco|floatformat:2 }}</h3>
         <a href="{% url 'confirmar_compra' %}" class="btn btn-success">Confirmar Compra</a>
-        <p>Voltar para <a href="/store">página inicial</a></p>
+        <p class="back-link">Voltar para <a href="/store">página inicial</a></p>
     {% else %}
         <p>Seu carrinho está vazio. Volte para a <a href="/store">página inicial</a> e adicione produtos ao carrinho.</p>
     {% endif %}

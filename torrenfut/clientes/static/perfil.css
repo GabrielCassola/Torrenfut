@@ -19,7 +19,7 @@ body {
 
 /* Estilo do Título */
 h2 {
-    color: #007bff; /* Cor azul para o título */
+    color: #28a745; /* Cor verde para o título */
     text-align: center; /* Centraliza o título */
     margin-bottom: 20px; /* Espaço abaixo do título */
 }
@@ -32,13 +32,20 @@ p {
 }
 
 /* Estilo do Link */
-a {
-    color: #007bff; /* Cor azul para links */
-    text-decoration: none; /* Remove o sublinhado */
+
+.back-link {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
 }
 
-a:hover {
-    text-decoration: underline; /* Sublinhado ao passar o mouse */
+.back-link a {
+    color: #28a745; /* Verde */
+    text-decoration: none;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
 }
 
 /* Estilo do Botão de Logout */

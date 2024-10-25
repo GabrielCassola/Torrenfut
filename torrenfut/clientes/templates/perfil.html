@@ -14,8 +14,6 @@
       
       <p><strong>Nome completo:</strong> {{ user.first_name }} {{ user.last_name }}</p>
       <p><strong>E-mail:</strong> {{ user.email }}</p>
-      
-      <p>Voltar para <a href="/store">página inicial</a></p>
   
       <!-- Botão de logout -->
       <form method="post" action="{% url 'logout' %}" style="margin-top: 20px;">
@@ -23,6 +21,7 @@
         <button type="submit" class="btn-logout">Sair</button>
       </form>
     </div>
+    <p class="back-link">Voltar para <a href="/store">página inicial</a></p>
   {% endblock %}
 </body>
 </html>

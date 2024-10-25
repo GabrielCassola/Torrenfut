@@ -40,7 +40,7 @@ body {
 }
 
 .btn-tamanho {
-    background-color: #FFA500; /* Laranja */
+    background-color: #28a745; /* Verde */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -51,7 +51,7 @@ body {
 }
 
 .btn-tamanho:hover {
-    background-color: #FF8C00; /* Laranja escuro no hover */
+    background-color: #186b2b; /* Verde escuro no hover */
 }
 
 .btn-tamanho:disabled, .btn-desabilitado {
@@ -60,7 +60,7 @@ body {
 }
 
 .btn-tamanho.selected {
-    background-color: #007bff;  /* cor para indicar o botão selecionado */
+    background-color: #186b2b;  /* cor para indicar o botão selecionado */
     color: white;
 }
 
@@ -79,7 +79,7 @@ a:hover {
 }
 
 .btn-comprar {
-    background-color: #FFA500; /* Laranja */
+    background-color: #28a745;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -90,7 +90,7 @@ a:hover {
 }
 
 .btn-comprar:hover {
-    background-color: #FF8C00; /* Laranja escuro no hover */
+    background-color: #186b2b; 
 }
 
 .quantity-selector {
@@ -109,7 +109,7 @@ a:hover {
 
 .quantity-selector button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     border: none;
     cursor: pointer;
@@ -126,7 +126,7 @@ a:hover {
 }
 
 .back-link a {
-    color: #3498db;
+    color: #28a745;
     text-decoration: none;
 }
 

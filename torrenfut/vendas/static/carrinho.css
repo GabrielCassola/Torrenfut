@@ -37,7 +37,7 @@ th, td {
 }
 
 th {
-    background-color: #007BFF;
+    background-color: #28a745;
     color: white;
     text-transform: uppercase;
     font-size: 14px;
@@ -93,13 +93,13 @@ td button:hover {
 }
 
 .back-link a {
-    color: #007BFF;
+    color: #28a745;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .back-link a:hover {
-    color: #0056b3;
+    color: #28a745;
 }
 
 /* Responsividade */
