@@ -4,7 +4,7 @@
     justify-content: center;           /* Centraliza os itens */
 }
 .gallery li {
-    margin: 15px;                      /* Espaço entre as camisetas */
+    margin: 20px;                      /* Espaço entre as camisetas */
     list-style: none;                  /* Remove os marcadores da lista */
     width: 250px;                      /* Largura fixa para cada item */                  
 }
@@ -33,3 +33,23 @@ img {
 .button:hover {
     background-color: #45a049;
 }
+
+.link{
+    text-align: center;
+    text-decoration: none;
+    color: #000000;
+    display: block; 
+    font-size: 16px;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.preço {
+    display: block;             
+    text-align: center;     
+    font-weight: bold;        
+    margin-top: 10px;     
+    font-size: 18px;  
+}  
