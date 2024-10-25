@@ -26,7 +26,7 @@
             <tbody>
                 {% for item in carrinho.itens.all %}
                 <tr>
-                    <td>{{ item.camiseta.time }} {{item.camiseta.estilo}} {{item.camiseta.temporada}}</td>
+                    <td><a href="{% url 'produto' item.camiseta.time item.camiseta.estilo item.camiseta.temporada|urlencode %}">{{ item.camiseta.time }} {{item.camiseta.estilo}} {{item.camiseta.temporada}}</a></td>
                     <td>{{ item.tamanho.tamanho }}</td>
                     <td>{{ item.quantidade }}</td>
                     <td>R$ {{ item.camiseta.valor_final|floatformat:2 }}</td>
