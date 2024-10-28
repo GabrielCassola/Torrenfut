@@ -3,6 +3,7 @@ import openpyxl
 from openpyxl.styles import Font, PatternFill
 from django.http import HttpResponse
 from .models import Camiseta, CamisetaTamanho
+from .utils import  gerar_grafico
 
 class CamisetaTamanhoInline(admin.TabularInline):
     model = CamisetaTamanho
@@ -62,6 +63,7 @@ def exportar_estoque_csv(modeladmin, request, queryset):
     # Salva o arquivo Excel na resposta
     wb.save(response)
     return response
+
 # Nome para a ação no admin
 exportar_estoque_csv.short_description = "Exportar Estoque para CSV"
 
@@ -71,6 +73,11 @@ class CamisetasAdmin(admin.ModelAdmin):
     list_filter = ("time", "temporada")
     inlines = [CamisetaTamanhoInline]
     actions = [exportar_estoque_csv]
+
+    def mostrar_grafico_estoque(self, obj):
+        return gerar_grafico(obj)
+
+    mostrar_grafico_estoque.short_description = "Gráfico estoque"
 
 # Register your models here.
 admin.site.register(Camiseta, CamisetasAdmin)
