@@ -1,6 +1,10 @@
 from django.http import HttpResponse, Http404
 from django.template import loader
-from .models import Camiseta, CamisetaTamanho
+from .models import Camiseta, CamisetaTamanho, HistoricoEstoque
+import json
+from django.shortcuts import render
+from django.contrib.admin.models import LogEntry, CHANGE
+import re
 
 
 def store(request):
@@ -25,5 +29,25 @@ def produto(request, time, estilo, temporada):
         'camiseta': camiseta, 
         'tamanhos': tamanhos,
 
+    }
+    return HttpResponse(template.render(context, request))
+
+def grafico_estoque(request, produto_id):
+    
+    try:
+        produto = CamisetaTamanho.objects.get(id=produto_id)
+        historico = HistoricoEstoque.objects.filter(produto=produto).order_by('data_alteracao')
+    except CamisetaTamanho.DoesNotExist:
+        raise Http404("Camiseta não encontrada.")
+    
+    dados_grafico = [["Data", "Quantidade em Estoque"]]
+    for entrada in historico:
+        dados_grafico.append([entrada.data_alteracao.strftime('%Y-%m-%d %H:%M:%S'), entrada.quantidade])
+
+    template = loader.get_template('grafico_estoque.html')
+
+    context = {
+        'produto': produto,
+        'dados_grafico': json.dumps(dados_grafico)
     }
     return HttpResponse(template.render(context, request))

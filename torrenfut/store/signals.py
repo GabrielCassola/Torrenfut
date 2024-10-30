@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
-from .models import CamisetaTamanho
+from .models import CamisetaTamanho, HistoricoEstoque
 
 @receiver(post_save, sender=CamisetaTamanho) # O email é enviado a cada vez que um produto é atualizado
 def verificar_estoque(sender, instance, **kwargs):
@@ -27,3 +27,11 @@ destinatarios =[
     'pedro.smith@unesp.br',
     'pirs.pedrinhoo@gmail.com'
 ]
+
+# Cria um sinal para a funcao HistoricoEstoque saber que o estoque foi modificado
+@receiver(post_save, sender=CamisetaTamanho)
+def atualizar_historico_estoque(sender, instance, **kwargs):
+    HistoricoEstoque.objects.create(
+        produto=instance,
+        quantidade=instance.quantidade_em_estoque
+    )

@@ -8,5 +8,6 @@ urlpatterns = [
     path('store/', views.store, name='store'),
     path('store/produto/<str:time>/<str:estilo>/<str:temporada>', views.produto, name='produto'),
     re_path(r'^store/produto/(?P<time>[^/]+)/(?P<estilo>[^/]+)/(?P<temporada>.+)$', views.produto, name='produto'),
+    path('grafico_estoque/<int:produto_id>/', views.grafico_estoque, name='grafico_estoque'),
 ]
 
