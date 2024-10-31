@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Carrinho, ItemCarrinho
+from .models import Carrinho, ItemCarrinho, Compra, ItemCompra
 from store.models import Camiseta, CamisetaTamanho
 from django.contrib import messages
 
@@ -66,17 +66,37 @@ def ver_carrinho(request):
 # Confirmar compra
 @login_required
 def confirmar_compra(request):
+    # Obtém o carrinho do usuário
     carrinho = get_object_or_404(Carrinho, usuario=request.user)
+    if carrinho.itens.count() == 0:
+        messages.error(request, "Seu carrinho está vazio.")
+        return redirect('ver_carrinho')
 
+    # Calcular o total da compra
+    total = sum(item.camiseta.valor_final * item.quantidade for item in carrinho.itens.all())
+
+    # Criar a compra
+    compra = Compra(usuario=request.user, total=total)
+    compra.save()  # Isso garante que a compra tenha um ID
+
+    # Adicionar cada item do carrinho à compra
     for item in carrinho.itens.all():
-        # Confirmar a remoção do estoque
+        ItemCompra.objects.create(
+            compra=compra,  # Aqui a compra já tem um ID
+            camiseta=item.camiseta,
+            tamanho=item.tamanho,
+            quantidade=item.quantidade,
+            preco_unitario=item.camiseta.valor_final
+        )
+        # Atualizar o estoque e deletar o item do carrinho
         item.tamanho.quantidade_em_estoque -= item.quantidade
         item.tamanho.save()
+        item.delete()  # Remover o item do carrinho
 
-    carrinho.delete()  # Limpar o carrinho após a compra
-
-    messages.success(request, 'Compra confirmada com sucesso!')
+    messages.success(request, 'Compra realizada com sucesso!')
     return redirect('perfil')
+
+
 
 @login_required
 def remover_item(request, item_id):
@@ -87,6 +107,6 @@ def remover_item(request, item_id):
     item.tamanho.save()
     
     item.delete()
-    messages.success(request, 'Item removido com sucesso do carrinho.')
+   # messages.success(request, 'Item removido com sucesso do carrinho.')
     
     return redirect('ver_carrinho')
