@@ -27,19 +27,75 @@
         {% endif %}
     </div>
 
-    <ul class="gallery">
-        {% for camiseta in camisetas %}
-            <li>
-                <a href="{% url 'produto' time=camiseta.time estilo=camiseta.estilo temporada=camiseta.temporada|urlencode %}">
-                <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }}" width="100%"></a>
-                <br>
-                <!-- Link para o produto usando urlencode na temporada -->
-                <a class= "link" href="{% url 'produto' time=camiseta.time estilo=camiseta.estilo temporada=camiseta.temporada|urlencode %}">
-                    {{ camiseta.time }} {{ camiseta.estilo }} {{ camiseta.temporada }}
-                </a><spam class="preço">R$ {{ camiseta.valor_final|floatformat:2 }}</spam>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <div class="filters">
+            <form method="get" action="{% url 'filtrar_camisetas' %}">
+                <ul>
+                    <li>
+                        <label for="tipo_produto">Filtrar por Tipo de Produto:</label>
+                        <select name="tipo_produto" id="tipo_produto">
+                            <option value="">Selecione um tipo de produto</option>
+                            {% for tipo in tipos_produto_disponiveis %}
+                                <option value="{{ tipo.id }}">{{ tipo }}</option>
+                            {% endfor %}
+                        </select>
+                    </li>
+                    <li>
+                        <label for="time">Filtrar por Time:</label>
+                        <select name="time" id="time">
+                            <option value="">Selecione um time</option>
+                            {% for time in times_disponiveis %}
+                                <option value="{{ time }}">{{ time }}</option>
+                            {% endfor %}
+                        </select>
+                    </li>
+                    <li>
+                        <label for="estilo">Filtrar por Estilo:</label>
+                        <select name="estilo" id="estilo">
+                            <option value="">Selecione um estilo</option>
+                            {% for estilo in estilos_disponiveis %}
+                                <option value="{{ estilo }}">{{ estilo }}</option>
+                            {% endfor %}
+                        </select>
+                    </li>
+                    <li>
+                        <label for="cor">Filtrar por Cor:</label>
+                        <select name="cor" id="cor">
+                            <option value="">Selecione uma cor</option>
+                            {% for cor in cores_disponiveis %}
+                                <option value="{{ cor }}">{{ cor }}</option>
+                            {% endfor %}
+                        </select>
+                    </li>
+                    <li>
+                        <label for="temporada">Filtrar por Temporada:</label>
+                        <select name="temporada" id="temporada">
+                            <option value="">Selecione uma temporada</option>
+                            {% for temporada in temporadas_disponiveis %}
+                                <option value="{{ temporada }}">{{ temporada }}</option>
+                            {% endfor %}
+                        </select>
+                    </li>
+                </ul>
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+    
+        <ul class="gallery">
+            {% for camiseta in camisetas %}
+                <li>
+                    <a href="{% url 'produto' time=camiseta.time estilo=camiseta.estilo temporada=camiseta.temporada|urlencode %}">
+                    <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }}" width="100%"></a>
+                    <br>
+                    <a class="link" href="{% url 'produto' time=camiseta.time estilo=camiseta.estilo temporada=camiseta.temporada|urlencode %}">
+                        {{ camiseta.time }} {{ camiseta.estilo }} {{ camiseta.temporada }}
+                    </a>
+                    <span class="preço">R$ {{ camiseta.valor_final|floatformat:2 }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
     
 </body>
 </html>

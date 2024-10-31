@@ -1,20 +1,33 @@
+.container {
+    display: flex;            /* Ativa o Flexbox para o contêiner */
+    margin: 20px;           /* Espaçamento externo */
+}
+
+.filters {
+    flex: 1;                 /* Permite que os filtros ocupem 1 parte do espaço */
+    margin-right: 20px;     /* Espaço à direita dos filtros */
+}
+
 .gallery {
-    display: flex;                      /* Ativa o Flexbox */
-    flex-wrap: wrap;                   /* Permite que os itens quebrem para a próxima linha */
-    justify-content: center;           /* Centraliza os itens */
+    flex: 3;                 /* Permite que as camisetas ocupem 3 partes do espaço */
+    display: flex;           /* Ativa o Flexbox para a galeria de camisetas */
+    flex-wrap: wrap;        /* Permite que os itens quebrem para a próxima linha */
+    justify-content: center; /* Centraliza os itens */
 }
+
 .gallery li {
-    margin: 20px;                      /* Espaço entre as camisetas */
-    list-style: none;                  /* Remove os marcadores da lista */
-    width: 250px;                      /* Largura fixa para cada item */                  
+    margin: 20px;           /* Espaço entre as camisetas */
+    list-style: none;       /* Remove os marcadores da lista */
+    width: 250px;           /* Largura fixa para cada item */
 }
+
 .gallery li:hover {
     transform: scale(1.05);
 }
 
 img {
-    max-width: 100%;                   /* Imagem ocupa 100% do espaço disponível */
-    height: 300px;                      /* Mantém a proporção da imagem */
+    max-width: 100%;        /* Imagem ocupa 100% do espaço disponível */
+    height: 300px;          /* Mantém a proporção da imagem */
 }
 
 .button {
@@ -34,11 +47,11 @@ img {
     background-color: #45a049;
 }
 
-.link{
+.link {
     text-align: center;
     text-decoration: none;
     color: #000000;
-    display: block; 
+    display: block;
     font-size: 16px;
 }
 
@@ -47,9 +60,9 @@ img {
 }
 
 .preço {
-    display: block;             
+    display: block;              
     text-align: center;     
     font-weight: bold;        
     margin-top: 10px;     
     font-size: 18px;  
-}  
+}
