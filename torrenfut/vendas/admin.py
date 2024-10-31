@@ -1,11 +1,18 @@
 from django.contrib import admin
-from .models import Compra
+from .models import Compra, ItemCompra
+
+class ItemCompraInline(admin.TabularInline):
+    model = ItemCompra
+    readonly_fields = ('camiseta', 'tamanho', 'quantidade', 'preco_unitario', 'subtotal')
+    can_delete = False
+    extra = 0
 
 @admin.register(Compra)
 class CompraAdmin(admin.ModelAdmin):
-    list_display = ('id', 'usuario', 'data_compra', 'total', 'usuario_id')  
+    list_display = ('id', 'usuario', 'data_compra', 'total')
     search_fields = ('usuario__username',)
-
+    inlines = [ItemCompraInline]
+    readonly_fields = ('usuario', 'data_compra', 'total')
     def usuario_id(self, obj):
         return obj.usuario.id  
     usuario_id.short_description = 'ID do Usuário'  
