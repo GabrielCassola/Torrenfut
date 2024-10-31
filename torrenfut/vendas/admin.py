@@ -12,7 +12,4 @@ class CompraAdmin(admin.ModelAdmin):
     list_display = ('id', 'usuario', 'data_compra', 'total')
     search_fields = ('usuario__username',)
     inlines = [ItemCompraInline]
-    readonly_fields = ('usuario', 'data_compra', 'total')
-    def usuario_id(self, obj):
-        return obj.usuario.id  
-    usuario_id.short_description = 'ID do Usuário'  
+    readonly_fields = ('usuario', 'data_compra', 'total') 
