@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Carrinho, ItemCarrinho
+from .models import Carrinho, ItemCarrinho, Compra
 from store.models import Camiseta, CamisetaTamanho
 from django.contrib import messages
 
@@ -66,17 +66,25 @@ def ver_carrinho(request):
 # Confirmar compra
 @login_required
 def confirmar_compra(request):
-    carrinho = get_object_or_404(Carrinho, usuario=request.user)
+    # Acessar o carrinho do usuário
+    carrinho = get_object_or_404(Carrinho, usuario=request.user)  # Obtém o carrinho do usuário logado
+    if carrinho.itens.count() == 0:
+        messages.error(request, "Seu carrinho está vazio.")
+        return redirect('ver_carrinho')
 
-    for item in carrinho.itens.all():
-        # Confirmar a remoção do estoque
-        item.tamanho.quantidade_em_estoque -= item.quantidade
-        item.tamanho.save()
+    # Calcular o total da compra
+    total = sum(item.camiseta.valor_final * item.quantidade for item in carrinho.itens.all())
+    
+    # Criar a compra e associar o usuário
+    compra = Compra.objects.create(usuario=request.user, total=total)
+    compra.itens.set(carrinho.itens.all())  # Adiciona os itens da compra
+    compra.save()
 
-    carrinho.delete()  # Limpar o carrinho após a compra
+    # Limpar o carrinho após a compra
+    carrinho.itens.clear() 
 
-    messages.success(request, 'Compra confirmada com sucesso!')
     return redirect('perfil')
+
 
 @login_required
 def remover_item(request, item_id):
@@ -87,6 +95,6 @@ def remover_item(request, item_id):
     item.tamanho.save()
     
     item.delete()
-    messages.success(request, 'Item removido com sucesso do carrinho.')
+   # messages.success(request, 'Item removido com sucesso do carrinho.')
     
     return redirect('ver_carrinho')
