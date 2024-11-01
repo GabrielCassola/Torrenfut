@@ -64,7 +64,10 @@ class CamisetaTamanho(models.Model):
 class HistoricoEstoque(models.Model):
     camiseta = models.ForeignKey(Camiseta, related_name='historico_camisetas', on_delete=models.CASCADE)
     produto = models.ForeignKey(CamisetaTamanho, related_name ='historico_estoque', on_delete=models.CASCADE)
-    quantidade = models.IntegerField()
+    estoque_anterior = models.IntegerField(default=0)  # Campo para a quantidade anterior
+    estoque_novo = models.IntegerField(default=0)  # Campo para a nova quantidade
+    email_usuario = models.EmailField(null=True)  # Campo para armazenar o e-mail do usuário
+    tamanho = models.CharField(max_length=2, null=True)  # Campo para o tamanho do produto
     data_alteracao = models.DateTimeField(default=timezone.now)
 
     def _str_(self):

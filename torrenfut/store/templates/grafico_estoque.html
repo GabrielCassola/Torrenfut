@@ -1,1 +1,51 @@
-<pre>{{ dados_grafico|safe }}</pre>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico-Estoque</title>
+    <link rel="stylesheet" href="{% static 'store/grafico_estoque.css' %}"">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        // Carregar o pacote corechart
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawCharts);
+        function drawCharts() {
+            // Obter os dados do contexto Django
+            var jsonData = JSON.parse(`{{ dados_grafico|safe }}`);
+
+            // Iterar sobre os tamanhos de camiseta e desenhar um gráfico para cada um
+            for (var tamanho in jsonData) {
+                var dataArray = jsonData[tamanho];
+
+                // Converter para DataTable
+                var data = google.visualization.arrayToDataTable(dataArray);
+                
+                // Opções do gráfico
+                var options = {
+                    title: 'Estoque Novo para Tamanho ' + tamanho,
+                    hAxis: { title: 'Data' },
+                    vAxis: { title: 'Estoque Novo' },
+                    width: 600,
+                    height: 400,
+                    legend: { position: 'bottom' },
+                    curveType: 'function' // Suaviza as linhas do gráfico
+                };
+
+                // Criar e desenhar o gráfico
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div_' + tamanho));
+                chart.draw(data, options);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Gráficos do estoque de camisetas por Tamanho</h1>
+    <div id="chart_div_G" style="margin-bottom: 40px;"></div>
+    <div id="chart_div_M" style="margin-bottom: 40px;"></div>
+    <div id="chart_div_P" style="margin-bottom: 40px;"></div>
+    <div id="chart_div_GG" style="margin-bottom: 40px;"></div>
+</body>
+</html>

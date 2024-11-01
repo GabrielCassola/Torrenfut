@@ -2,10 +2,10 @@ from django.http import HttpResponse, Http404
 from django.template import loader
 from .models import Camiseta, CamisetaTamanho, HistoricoEstoque
 import json
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.admin.models import LogEntry, CHANGE
 import re
-
+from collections import defaultdict
 
 def store(request):
     camisetas = Camiseta.objects.all()
@@ -33,21 +33,28 @@ def produto(request, time, estilo, temporada):
     return HttpResponse(template.render(context, request))
 
 def grafico_estoque(request, produto_id):
-    
-    try:
-        produto = CamisetaTamanho.objects.get(id=produto_id)
-        historico = HistoricoEstoque.objects.filter(produto=produto).order_by('data_alteracao')
-    except CamisetaTamanho.DoesNotExist:
-        raise Http404("Camiseta não encontrada.")
-    
-    dados_grafico = [["Data", "Quantidade em Estoque"]]
-    for entrada in historico:
-        dados_grafico.append([entrada.data_alteracao.strftime('%Y-%m-%d %H:%M:%S'), entrada.quantidade])
 
-    template = loader.get_template('grafico_estoque.html')
+    # Obtém a camiseta específica usando o produto_id
+    camiseta = get_object_or_404(Camiseta, id=produto_id)
+
+    # Obtém todos os dados do histórico de estoque
+    historico = HistoricoEstoque.objects.all().filter(camiseta=camiseta).order_by('data_alteracao')
+
+    # Organizar os dados por tamanho
+    dados_grafico = defaultdict(list)
+    for entrada in historico:
+        dados_grafico[entrada.produto.tamanho].append([
+            entrada.data_alteracao.strftime('%Y-%m-%d'),
+            entrada.estoque_novo,
+        ])
+
+    # Converter para formato JSON adequado para Google Charts
+    dados_formatados = json.dumps({
+        tamanho: [["Data", "Estoque Novo"]] + entradas
+        for tamanho, entradas in dados_grafico.items()
+    })
 
     context = {
-        'produto': produto,
-        'dados_grafico': json.dumps(dados_grafico)
+        'dados_grafico': dados_formatados
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'grafico_estoque.html', context)

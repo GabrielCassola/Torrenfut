@@ -69,7 +69,7 @@ exportar_estoque_csv.short_description = "Exportar Estoque para CSV"
 
 
 class CamisetasAdmin(admin.ModelAdmin):
-    list_display = ("time", "temporada", "estilo", "estoque_total", "valor_final")
+    list_display = ("time", "temporada", "estilo", "estoque_total", "valor_final", "link_grafico_estoque")
     list_filter = ("time", "temporada")
     inlines = [CamisetaTamanhoInline]
     actions = [exportar_estoque_csv]
