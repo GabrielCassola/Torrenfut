@@ -4,8 +4,46 @@
 }
 
 .filters {
-    flex: 1;                 /* Permite que os filtros ocupem 1 parte do espaço */
-    margin-right: 20px;     /* Espaço à direita dos filtros */
+    flex: 1;  /* Permite que os filtros ocupem 1 parte do espaço */
+    margin-right: 20px; /* Espaço à direita dos filtros */
+    padding: 20px;             /* Espaçamento interno */
+    border-radius: 8px;       /* Bordas arredondadas */
+    margin-bottom: 20px;      /* Espaço abaixo dos filtros */
+}
+
+.filters label {
+    font-weight: bold;         /* Texto em negrito */
+    margin-top: 10px;         /* Espaçamento acima das labels */
+    display: block;            /* Cada label em uma nova linha */
+}
+
+.filters select {
+    width: 100%;               /* Largura total do campo */
+    padding: 10px;            /* Espaçamento interno do select */
+    border: 1px solid #c6e3c6; /* Borda verde clara */
+    border-radius: 4px;       /* Bordas arredondadas */
+    transition: border-color 0.3s; /* Transição suave para a borda */
+}
+
+.filters select:focus {
+    border-color: #5cb85c;    /* Cor da borda ao focar (verde mais escuro) */
+    outline: none;            /* Remove contorno padrão */
+    box-shadow: 0 0 0 0.2rem rgba(92, 184, 92, 0.25); /* Sombra ao focar */
+}
+
+.filters button {
+    background-color: #5cb85c; /* Cor de fundo verde */
+    color: white;              /* Cor do texto */
+    padding: 10px 20px;       /* Espaçamento interno */
+    border: none;              /* Sem borda */
+    border-radius: 4px;       /* Bordas arredondadas */
+    cursor: pointer;           /* Cursor de ponteiro */
+    transition: background-color 0.3s; /* Transição suave */
+    margin-top: 15px;         /* Espaçamento acima do botão */
+}
+
+.filters button:hover {
+    background-color: #4cae4c; /* Cor do botão ao passar o mouse (verde mais escuro) */
 }
 
 .gallery {

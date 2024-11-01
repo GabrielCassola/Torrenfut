@@ -32,7 +32,7 @@
             <form method="get" action="{% url 'filtrar_camisetas' %}">
                 <ul>
                     <li>
-                        <label for="tipo_produto">Filtrar por Tipo de Produto:</label>
+                        <label for="tipo_produto">Produto:</label>
                         <select name="tipo_produto" id="tipo_produto">
                             <option value="">Selecione um tipo de produto</option>
                             {% for tipo in tipos_produto_disponiveis %}
@@ -41,7 +41,7 @@
                         </select>
                     </li>
                     <li>
-                        <label for="time">Filtrar por Time:</label>
+                        <label for="time">Time:</label>
                         <select name="time" id="time">
                             <option value="">Selecione um time</option>
                             {% for time in times_disponiveis %}
@@ -50,7 +50,7 @@
                         </select>
                     </li>
                     <li>
-                        <label for="estilo">Filtrar por Estilo:</label>
+                        <label for="estilo">Estilo:</label>
                         <select name="estilo" id="estilo">
                             <option value="">Selecione um estilo</option>
                             {% for estilo in estilos_disponiveis %}
@@ -59,7 +59,7 @@
                         </select>
                     </li>
                     <li>
-                        <label for="cor">Filtrar por Cor:</label>
+                        <label for="cor">Cor:</label>
                         <select name="cor" id="cor">
                             <option value="">Selecione uma cor</option>
                             {% for cor in cores_disponiveis %}
@@ -68,7 +68,7 @@
                         </select>
                     </li>
                     <li>
-                        <label for="temporada">Filtrar por Temporada:</label>
+                        <label for="temporada">Temporada:</label>
                         <select name="temporada" id="temporada">
                             <option value="">Selecione uma temporada</option>
                             {% for temporada in temporadas_disponiveis %}
