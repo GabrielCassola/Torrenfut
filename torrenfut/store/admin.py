@@ -76,7 +76,7 @@ class CamisetasAdmin(admin.ModelAdmin):
 
     def link_grafico_estoque(self, obj):
         url = reverse('grafico_estoque', args=[obj.id])
-        return format_html('<a href="{}">Ver Gráfico</a>', url)
+        return format_html('<a href="{}">Gráfico Estoque</a>', url)
 
     link_grafico_estoque.short_description = 'Gráfico de Estoque'
     

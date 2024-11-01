@@ -1,14 +1,9 @@
 from django.http import HttpResponse, Http404
 from django.template import loader
-<<<<<<< HEAD
 from .models import Camiseta, CamisetaTamanho, HistoricoEstoque
 import json
 from django.shortcuts import render, get_object_or_404
-from django.contrib.admin.models import LogEntry, CHANGE
-import re
 from collections import defaultdict
-=======
-from django.shortcuts import render
 from .models import Camiseta, CamisetaTamanho, TipoProduto
 
 def obter_opcoes_filtro():
@@ -27,7 +22,6 @@ def obter_opcoes_filtro():
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
     }
 
->>>>>>> 388ab71b51426a85ea3464c3c5ae37c293c3b145
 
 def store(request):
     camisetas = Camiseta.objects.all()
@@ -58,7 +52,6 @@ def produto(request, time, estilo, temporada):
     }
     return HttpResponse(template.render(context, request))
 
-<<<<<<< HEAD
 def grafico_estoque(request, produto_id):
 
     # Obtém a camiseta específica usando o produto_id
@@ -85,7 +78,6 @@ def grafico_estoque(request, produto_id):
         'dados_grafico': dados_formatados
     }
     return render(request, 'grafico_estoque.html', context)
-=======
 
 
 
@@ -124,4 +116,3 @@ def filtrar_camisetas(request):
         'temporadas_disponiveis': temporadas_disponiveis,
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
     })
->>>>>>> 388ab71b51426a85ea3464c3c5ae37c293c3b145
