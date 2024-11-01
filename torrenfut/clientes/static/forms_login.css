@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: left; /* Alinhamento à esquerda */
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #28a745; /* Verde */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Espaço entre os grupos */
+}
+
+label {
+    display: block; /* Muda para block para empilhar rótulo e input */
+    margin-bottom: 5px; /* Espaço abaixo do rótulo */
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 90%; /* Largura total do container */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border 0.3s;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #28a745; /* Verde */
+}
+
+button {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838; /* Verde mais escuro */
+}
+
+.back-link {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.back-link a {
+    color: #28a745; /* Verde */
+    text-decoration: none;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+
+

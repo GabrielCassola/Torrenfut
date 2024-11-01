@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ camiseta.time }} {{ camiseta.estilo }} {{ camiseta.temporada }}</title>
     <link rel="stylesheet" href="{% static 'store/produto.css' %}">
@@ -11,12 +11,14 @@
 <body>
     <div class="container">
         <!-- Imagem da camisa -->
-        <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }} {{ camiseta.estilo }}" />
+        <div class="image-container">
+            <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }} {{ camiseta.estilo }}" />
+        </div>
         
         <!-- Informações do produto -->
         <div class="product-info">
             <h1>{{ camiseta.time }} {{ camiseta.estilo }} {{ camiseta.temporada }}</h1>
-            <p class="price">Preço: R${{ camiseta.valor_final|floatformat:2 }}</p>
+            <p class="price">Preço: R$ {{ camiseta.valor_final|floatformat:2 }}</p>
 
             <!-- Botões de seleção de tamanhos -->
             <h3>Escolha o tamanho:</h3>
@@ -24,7 +26,7 @@
                 {% for tamanho in tamanhos %}
                     <button type="button"
                             class="btn-tamanho {% if tamanho.quantidade_em_estoque == 0 %}btn-desabilitado{% endif %}"
-                            onclick="exibirEstoque('{{ tamanho.tamanho }}', '{{ tamanho.quantidade_em_estoque }}')"
+                            onclick="exibirEstoque('{{ tamanho.tamanho }}', '{{ tamanho.quantidade_em_estoque }}', '{{ tamanho.id }}')"
                             {% if tamanho.quantidade_em_estoque == 0 %}disabled{% endif %}>
                         {{ tamanho.tamanho }}
                     </button>
@@ -35,28 +37,76 @@
             <div class="stock-info">
                 <h4>Quantidade em estoque: <span id="estoque">Selecione um tamanho</span></h4>
             </div>
-             <!-- Botão solicitar compra -->
-             <div>
-                <button type="button" class="btn-comprar">Comprar</button>
+
+            <!-- Seletor de quantidade -->
+            <div class="quantity-selector">
+                <label for="quantidade">Quantidade:</label>
+                <button type="button" id="decrease" onclick="adjustQuantity(-1)" disabled>-</button>
+                <input type="number" id="quantidade" name="quantidade_display" value="1" min="1" max="1" readonly>
+                <button type="button" id="increase" onclick="adjustQuantity(1)" disabled>+</button>
             </div>
+
+            <!-- Formulário para adicionar ao carrinho -->
+            <form action="{% url 'adicionar_ao_carrinho' camiseta.id %}" method="POST" id="formCarrinho">
+                {% csrf_token %}
+                <input type="hidden" name="tamanho_id" id="tamanho_id" value="">
+                <input type="hidden" name="quantidade" id="quantidade_hidden" value="1">
+                <button type="submit" class="btn-comprar" disabled id="btnComprar" onclick="this.disabled=true; this.form.submit();">Adicionar ao Carrinho</button>
+            </form>            
         </div>
     </div>
-    <p>Voltar para <a href="/store">página inicial</a></p>
+    <p class="back-link">Voltar para <a href="/store">página inicial</a></p>
+
 
     <script>
-        const buttons = document.querySelectorAll('.btn-tamanho')
+        const buttons = document.querySelectorAll('.btn-tamanho');
+        const btnComprar = document.getElementById('btnComprar');
+        const tamanhoInput = document.getElementById('tamanho_id');
+        const quantidadeInput = document.getElementById('quantidade');
+        const quantidadeHidden = document.getElementById('quantidade_hidden');
+        const increaseBtn = document.getElementById('increase');
+        const decreaseBtn = document.getElementById('decrease');
+        let maxEstoque = 0;
 
-        function exibirEstoque(tamanho, quantidade) {
+        function exibirEstoque(tamanho, quantidade, tamanho_id) {
             document.getElementById('estoque').textContent = quantidade;
+            tamanhoInput.value = tamanho_id;
+            maxEstoque = quantidade;
+            
+            // Atualiza o seletor de quantidade
+            quantidadeInput.value = 1;
+            quantidadeHidden.value = 1; // Atualiza o campo oculto
+            quantidadeInput.max = quantidade;
+
+            // Habilita os botões de ajuste de quantidade
+            increaseBtn.disabled = quantidade <= 1;
+            decreaseBtn.disabled = true;
+            
+            // Habilita o botão de compra se houver estoque
+            btnComprar.disabled = quantidade == 0;
+        }
+
+        function adjustQuantity(change) {
+            let currentQuantity = parseInt(quantidadeInput.value);
+            let newQuantity = currentQuantity + change;
+
+            if (newQuantity >= 1 && newQuantity <= maxEstoque) {
+                quantidadeInput.value = newQuantity;
+                quantidadeHidden.value = newQuantity; // Atualiza o campo oculto com a nova quantidade
+
+                // Habilita/desabilita botões conforme a quantidade selecionada
+                decreaseBtn.disabled = newQuantity <= 1;
+                increaseBtn.disabled = newQuantity >= maxEstoque;
+            }
         }
 
         buttons.forEach(button => {
             button.addEventListener('click', function(){
                 buttons.forEach(btn => btn.classList.remove('selected'));
-                this.classList.add('selected')
-            })
-        })
-
+                this.classList.add('selected');
+            });
+        });
     </script>
 </body>
+</html>
 </html>

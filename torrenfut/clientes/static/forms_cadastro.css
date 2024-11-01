@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: left; /* Alinhamento à esquerda */
+}
+
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #28a745; /* Verde */
+}
+
+button {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px; /* Espaço acima do botão */
+}
+
+button:hover {
+    background-color: #218838; /* Verde mais escuro */
+}
+
+.errors {
+    margin-top: 15px;
+    background: #ffdddd; /* Fundo vermelho claro para erros */
+    color: #d8000c; /* Texto vermelho */
+    padding: 10px;
+    border: 1px solid #d8000c; /* Borda vermelha */
+    border-radius: 4px;
+}
+
+.back-link {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.back-link a {
+    color: #28a745; /* Verde */
+    text-decoration: none;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+.alert {
+    background: #fff3cd; /* Fundo amarelo claro para alertas */
+    color: #856404; /* Texto amarelo escuro */
+    padding: 10px;
+    border: 1px solid #ffeeba; /* Borda amarelo claro */
+    border-radius: 4px;
+    margin-bottom: 20px; /* Espaço abaixo do alerta */
+}

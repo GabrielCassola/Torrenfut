@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho</title>
+    <link rel="stylesheet" href="{% static 'carrinho.css' %}">
+</head>
+<body>
+    {% block content %}
+    <h2>Carrinho de Compras</h2>
+
+    {% if carrinho.itens.count > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Tamanho</th>
+                    <th>Quantidade</th>
+                    <th>Preço Unitário</th>
+                    <th>Subtotal</th>
+                    <th></th>  <!-- Coluna para as ações de remover -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in carrinho.itens.all %}
+                <tr>
+                    <td><a href="{% url 'produto' item.camiseta.time item.camiseta.estilo item.camiseta.temporada|urlencode %}">{{ item.camiseta.time }} {{item.camiseta.estilo}} {{item.camiseta.temporada}}</a></td>
+                    <td>{{ item.tamanho.tamanho }}</td>
+                    <td>{{ item.quantidade }}</td>
+                    <td>R$ {{ item.camiseta.valor_final|floatformat:2 }}</td>
+                    <td>R$ {{ item.subtotal|floatformat:2 }}</td>
+                    <td>
+                        <form method="post" action="{% url 'remover_item' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Remover</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3>Total: R$ {{ carrinho.total_preco|floatformat:2 }}</h3>
+        <a href="{% url 'confirmar_compra' %}" class="btn btn-success">Confirmar Compra</a>
+        <p class="back-link">Voltar para <a href="/store">página inicial</a></p>
+    {% else %}
+        <p>Seu carrinho está vazio. Volte para a <a href="/store">página inicial</a> e adicione produtos ao carrinho.</p>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

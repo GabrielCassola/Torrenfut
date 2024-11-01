@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Cliente</title>
-    <link rel="stylesheet" href="{% static 'forms.css' %}">
+    <link rel="stylesheet" href="{% static 'forms_cadastro.css' %}">
 </head>
 <body>
     {% if messages %}
@@ -28,6 +28,7 @@
             {% csrf_token %}
             {{ form.as_p }}  <!-- Renderiza o formulário -->
             <button type="submit">Cadastrar</button>
+            <p class="back-link">Voltar para <a href="/store">página inicial</a></p>
         </form>
 
         {% if form.errors %}
@@ -46,6 +47,5 @@
             </div>
         {% endif %}
     </div>
-<p>Voltar para <a href="/store">página inicial</a></p>
 </body>
 </html>
