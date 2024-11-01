@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'store.middleware.CurrentUserMiddleware',
 ]
 
 ROOT_URLCONF = 'torrenfut.urls'
@@ -61,7 +62,10 @@ ROOT_URLCONF = 'torrenfut.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),  # Caminho para templates de nível global
+            os.path.join(BASE_DIR, 'store/templates')  # Inclua o caminho do app específico
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

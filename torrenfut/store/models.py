@@ -1,6 +1,7 @@
 # models.py (app store)
 from django.db import models
 from fornecedores.models import Fornecedor, TipoProduto, Taxa
+from django.utils import timezone
 
 class Camiseta(models.Model):
     tipo_produto = models.ForeignKey(TipoProduto, default=1, on_delete=models.CASCADE)  # Supondo que o ID 1 exista em TipoProduto
@@ -59,3 +60,15 @@ class CamisetaTamanho(models.Model):
 
     def estoque_baixo(self):
         return self.quantidade_em_estoque <= self.estoque_minimo
+
+class HistoricoEstoque(models.Model):
+    camiseta = models.ForeignKey(Camiseta, related_name='historico_camisetas', on_delete=models.CASCADE)
+    produto = models.ForeignKey(CamisetaTamanho, related_name ='historico_estoque', on_delete=models.CASCADE)
+    estoque_anterior = models.IntegerField(default=0)  # Campo para a quantidade anterior
+    estoque_novo = models.IntegerField(default=0)  # Campo para a nova quantidade
+    email_usuario = models.EmailField(null=True)  # Campo para armazenar o e-mail do usuário
+    tamanho = models.CharField(max_length=2, null=True)  # Campo para o tamanho do produto
+    data_alteracao = models.DateTimeField(default=timezone.now)
+
+    def _str_(self):
+        return f"{self.camiseta} e {self.produto} - {self.quantidade} em {self.data_alteracao}"
