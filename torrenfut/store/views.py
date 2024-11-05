@@ -57,6 +57,13 @@ def grafico_estoque(request, produto_id):
     # Obtém a camiseta específica usando o produto_id
     camiseta = get_object_or_404(Camiseta, id=produto_id)
 
+     # Obtendo valores
+    time = camiseta.time
+    cor_principal = camiseta.cor_principal
+    marca = camiseta.marca
+    temporada = camiseta.temporada
+    estilo = camiseta.estilo
+
     # Obtém todos os dados do histórico de estoque
     historico = HistoricoEstoque.objects.all().filter(camiseta=camiseta).order_by('data_alteracao')
 
@@ -75,7 +82,12 @@ def grafico_estoque(request, produto_id):
     })
 
     context = {
-        'dados_grafico': dados_formatados
+        'dados_grafico': dados_formatados,
+        'time': time,
+        'estilo': estilo,
+        'cor_principal': cor_principal,
+        'marca': marca,
+        'temporada': temporada,
     }
     return render(request, 'grafico_estoque.html', context)
 
