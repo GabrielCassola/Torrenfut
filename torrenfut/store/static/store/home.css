@@ -46,6 +46,9 @@
     background-color: #4cae4c; /* Cor do botão ao passar o mouse (verde mais escuro) */
 }
 
+.filters li {
+    list-style: none;
+}
 .gallery {
     flex: 3;                 /* Permite que as camisetas ocupem 3 partes do espaço */
     display: flex;           /* Ativa o Flexbox para a galeria de camisetas */
