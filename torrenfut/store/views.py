@@ -9,14 +9,14 @@ from .models import Camiseta, CamisetaTamanho, TipoProduto
 def obter_opcoes_filtro():
     # Obter opções únicas para filtro
     cores_disponiveis = Camiseta.objects.values_list('cor_principal', flat=True).distinct()
-    estilos_disponiveis = Camiseta.objects.values_list('estilo', flat=True).distinct()
+    marcas_disponiveis = Camiseta.objects.values_list('marca', flat=True).distinct()
     times_disponiveis = Camiseta.objects.values_list('time', flat=True).distinct()
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
     tipos_produto_disponiveis = TipoProduto.objects.all()
     
     return {
         'cores_disponiveis': cores_disponiveis,
-        'estilos_disponiveis': estilos_disponiveis,
+        'marcas_disponiveis': marcas_disponiveis,
         'times_disponiveis': times_disponiveis,
         'temporadas_disponiveis': temporadas_disponiveis,
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
@@ -92,10 +92,9 @@ def grafico_estoque(request, produto_id):
     return render(request, 'grafico_estoque.html', context)
 
 
-
 def filtrar_camisetas(request):
     cor = request.GET.get('cor')
-    estilo = request.GET.get('estilo')
+    marca = request.GET.get('marca')
     time = request.GET.get('time')
     temporada = request.GET.get('temporada')
     tipo_produto = request.GET.get('tipo_produto')
@@ -104,8 +103,8 @@ def filtrar_camisetas(request):
     camisetas = Camiseta.objects.all()
     if cor:
         camisetas = camisetas.filter(cor_principal=cor)
-    if estilo:
-        camisetas = camisetas.filter(estilo=estilo)
+    if marca:
+        camisetas = camisetas.filter(marca=marca)
     if time:
         camisetas = camisetas.filter(time=time)
     if temporada:
@@ -115,7 +114,7 @@ def filtrar_camisetas(request):
 
     # Obter opções únicas para filtro
     cores_disponiveis = Camiseta.objects.values_list('cor_principal', flat=True).distinct()
-    estilos_disponiveis = Camiseta.objects.values_list('estilo', flat=True).distinct()
+    marcas_disponiveis = Camiseta.objects.values_list('marca', flat=True).distinct()
     times_disponiveis = Camiseta.objects.values_list('time', flat=True).distinct()
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
     tipos_produto_disponiveis = TipoProduto.objects.all()  # Presumindo que você tenha um modelo TipoProduto
@@ -123,7 +122,7 @@ def filtrar_camisetas(request):
     return render(request, 'home.html', {
         'camisetas': camisetas,
         'cores_disponiveis': cores_disponiveis,
-        'estilos_disponiveis': estilos_disponiveis,
+        'marcas_disponiveis': marcas_disponiveis,
         'times_disponiveis': times_disponiveis,
         'temporadas_disponiveis': temporadas_disponiveis,
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
