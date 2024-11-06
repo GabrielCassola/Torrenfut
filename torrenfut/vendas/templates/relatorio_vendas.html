@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Vendas</title>
+    <a href="{% static 'vendas/relatorio_vendas.css' %}"></a>
+</head>
+<body>
+    <h1>Relatório de Vendas</h1>
+        {% for compra in compras %}
+            <h2>Compra ID: {{ compra.id }} - Usuário: {{ compra.usuario.username }} - Data: {{ compra.data_compra }}</h2>
+            <p>Total: R$ {{ compra.total }}</p>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Camiseta</th>
+                        <th>Tamanho</th>
+                        <th>Quantidade</th>
+                        <th>Preço Unitário</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in itens %}
+                        {% if item.compra_id == compra.id %}
+                            <tr>
+                                <td>{{ item.camiseta.time }}</td>
+                                <td>{{ item.tamanho.tamanho }}</td>
+                                <td>{{ item.quantidade }}</td>
+                                <td>R$ {{ item.preco_unitario }}</td>
+                                <td>R$ {{ item.subtotal }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h2>Receita total das vendas</h2>
+        {% endfor %}
+</body>
+</html>
