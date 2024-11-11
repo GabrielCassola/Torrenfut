@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Vendas</title>
+    <a href="{% static 'relatorio_vendas.css' %}"></a>
+</head>
+<body>
+    <h1>Relatório de Vendas</h1>
+        <p>Histórico de Vendas</p>
+        {% for compra in compras %}
+            <h2>Compra ID: {{ compra.id }} - Usuário: {{ compra.usuario.username }} - Data: {{ compra.data_compra }}</h2>
+            <p>Total: R$ {{ compra.total }}</p>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Camiseta</th>
+                        <th>Tamanho</th>
+                        <th>Quantidade</th>
+                        <th>Preço Unitário</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in itens %}
+                        {% if item.compra_id == compra.id %}
+                            <tr>
+                                <td>{{ item.camiseta.time }}</td>
+                                <td>{{ item.tamanho.tamanho }}</td>
+                                <td>{{ item.quantidade }}</td>
+                                <td>R$ {{ item.preco_unitario }}</td>
+                                <td>R$ {{ item.subtotal }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+        <h2>Venda dos produtos</h2>
+    <ul>
+        {% for produto in totais_por_produto %}
+            <li>{{ produto.camiseta__time }} {{produto.tamanho__tamanho}} - Total Vendido: {{ produto.total_quantidade }} - Total Arrecadado: R$ {{ produto.total_arrecadado }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Faturamento</h2>
+    <p>R$ {{ total_geral }}</p>
+</body>
+</html>
