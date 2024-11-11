@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.db.models import Sum, F
 
 @login_required
 def adicionar_ao_carrinho(request, camiseta_id):
@@ -118,10 +119,20 @@ def relatorio_vendas(modeladmin, request, queryset): # Action no admin exige 3 a
     itens = ItemCompra.objects.filter(compra__in=queryset)
     compras = Compra.objects.prefetch_related('itens_compra').filter(id__in=queryset)
 
+    # Calcular o total de cada produto vendido e o total arrecadado
+    totais_por_produto = itens.values('camiseta__time', 'tamanho__tamanho').annotate(
+    total_quantidade=Sum('quantidade'),
+    total_arrecadado=Sum(F('quantidade') * F('preco_unitario'))
+    )
+
+    total_geral = sum(item.subtotal() for item in itens)
+
     # Carregar o template e passar apenas os itens filtrados
     template = loader.get_template('relatorio_vendas.html')
     context = {
         'compras': compras,
         'itens': itens,  # Somente itens das compras selecionadas
+        'totais_por_produto': totais_por_produto, # Total vendido por produto
+        'total_geral': total_geral  # Total arrecado
     }
     return HttpResponse(template.render(context, request))
