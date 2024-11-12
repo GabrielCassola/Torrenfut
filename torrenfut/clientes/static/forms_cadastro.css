@@ -24,6 +24,32 @@ h1 {
     color: #28a745; /* Verde */
 }
 
+/* Estilo dos grupos de formulário */
+.form-group {
+    margin-bottom: 15px; /* Espaçamento entre os campos */
+}
+
+/* Estilo dos rótulos */
+.form-group label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Estilo dos campos de entrada */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+/* Estilo do botão de envio */
 button {
     background-color: #28a745; /* Verde */
     color: white;
@@ -40,6 +66,13 @@ button:hover {
     background-color: #218838; /* Verde mais escuro */
 }
 
+/* Estilo das mensagens de erro */
+.error-message {
+    color: red;
+    font-size: 0.85em;
+}
+
+/* Estilo das mensagens de erro globais */
 .errors {
     margin-top: 15px;
     background: #ffdddd; /* Fundo vermelho claro para erros */
@@ -49,6 +82,7 @@ button:hover {
     border-radius: 4px;
 }
 
+/* Link de retorno */
 .back-link {
     margin-top: 15px;
     font-size: 14px;
@@ -63,12 +97,15 @@ button:hover {
 .back-link a:hover {
     text-decoration: underline;
 }
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5em; /* Reduz o tamanho da fonte em telas pequenas */
+        word-wrap: break-word; /* Quebra as palavras longas para evitar cortes */
+    }
+}
 
-.alert {
-    background: #fff3cd; /* Fundo amarelo claro para alertas */
-    color: #856404; /* Texto amarelo escuro */
-    padding: 10px;
-    border: 1px solid #ffeeba; /* Borda amarelo claro */
-    border-radius: 4px;
-    margin-bottom: 20px; /* Espaço abaixo do alerta */
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.2em; /* Fonte ainda menor para telas muito pequenas */
+    }
 }
