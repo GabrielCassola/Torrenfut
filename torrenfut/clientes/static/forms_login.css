@@ -77,5 +77,21 @@ button:hover {
     text-decoration: underline;
 }
 
+.cadastro{
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.cadastro a {
+    color: #28a745; /* Verde */
+    text-decoration: none;
+}
+
+.cadastro a:hover {
+    text-decoration: underline;
+}
+
+
 
 
