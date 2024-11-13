@@ -1,14 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from .models import Carrinho, ItemCarrinho, Compra, ItemCompra
 from store.models import Camiseta, CamisetaTamanho
 from django.contrib import messages
 from django.template import loader
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.db.models import Sum, F
+
 
 @login_required
 def adicionar_ao_carrinho(request, camiseta_id):
@@ -95,8 +94,30 @@ def confirmar_compra(request):
         item.tamanho.save()
         item.delete()  # Remover o item do carrinho
 
+    enviar_email_confirmacao_compra(compra, request.user)
     messages.success(request, 'Compra realizada com sucesso!')
     return redirect('perfil')
+
+def enviar_email_confirmacao_compra(compra, usuario):
+    usuario_email = usuario.email
+    itens_compra = compra.itens_compra.all()  # Pega todos os itens da compra atual
+
+    mensagem = f"Olá {usuario.first_name},\n\n"
+    mensagem += "Obrigado pela sua compra! Aqui estão os detalhes do seu pedido:\n\n"
+
+    for item in itens_compra:
+        mensagem += f"- {item.camiseta.time} {item.camiseta.estilo} {item.camiseta.temporada} ({item.tamanho.tamanho}) x{item.quantidade} - R$ {item.subtotal():.2f}\n"
+
+    mensagem += f"Total: R$ {compra.total:.2f}\n\n"
+    mensagem += "Agradecemos por escolher nossa loja!\n\nAtenciosamente,\nEquipe Torrenfut"
+
+    send_mail(
+        subject='Confirmação de compra',
+        message=mensagem,
+        from_email='bento.teste7009@gmail.com',
+        recipient_list=[usuario_email],
+        fail_silently=False,
+    )
 
 
 
