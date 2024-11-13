@@ -14,7 +14,10 @@
       
       <p><strong>Nome completo:</strong> {{ user.first_name }} {{ user.last_name }}</p>
       <p><strong>E-mail:</strong> {{ user.email }}</p>
-  
+
+      <!-- Formulário de edição -->
+      <a href="{% url 'editar_perfil' %}"><button class="btn-editar">Editar perfil</button></a>
+
       <!-- Botão de logout -->
       <form method="post" action="{% url 'logout' %}" style="margin-top: 20px;">
         {% csrf_token %}

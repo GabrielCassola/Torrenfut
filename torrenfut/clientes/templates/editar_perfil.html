@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+    <link rel="stylesheet" href="{% static 'editar_perfil.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Editar perfil</h1>
+
+        <form method="POST" action="{% url 'editar_perfil' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_first_name">Nome:</label>
+                {{ form.first_name }}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_last_name">Sobrenome:</label>
+                {{ form.last_name }}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_email">E-mail:</label>
+                {{ form.email }}
+            </div>
+
+            <button type="submit">Salvar alterações</button>
+        </form>
+            <p style="text-align: center;"><a href="{% url 'perfil' %}" class="back-link">Voltar ao perfil</a></p>
+    </div>
+</body>
+</html>

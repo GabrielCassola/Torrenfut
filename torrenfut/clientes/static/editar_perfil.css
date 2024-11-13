@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: left; /* Alinhamento à esquerda */
+}
+
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #28a745; /* Verde */
+}
+
+/* Estilo dos grupos de formulário */
+.form-group {
+    margin-bottom: 15px; /* Espaçamento entre os campos */
+}
+
+/* Estilo dos rótulos */
+.form-group label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Estilo dos campos de entrada */
+.form-group input[type="text"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+/* Estilo do botão de envio */
+button {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px; /* Espaço acima do botão */
+}
+
+button:hover {
+    background-color: #218838; /* Verde mais escuro */
+}
+
+/* Estilo das mensagens de erro */
+.error-message {
+    color: red;
+    font-size: 0.85em;
+}
+
+/* Estilo das mensagens de erro globais */
+.errors {
+    margin-top: 15px;
+    background: #ffdddd; /* Fundo vermelho claro para erros */
+    color: #d8000c; /* Texto vermelho */
+    padding: 10px;
+    border: 1px solid #d8000c; /* Borda vermelha */
+    border-radius: 4px;
+}
+
+
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5em; /* Reduz o tamanho da fonte em telas pequenas */
+        word-wrap: break-word; /* Quebra as palavras longas para evitar cortes */
+    }
+
+    .container {
+        width: 80%; /* Torna o formulário mais responsivo em telas pequenas */
+        padding: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.2em; /* Fonte ainda menor para telas muito pequenas */
+    }
+
+    .container {
+        width: 90%; /* Ajuste para telas ainda menores */
+    }
+}
+
+
+.back-link {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+    color: #28a745; /* Verde */
+    text-decoration: none;
+    display: inline-block
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}

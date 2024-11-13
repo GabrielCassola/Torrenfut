@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from .forms import ClienteRegistrationForm
+from .forms import ClienteRegistrationForm, EditarPerfilForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Cliente
@@ -49,3 +49,17 @@ def logout_cliente(request):
 @login_required
 def perfil_cliente(request):
     return render(request, 'perfil.html')  # Renderiza um template de perfil
+
+
+@login_required
+def editar_perfil(request):
+    if request.method == 'POST':
+        form = EditarPerfilForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+
+            return redirect('perfil')  
+    else:
+        form = EditarPerfilForm(instance=request.user)
+    
+    return render(request, 'editar_perfil.html', {'form': form})

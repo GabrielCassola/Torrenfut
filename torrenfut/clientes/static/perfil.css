@@ -63,3 +63,20 @@ p {
 .btn-logout:hover {
     background-color: #c82333; /* Tom mais escuro ao passar o mouse */
 }
+
+
+.btn-editar {
+    background-color: #28a745; /* Verde para o botão de editar */
+    color: white; /* Texto branco */
+    border: none; /* Remove a borda */
+    padding: 10px 15px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor em forma de mão */
+    transition: background-color 0.3s ease; /* Transição suave */
+    width: 100%; /* Botão ocupa toda a largura */
+    margin-top: 20px; /* Espaço superior */
+}
+
+.btn-editar:hover {
+    background-color: #186b2b; /* Tom mais escuro de verde ao passar o mouse */
+}
