@@ -27,6 +27,65 @@
         {% endif %}
     </div>
 
+    <div class="buscar">
+        <input id="inputBusca" onkeyup="filtrar()" type="text" placeholder="O que você procura?">
+    </div>
+    <div class="listaProdutosContainer">
+        <ul id="listaProdutos">
+            {% for camiseta in camisetas %}
+                <li>
+                    <a href="{% url 'produto' time=camiseta.time estilo=camiseta.estilo temporada=camiseta.temporada|urlencode %}">
+                        <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }}" width="100%">
+                    </a><span class="item-text">{{ camiseta.time }} {{ camiseta.estilo }} {{ camiseta.temporada }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <script>
+        function filtrar() {
+            var input, filter, ul, li, span, i, txtValue, count = 0;
+    
+            // Obter valor de pesquisa e os elementos
+            input = document.getElementById('inputBusca');
+            ul = document.getElementById('listaProdutos');
+            filter = input.value.toUpperCase();
+    
+            // Pegar todos os <li> dentro do <ul>
+            li = ul.getElementsByTagName("li");
+    
+            // Se o campo estiver vazio, ocultar todos os itens
+            if (filter === "") {
+                ul.style.display = "none";
+                for (i = 0; i < li.length; i++) {
+                    li[i].style.display = "none";
+                }
+                return; // Sai da função se o campo estiver vazio
+            }
+    
+            // Percorrer os <li> para verificar quais correspondem ao filtro
+            for (i = 0; i < li.length; i++) {
+                span = li[i].getElementsByClassName("item-text")[0]; // Seleciona o texto do item
+                txtValue = span.textContent || span.innerText;
+    
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = ""; // Mostra o item se corresponder
+                    count++;
+    
+                    // Destaque em negrito a parte correspondente
+                    let regex = new RegExp(`(${filter})`, 'gi');
+                    span.innerHTML = txtValue.replace(regex, "<strong>$1</strong>");
+                } else {
+                    li[i].style.display = "none"; // Esconde o item se não corresponder
+                }
+            }
+    
+            // Exibir ou ocultar a lista dependendo do número de correspondências
+            ul.style.display = count === 0 ? "none" : "block";
+        }
+    </script>
+    
     <div class="container">
         <div class="filters">
             <form method="get" action="{% url 'filtrar_camisetas' %}">

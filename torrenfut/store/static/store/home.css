@@ -107,3 +107,109 @@ img {
     margin-top: 10px;     
     font-size: 18px;  
 }
+
+/* Efeito de Desfoque no Fundo */
+#fundoDesfocado {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+    pointer-events: none; /* Permite interagir com elementos sobrepostos, como a barra de busca */
+}
+
+/* Lista de Produtos (modal leve) */
+#listaProdutosContainer {
+    position: absolute;
+    top: 80px; /* Alinha logo abaixo da barra de busca */
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    width: 80%;
+    max-width: 600px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    max-height: 300px; /* Limita a altura do modal */
+    overflow-y: auto; /* Habilita rolagem se a lista for longa */
+}
+
+/* Estilo da Barra de Busca */
+.buscar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    z-index: 1003; /* Coloca a barra de busca acima do fundo desfocado */
+    position: relative;
+}
+
+.buscar input[type="text"] {
+    width: 80%;
+    max-width: 500px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #c6e3c6;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+}
+
+.buscar input[type="text"]:focus {
+    outline: none;
+    border-color: #5cb85c;
+    box-shadow: 0 0 0 0.2rem rgba(92, 184, 92, 0.25);
+}
+
+
+/* Lista de Produtos (modal leve) */
+#listaProdutosContainer {
+    position: absolute;
+    top: 70px; /* Alinha logo abaixo da barra de busca */
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    width: 80%;
+    max-width: 600px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+}
+
+#listaProdutos {
+    display: none;
+}
+
+/* Estilo de Cada Item da Lista */
+#listaProdutos li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: transform 0.3s;
+}
+
+#listaProdutos li:hover {
+    transform: scale(1.02);
+}
+
+#listaProdutos img {
+    width: 60px;
+    height: auto;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+#listaProdutos .link {
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    transition: font-weight 0.3s;
+}
