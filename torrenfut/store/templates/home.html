@@ -154,7 +154,27 @@
             {% endfor %}
         </ul>
     </div>
+
     
+    <footer>
+        <!-- Linha divisória horizontal -->
+        <hr class="footer-divider">
+        
+        <!-- Conteúdo do rodapé -->
+        <div class="footer-content">
+            <!-- Lado esquerdo -->
+            <div class="footer-left">
+                <a href="{% url 'sobre' %}" class="button">Sobre o Projeto</a>
+                <a href="{% url 'quem_somos' %}" class="button">Quem Somos Nós</a>
+            </div>
+            
+            <!-- Lado direito -->
+            <div class="footer-right">
+                <a href="https://github.com/GabrielCassola/Torrenfut" target="_blank" class="button">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
     
 </body>
 </html>
