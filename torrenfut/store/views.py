@@ -127,3 +127,9 @@ def filtrar_camisetas(request):
         'temporadas_disponiveis': temporadas_disponiveis,
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
     })
+
+def sobre(request):
+    return render(request, 'sobre.html')  # Carrega a página 'sobre.html'
+
+def quem_somos(request):
+    return render(request, 'quem_somos.html')  # Carrega a página 'quem_somos.html'

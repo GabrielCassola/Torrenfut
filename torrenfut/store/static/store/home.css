@@ -213,3 +213,59 @@ img {
     text-decoration: none;
     transition: font-weight 0.3s;
 }
+
+/* Rodape */
+/* Estilo para a linha divisória */
+.footer-divider {
+    border: 0; /* Remove a borda padrão */
+    height: 1px; /* Define a altura da linha */
+    background-color: #ddd; /* Cor da linha (cinza claro) */
+    margin: 20px 0; /* Espaçamento acima e abaixo da linha */
+}
+
+/* Estilo do rodapé */
+footer {
+    background-color: #ffffff; /* Cor de fundo do rodapé */
+    padding: 20px 0; /* Espaçamento interno no rodapé */
+}
+
+/* Conteúdo do rodapé */
+.footer-content {
+    display: flex;
+    justify-content: space-between; /* Espaço entre o lado esquerdo e direito */
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o conteúdo */
+    padding: 0 20px; /* Espaçamento nas laterais */
+}
+
+/* Lado esquerdo */
+.footer-left {
+    display: flex;
+    flex-direction: column; /* Coloca os botões em coluna */
+}
+
+/* Lado direito */
+.footer-right {
+    display: flex;
+    align-items: center; /* Alinha verticalmente os itens */
+}
+
+/* Estilo para os botões no rodapé */
+.footer-left a,
+.footer-right a {
+    text-decoration: none;
+    color: #4CAF50; /* Cor verde */
+    background-color: white; /* Fundo branco */
+    padding: 10px 20px; /* Espaçamento interno */
+    border-radius: 4px; /* Bordas arredondadas */
+    margin: 5px 0; /* Espaçamento entre os botões */
+    font-size: 16px; /* Tamanho da fonte */
+    text-align: center;
+    display: inline-block;
+}
+
+.footer-left a:hover,
+.footer-right a:hover {
+    background-color: #45a049; /* Cor do botão ao passar o mouse */
+    color: white; /* Cor do texto ao passar o mouse */
+}
