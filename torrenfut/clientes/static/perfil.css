@@ -4,7 +4,7 @@ body {
     background: linear-gradient(to right, #f0f4f8, #d9e2ec); /* Gradiente suave de fundo */
     color: #333; /* Cor do texto */
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
 /* Container do Perfil */
@@ -79,4 +79,88 @@ p {
 
 .btn-editar:hover {
     background-color: #186b2b; /* Tom mais escuro de verde ao passar o mouse */
+}
+/* Cabeçalho */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #4CAF50;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Nome do site à esquerda */
+.header-left {
+    color: white; /* Altera a cor do nome do site para branco */
+    font-size: 20px; /* Tamanho do texto */
+    font-weight: bold; /* Texto em negrito */
+}
+
+
+/* Estilo do botão no cabeçalho */
+.header-right .button {
+    background-color: white; /* Cor de fundo branca */
+    color: #4CAF50; /* Cor do texto verde */
+    padding: 10px 20px; /* Espaçamento interno */
+    text-align: center; /* Centraliza o texto */
+    text-decoration: none; /* Remove o sublinhado */
+    display: inline-block; /* Exibe o botão como um bloco em linha */
+    font-size: 16px; /* Tamanho da fonte */
+    margin-left: 10px; /* Espaço à esquerda */
+    border: 1px solid #4CAF50; /* Borda verde */
+    border-radius: 4px; /* Bordas arredondadas */
+}
+
+.header-right .button:hover {
+    background-color: #4CAF50; /* Fundo verde ao passar o mouse */
+    color: white; /* Cor do texto branca ao passar o mouse */
+}
+
+/* Estilo para o botão de usuário logado */
+.header-right a {
+    background-color: white; /* Fundo branco */
+    color: #4CAF50; /* Cor do texto verde */
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10px;
+    border: 1px solid #4CAF50; /* Borda verde */
+    border-radius: 4px; /* Bordas arredondadas */
+}
+
+.header-right a:hover {
+    background-color: #4CAF50; /* Fundo verde ao passar o mouse */
+    color: white; /* Cor do texto branca ao passar o mouse */
+}
+
+/* Estilo para o nome do usuário logado */
+.header-right a span {
+    color: #4CAF50; /* Cor do texto do nome do usuário em branco */
+}
+
+.header-right a:hover span {
+    color: white; /* Garante que o nome do usuário continue branco ao passar o mouse */
+}
+
+.carrinho-link {
+    position: relative;
+    color: #4CAF50;
+    background: white;
+    padding: 8px 15px;
+    margin-left: 10px;
+    text-decoration: none;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+}
+
+.carrinho-link:hover {
+    background: #4CAF50;
+    color: white;
+}
+
+#carrinho-indicador {
+    font-weight: bold;
 }

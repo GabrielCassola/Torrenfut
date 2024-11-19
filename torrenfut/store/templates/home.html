@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +26,8 @@
                 <a href="{% url 'perfil' %}" style="text-decoration: none; color: black;">
                     <span>{{ user.first_name }} {{ user.last_name }}</span>
                 </a>
-                <a href="{% url 'ver_carrinho' %}" class="button" style="margin-left: 15px;">Ir para o Carrinho</a>
+                <a href="{% url 'ver_carrinho' %}" class="button carrinho-link" style="margin-left: 15px;">Ir para o Carrinho
+                        <span id="carrinho-indicador">({{ carrinho_quantidade }})</span></a>
             {% else %}
                 <a href="{% url 'login' %}" class="button">Login</a>
                 <a href="{% url 'cadastro' %}" class="button">Cadastro</a>
@@ -164,8 +165,8 @@
         <hr class="footer-divider">
         <div class="footer-content">
             <div class="footer-left">
-                <a href="{% url 'sobre' %}" class="button">Sobre o Projeto</a>
-                <a href="{% url 'quem_somos' %}" class="button">Quem Somos Nós</a>
+                <a href="{% url 'sobre' %}" class="button">Sobre o projeto</a>
+                <a href="{% url 'quem_somos' %}" class="button">Quem somos nós</a>
             </div>
             <div class="footer-right">
                 <a href="https://github.com/GabrielCassola/Torrenfut" target="_blank" class="button">GitHub</a>

@@ -12,6 +12,7 @@ from django.db.models import Sum, F
 @login_required
 def adicionar_ao_carrinho(request, camiseta_id):
     camiseta = get_object_or_404(Camiseta, id=camiseta_id)
+    referer = request.META.get('HTTP_REFERER', '/')
     
     # Obter o tamanho do formulário
     tamanho_id = request.POST.get('tamanho_id')
@@ -45,16 +46,15 @@ def adicionar_ao_carrinho(request, camiseta_id):
             item_carrinho.quantidade = nova_quantidade
         else:
             messages.error(request, f'Estoque insuficiente. Você já possui {item_carrinho.quantidade} no carrinho.')
-            return redirect('ver_carrinho')
+            return redirect(referer)
 
     item_carrinho.save()
 
     # Atualizar o estoque
     tamanho.quantidade_em_estoque -= quantidade
     tamanho.save()
-
-    #messages.success(request, f'{quantidade} unidade(s) de {camiseta.time} foram adicionadas ao carrinho.')
-    return redirect('ver_carrinho')
+    
+    return redirect(referer)
 
 
 # Ver o carrinho

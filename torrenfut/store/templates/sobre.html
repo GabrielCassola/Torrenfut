@@ -1,11 +1,106 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>Sobre o projeto</title>
+    <link rel="stylesheet" href="{% static 'sobre.css' %}">
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    <header class="header">
+        <div class="header-left">
+            <h1>Torrenfut</h1> <!-- Nome do site à esquerda -->
+        </div>
+        <div class="header-right">
+            <!-- Botões de login e cadastro -->
+            {% if user.is_authenticated %}
+                <a href="{% url 'perfil' %}" style="text-decoration: none; color: black;">
+                    <span>{{ user.first_name }} {{ user.last_name }}</span>
+                </a>
+                <a href="{% url 'ver_carrinho' %}" class="button carrinho-link" style="margin-left: 15px;">Ir para o Carrinho
+                        <span id="carrinho-indicador">({{ carrinho_quantidade }})</span></a>
+            {% else %}
+                <a href="{% url 'login' %}" class="button">Login</a>
+                <a href="{% url 'cadastro' %}" class="button">Cadastro</a>
+            {% endif %}
+        </div>
+    </header>
+
+
+    <div class="container">
+        <h2>Sobre o Projeto</h2>
+        <p>
+            Este é um projeto de um e-commerce focado na venda de artigos esportivos, desenvolvido como parte da disciplina 
+            <strong>Implementação de Sistemas de Informação</strong> do curso de <strong>Sistemas de Informação</strong> 
+            na <strong>Universidade Estadual Paulista (UNESP) - Campus Bauru</strong>.
+        </p>
+
+        <h2>Tecnologias Utilizadas</h2>
+        <ul>
+            <li><strong>Python:</strong> Linguagem de programação utilizada no desenvolvimento do backend.</li>
+            <li><strong>Django:</strong> Framework para o backend, responsável por gerenciar o banco de dados, as rotas e a lógica de negócios.</li>
+            <li><strong>HTML, CSS e JavaScript:</strong> Linguagens utilizadas no frontend, garantindo a estrutura, o design e a interatividade da aplicação.</li>
+        </ul>
+
+        <h2>Funcionalidades</h2>
+        <div class="funcionalidades">
+            <p>O sistema oferece um conjunto completo de funcionalidades voltadas para a gestão eficiente de um e-commerce de artigos esportivos. Confira:</p>
+            
+            <h3>Gestão de Usuários</h3>
+            <ul>
+                <li>Cadastro de administradores com privilégios específicos.</li>
+                <li>Cadastro e gerenciamento de clientes e fornecedores.</li>
+            </ul>
+        
+            <h3>Gestão de Produtos e Estoque</h3>
+            <ul>
+                <li>Cadastro, edição, exclusão e visualização de produtos (CRUD).</li>
+                <li>Cadastro de tributos, incluindo IOF e outros impostos aplicáveis.</li>
+                <li>Emissão de alertas automáticos para estoques baixos.</li>
+                <li>Emissão de relatórios detalhados de estoque.</li>
+            </ul>
+        
+            <h3>Precificação</h3>
+            <ul>
+                <li>Cálculo automatizado do preço de venda baseado em:
+                    <ul>
+                        <li>Preço de custo.</li>
+                        <li>IOF e outros tributos cadastrados.</li>
+                        <li>Custos de frete.</li>
+                        <li>Porcentagem de lucro configurável.</li>
+                    </ul>
+                </li>
+            </ul>
+        
+            <h3>Gestão de Compras e Vendas</h3>
+            <ul>
+                <li>Recebimento e controle de pedidos de compra.</li>
+                <li>Realização e registro de vendas diretamente no sistema.</li>
+                <li>Emissão de confirmação de vendas com detalhes para o cliente.</li>
+            </ul>
+        
+            <h3>Relatórios e Informações</h3>
+            <ul>
+                <li>Emissão de relatórios detalhados de vendas e estoque, permitindo análise do desempenho comercial.</li>
+            </ul>
+        </div>
+
+        <h2>Objetivo</h2>
+        <p>
+            O principal objetivo deste projeto é aplicar os conhecimentos adquiridos na disciplina, 
+            integrando os conceitos de desenvolvimento web com práticas modernas de programação. 
+            Além disso, visa proporcionar aos alunos a experiência de criar uma aplicação funcional e completa.
+        </p>
+
+        <h2>Equipe</h2>
+        <p>
+            O projeto foi desenvolvido por <a href="/quem-somos">alunos do curso de Sistemas de Informação</a>, sob a orientação do Prof. Dr. Higor Amario de Souza.
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Torrenfut | UNESP Bauru - Sistemas de Informação</p>
+    </footer>
 </body>
 </html>
