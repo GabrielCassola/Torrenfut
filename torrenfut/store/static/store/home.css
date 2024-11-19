@@ -1,3 +1,11 @@
+/* Estilo geral do body e página */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Cor de fundo clara para a página */
+}
+
 .container {
     display: flex;            /* Ativa o Flexbox para o contêiner */
     margin: 20px;           /* Espaçamento externo */
@@ -9,6 +17,8 @@
     padding: 20px;             /* Espaçamento interno */
     border-radius: 8px;       /* Bordas arredondadas */
     margin-bottom: 20px;      /* Espaço abaixo dos filtros */
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
 .filters label {
@@ -144,18 +154,20 @@ img {
 .buscar {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
     margin-bottom: 20px;
+    width: 100%; /* Garante que a barra de busca ocupe toda a largura disponível */
     z-index: 1003; /* Coloca a barra de busca acima do fundo desfocado */
     position: relative;
 }
 
 .buscar input[type="text"] {
     width: 80%;
-    max-width: 500px;
-    padding: 10px;
+    max-width: 800px;
+    padding: 10px 12px;
     font-size: 16px;
     border: 1px solid #c6e3c6;
-    border-radius: 4px;
+    border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s;
 }
@@ -225,7 +237,7 @@ img {
 
 /* Estilo do rodapé */
 footer {
-    background-color: #ffffff; /* Cor de fundo do rodapé */
+    background-color: #f4f4f4; /* Cor de fundo do rodapé */
     padding: 20px 0; /* Espaçamento interno no rodapé */
 }
 
@@ -255,7 +267,7 @@ footer {
 .footer-right a {
     text-decoration: none;
     color: #4CAF50; /* Cor verde */
-    background-color: white; /* Fundo branco */
+    background-color: #f4f4f4; /* Fundo branco */
     padding: 10px 20px; /* Espaçamento interno */
     border-radius: 4px; /* Bordas arredondadas */
     margin: 5px 0; /* Espaçamento entre os botões */
@@ -269,3 +281,78 @@ footer {
     background-color: #45a049; /* Cor do botão ao passar o mouse */
     color: white; /* Cor do texto ao passar o mouse */
 }
+
+/* Cabeçalho */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #4CAF50;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Nome do site à esquerda */
+.header-left {
+    color: white; /* Altera a cor do nome do site para branco */
+    font-size: 20px; /* Tamanho do texto */
+    font-weight: bold; /* Texto em negrito */
+}
+
+
+/* Barra de busca no meio */
+.header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Garante que o espaço disponível seja utilizado por completo */
+    padding: 0 20px; /* Ajuste para manter algum espaçamento nas laterais */
+}
+
+/* Estilo do botão no cabeçalho */
+.header-right .button {
+    background-color: white; /* Cor de fundo branca */
+    color: #4CAF50; /* Cor do texto verde */
+    padding: 10px 20px; /* Espaçamento interno */
+    text-align: center; /* Centraliza o texto */
+    text-decoration: none; /* Remove o sublinhado */
+    display: inline-block; /* Exibe o botão como um bloco em linha */
+    font-size: 16px; /* Tamanho da fonte */
+    margin-left: 10px; /* Espaço à esquerda */
+    border: 1px solid #4CAF50; /* Borda verde */
+    border-radius: 4px; /* Bordas arredondadas */
+}
+
+.header-right .button:hover {
+    background-color: #4CAF50; /* Fundo verde ao passar o mouse */
+    color: white; /* Cor do texto branca ao passar o mouse */
+}
+
+/* Estilo para o botão de usuário logado */
+.header-right a {
+    background-color: white; /* Fundo branco */
+    color: #4CAF50; /* Cor do texto verde */
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10px;
+    border: 1px solid #4CAF50; /* Borda verde */
+    border-radius: 4px; /* Bordas arredondadas */
+}
+
+.header-right a:hover {
+    background-color: #4CAF50; /* Fundo verde ao passar o mouse */
+    color: white; /* Cor do texto branca ao passar o mouse */
+}
+
+/* Estilo para o nome do usuário logado */
+.header-right a span {
+    color: #4CAF50; /* Cor do texto do nome do usuário em branco */
+}
+
+.header-right a:hover span {
+    color: white; /* Garante que o nome do usuário continue branco ao passar o mouse */
+}
+

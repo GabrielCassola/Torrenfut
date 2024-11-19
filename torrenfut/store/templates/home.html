@@ -9,27 +9,32 @@
     <link rel="stylesheet" href="{% static 'store/home.css' %}">
 </head>
 <body>
-    <h1 style="text-align: center;">Torrenfut</h1>
 
-    <!-- Botões de login e cadastro, ou exibe o nome do usuário logado -->
-    <div style="text-align: right; margin-bottom: 20px;">
-        {% if user.is_authenticated %}
-            <!-- Exibe o ícone do usuário com um link para o perfil -->
-            <a href="{% url 'perfil' %}" style="text-decoration: none; color: black;">
-            <span>{{ user.first_name }} {{ user.last_name }}</span>
-            </a>
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="header-left">
+            <h1>Torrenfut</h1> <!-- Nome do site à esquerda -->
+        </div>
+        <div class="header-center">
+            <div class="buscar">
+                <input id="inputBusca" onkeyup="filtrar()" type="text" placeholder="O que você procura?">
+            </div>
+        </div>
+        <div class="header-right">
+            <!-- Botões de login e cadastro -->
+            {% if user.is_authenticated %}
+                <a href="{% url 'perfil' %}" style="text-decoration: none; color: black;">
+                    <span>{{ user.first_name }} {{ user.last_name }}</span>
+                </a>
+                <a href="{% url 'ver_carrinho' %}" class="button" style="margin-left: 15px;">Ir para o Carrinho</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="button">Login</a>
+                <a href="{% url 'cadastro' %}" class="button">Cadastro</a>
+            {% endif %}
+        </div>
+    </header>
 
-            <!-- Botão para ir ao carrinho -->
-            <a href="{% url 'ver_carrinho' %}" class="button" style="margin-left: 15px;">Ir para o Carrinho</a>
-        {% else %}
-            <a href="{% url 'login' %}" class="button">Login</a>
-            <a href="{% url 'cadastro' %}" class="button">Cadastro</a>
-        {% endif %}
-    </div>
-
-    <div class="buscar">
-        <input id="inputBusca" onkeyup="filtrar()" type="text" placeholder="O que você procura?">
-    </div>
+    <!-- Conteúdo restante do site -->
     <div class="listaProdutosContainer">
         <ul id="listaProdutos">
             {% for camiseta in camisetas %}
@@ -42,19 +47,19 @@
             {% endfor %}
         </ul>
     </div>
-    
+
     <script>
         function filtrar() {
             var input, filter, ul, li, span, i, txtValue, count = 0;
-    
+
             // Obter valor de pesquisa e os elementos
             input = document.getElementById('inputBusca');
             ul = document.getElementById('listaProdutos');
             filter = input.value.toUpperCase();
-    
+
             // Pegar todos os <li> dentro do <ul>
             li = ul.getElementsByTagName("li");
-    
+
             // Se o campo estiver vazio, ocultar todos os itens
             if (filter === "") {
                 ul.style.display = "none";
@@ -63,16 +68,16 @@
                 }
                 return; // Sai da função se o campo estiver vazio
             }
-    
+
             // Percorrer os <li> para verificar quais correspondem ao filtro
             for (i = 0; i < li.length; i++) {
                 span = li[i].getElementsByClassName("item-text")[0]; // Seleciona o texto do item
                 txtValue = span.textContent || span.innerText;
-    
+
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     li[i].style.display = ""; // Mostra o item se corresponder
                     count++;
-    
+
                     // Destaque em negrito a parte correspondente
                     let regex = new RegExp(`(${filter})`, 'gi');
                     span.innerHTML = txtValue.replace(regex, "<strong>$1</strong>");
@@ -80,12 +85,13 @@
                     li[i].style.display = "none"; // Esconde o item se não corresponder
                 }
             }
-    
+
             // Exibir ou ocultar a lista dependendo do número de correspondências
             ul.style.display = count === 0 ? "none" : "block";
         }
     </script>
-    
+
+    <!-- Restante do conteúdo da página -->
     <div class="container">
         <div class="filters">
             <form method="get" action="{% url 'filtrar_camisetas' %}">
@@ -139,7 +145,6 @@
                 <button type="submit">Filtrar</button>
             </form>
         </div>
-    
         <ul class="gallery">
             {% for camiseta in camisetas %}
                 <li>
@@ -155,26 +160,18 @@
         </ul>
     </div>
 
-    
     <footer>
-        <!-- Linha divisória horizontal -->
         <hr class="footer-divider">
-        
-        <!-- Conteúdo do rodapé -->
         <div class="footer-content">
-            <!-- Lado esquerdo -->
             <div class="footer-left">
                 <a href="{% url 'sobre' %}" class="button">Sobre o Projeto</a>
                 <a href="{% url 'quem_somos' %}" class="button">Quem Somos Nós</a>
             </div>
-            
-            <!-- Lado direito -->
             <div class="footer-right">
                 <a href="https://github.com/GabrielCassola/Torrenfut" target="_blank" class="button">GitHub</a>
             </div>
         </div>
     </footer>
 
-    
 </body>
 </html>
