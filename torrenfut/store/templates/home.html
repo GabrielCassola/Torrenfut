@@ -42,8 +42,8 @@
                 <li>
                     <a href="{% url 'produto' time=camiseta.time estilo=camiseta.estilo temporada=camiseta.temporada|urlencode %}">
                         <img src="{{ camiseta.imagem.url }}" alt="{{ camiseta.time }}" width="100%">
-                    </a><span class="item-text">{{ camiseta.time }} {{ camiseta.estilo }} {{ camiseta.temporada }}</span>
-                    </a>
+                    <span class="item-text">{{ camiseta.time }} {{ camiseta.estilo }} {{ camiseta.temporada }}</span></a>
+                    
                 </li>
             {% endfor %}
         </ul>

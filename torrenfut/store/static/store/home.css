@@ -195,6 +195,11 @@ img {
     z-index: 1002;
 }
 
+.listaProdutosContainer ul li a {
+    text-decoration: none; /* Remove o sublinhado */
+    color: inherit; /* Mantém a cor original */
+}
+
 #listaProdutos {
     display: none;
 }
