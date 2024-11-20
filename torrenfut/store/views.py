@@ -13,6 +13,8 @@ def obter_opcoes_filtro():
     times_disponiveis = Camiseta.objects.values_list('time', flat=True).distinct()
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
     tipos_produto_disponiveis = TipoProduto.objects.all()
+    ligas_disponiveis = Camiseta.objects.values_list('liga', flat=True).distinct()
+
     
     return {
         'cores_disponiveis': cores_disponiveis,
@@ -20,6 +22,8 @@ def obter_opcoes_filtro():
         'times_disponiveis': times_disponiveis,
         'temporadas_disponiveis': temporadas_disponiveis,
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
+        'ligas_disponiveis': ligas_disponiveis,
+
     }
 
 
@@ -98,6 +102,7 @@ def filtrar_camisetas(request):
     time = request.GET.get('time')
     temporada = request.GET.get('temporada')
     tipo_produto = request.GET.get('tipo_produto')
+    liga = request.GET.get('liga')
 
     # Buscar todas as camisetas
     camisetas = Camiseta.objects.all()
@@ -111,13 +116,17 @@ def filtrar_camisetas(request):
         camisetas = camisetas.filter(temporada=temporada)
     if tipo_produto:
         camisetas = camisetas.filter(tipo_produto__id=tipo_produto)
+    if liga:
+        camisetas = camisetas.filter(liga=liga)
+
 
     # Obter opções únicas para filtro
     cores_disponiveis = Camiseta.objects.values_list('cor_principal', flat=True).distinct()
     marcas_disponiveis = Camiseta.objects.values_list('marca', flat=True).distinct()
     times_disponiveis = Camiseta.objects.values_list('time', flat=True).distinct()
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
-    tipos_produto_disponiveis = TipoProduto.objects.all()  # Presumindo que você tenha um modelo TipoProduto
+    tipos_produto_disponiveis = TipoProduto.objects.all() 
+    ligas_disponiveis = Camiseta.objects.values_list('liga', flat=True).distinct()
 
     return render(request, 'home.html', {
         'camisetas': camisetas,
@@ -126,6 +135,7 @@ def filtrar_camisetas(request):
         'times_disponiveis': times_disponiveis,
         'temporadas_disponiveis': temporadas_disponiveis,
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
+        'ligas_disponiveis': ligas_disponiveis
     })
 
 def sobre(request):

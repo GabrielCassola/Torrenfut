@@ -6,6 +6,7 @@ from django.utils import timezone
 class Camiseta(models.Model):
     tipo_produto = models.ForeignKey(TipoProduto, default=1, on_delete=models.CASCADE)  # Supondo que o ID 1 exista em TipoProduto
     time = models.CharField(max_length=100)
+    liga = models.CharField(max_length=100, null=True)
     temporada = models.CharField(max_length=50)
     estilo = models.CharField(max_length=50)
     cor_principal = models.CharField(max_length=50)
