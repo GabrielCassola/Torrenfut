@@ -1,11 +1,47 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>Sobre Nós</title>
+    <link rel="stylesheet" href="{% static 'quem_somos.css' %}">
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    <header class="header">
+        <div class="header-left">
+            <h1>Torrenfut</h1> <!-- Nome do site à esquerda -->
+        </div>
+        <div class="header-right">
+            {% if user.is_authenticated %}
+                <a href="{% url 'perfil' %}" style="text-decoration: none; color: black;">
+                    <span>{{ user.first_name }} {{ user.last_name }}</span>
+                </a>
+                <a href="{% url 'ver_carrinho' %}" class="button carrinho-link" style="margin-left: 15px;">Ir para o Carrinho
+                        <span id="carrinho-indicador">({{ carrinho_quantidade }})</span></a>
+            {% else %}
+                <a href="{% url 'login' %}" class="button">Login</a>
+                <a href="{% url 'cadastro' %}" class="button">Cadastro</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Quem Somos</h2>
+        <p>
+            Somos estudantes do curso de Sistemas de Informação da UNESP, atualmente no 6º semestre. Nossa trajetória é movida pela paixão por tecnologia, inovação e a busca constante por soluções que possam transformar desafios em oportunidades.
+        </p>
+        <p>
+            Combinando teoria e prática, adquirimos competências que nos permitem compreender e desenvolver sistemas computacionais eficientes e inteligentes. Acreditamos no poder da colaboração, do aprendizado contínuo e do impacto positivo que a tecnologia pode proporcionar à sociedade.
+        </p>
+        <p>
+            Estamos comprometidos em construir um futuro onde a informação seja a base para decisões mais ágeis e transformadoras, contribuindo para um mundo mais conectado e sustentável.
+        </p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Torrenfut | UNESP Bauru - Sistemas de Informação</p>
+    </footer>
 </body>
 </html>

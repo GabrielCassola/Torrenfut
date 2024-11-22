@@ -4,48 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Relatório de Vendas</title>
-    <a href="{% static 'relatorio_vendas.css' %}"></a>
+    <link rel="stylesheet" href="{% static 'relatorio_vendas.css' %}">
 </head>
 <body>
     <h1>Relatório de Vendas</h1>
-        <p>Histórico de Vendas</p>
-        {% for compra in compras %}
-            <h2>Compra ID: {{ compra.id }} - Usuário: {{ compra.usuario.username }} - Data: {{ compra.data_compra }}</h2>
-            <p>Total: R$ {{ compra.total }}</p>
+    <p>Histórico de Vendas</p>
+    {% for compra in compras %}
+        <h2>Compra ID: {{ compra.id }} - Usuário: {{ compra.usuario.username }} - Data: {{ compra.data_compra }}</h2>
+        <p>Total: <span class="highlight">R$ {{ compra.total }}</span></p>
 
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Camiseta</th>
-                        <th>Tamanho</th>
-                        <th>Quantidade</th>
-                        <th>Preço Unitário</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in itens %}
-                        {% if item.compra_id == compra.id %}
-                            <tr>
-                                <td>{{ item.camiseta.time }}</td>
-                                <td>{{ item.tamanho.tamanho }}</td>
-                                <td>{{ item.quantidade }}</td>
-                                <td>R$ {{ item.preco_unitario }}</td>
-                                <td>R$ {{ item.subtotal }}</td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% endfor %}
-        <h2>Venda dos produtos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Camiseta</th>
+                    <th>Tamanho</th>
+                    <th>Quantidade</th>
+                    <th>Preço Unitário</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in itens %}
+                    {% if item.compra_id == compra.id %}
+                        <tr>
+                            <td>{{ item.camiseta.time }}</td>
+                            <td>{{ item.tamanho.tamanho }}</td>
+                            <td>{{ item.quantidade }}</td>
+                            <td>R$ {{ item.preco_unitario }}</td>
+                            <td>R$ {{ item.subtotal }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+
+    <h2>Venda dos Produtos</h2>
     <ul>
         {% for produto in totais_por_produto %}
-            <li>{{ produto.camiseta__time }} {{produto.tamanho__tamanho}} - Total Vendido: {{ produto.total_quantidade }} - Total Arrecadado: R$ {{ produto.total_arrecadado }}</li>
+            <li>
+                {{ produto.camiseta__time }} {{ produto.tamanho__tamanho }} - 
+                Total Vendido: <span class="highlight">{{ produto.total_quantidade }}</span> - 
+                Total Arrecadado: <span class="highlight">R$ {{ produto.total_arrecadado }}</span>
+            </li>
         {% endfor %}
     </ul>
 
     <h2>Faturamento</h2>
-    <p>R$ {{ total_geral }}</p>
+    <p>Total Geral: <span class="highlight">R$ {{ total_geral }}</span></p>
 </body>
 </html>
