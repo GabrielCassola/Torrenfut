@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gráfico-Estoque</title>
-    <link rel="stylesheet" href="{% static 'store/grafico_estoque.css' %}"">
+    <link rel="stylesheet" href="{% static 'store/grafico_estoque.css' %}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         // Carregar o pacote corechart
@@ -28,8 +28,8 @@
                     title: 'Estoque Novo para Tamanho ' + tamanho,
                     hAxis: { title: 'Data' },
                     vAxis: { title: 'Estoque Novo' },
-                    width: 600,
-                    height: 400,
+                    width: 550,
+                    height: 350,
                     legend: { position: 'bottom' },
                     curveType: 'function' // Suaviza as linhas do gráfico
                 };
@@ -40,12 +40,59 @@
             }
         }
     </script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .chart-container {
+            flex: 0 0 48%; /* 48% para dois gráficos por linha com espaçamento */
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        .chart-container h2 {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Gráficos do estoque Camiseta {{time}} {{estilo}} {{cor_principal}} {{marca}} temporada {{temporada}}</h1>
-    <div id="chart_div_G" style="margin-bottom: 40px;"></div>
-    <div id="chart_div_M" style="margin-bottom: 40px;"></div>
-    <div id="chart_div_P" style="margin-bottom: 40px;"></div>
-    <div id="chart_div_GG" style="margin-bottom: 40px;"></div>
+    <header>
+        <h1>Gráficos do Estoque - Camisetas {{time}} {{estilo}} {{cor_principal}} {{marca}} - Temporada {{temporada}}</h1>
+    </header>
+    <div class="container">
+        <div id="chart_div_G" class="chart-container"></div>
+        <div id="chart_div_M" class="chart-container"></div>
+        <div id="chart_div_P" class="chart-container"></div>
+        <div id="chart_div_GG" class="chart-container"></div>
+    </div>
 </body>
 </html>

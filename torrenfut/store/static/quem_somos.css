@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #4CAF50;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.header-right .button {
+    background-color: white;
+    color: #4CAF50;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+}
+
+.header-right .button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.header-right a {
+    background-color: white;
+    color: #4CAF50;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+}
+
+.header-right a:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.header-right a span {
+    color: #4CAF50;
+}
+
+.header-right a:hover span {
+    color: white;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: white;
+}
+
+h2 {
+    color: #4CAF50;
+}
+
+footer {
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+footer p {
+    text-align: center;
+}
+
+p {
+    margin: 10px 0;
+    text-align: justify;
+}
