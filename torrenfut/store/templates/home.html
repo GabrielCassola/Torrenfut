@@ -156,13 +156,13 @@
             </form>
 
             <div class="filtros-ativos">
-                {% for filtro, valor in filtros_aplicados.items %}
-                    <span class="filtro-tag">
-                        {{ filtro|capfirst }}: {{ valor }}
-                        <a href="{% url 'filtrar_camisetas' %}?{% for key, val in request.GET.items %}{% if key != filtro %}{{ key }}={{ val }}&{% endif %}{% endfor %}" class="remover-filtro">×</a>
-                    </span>
-                {% endfor %}
-            </div>
+    {% for filtro, valor in filtros_aplicados.items %}
+        <span class="filtro-tag">
+            {{ filtro|capfirst }}: {{ valor }}
+            <a href="{% url 'filtrar_camisetas' %}?{% for key, val in request.GET.items %}{% if key != filtro %}{{ key }}={{ val }}&{% endif %}{% endfor %}" class="remover-filtro">×</a>
+        </span>
+    {% endfor %}
+</div>
         </div>
         
         <ul class="gallery">
