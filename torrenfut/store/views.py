@@ -1,6 +1,6 @@
 from django.http import HttpResponse, Http404
 from django.template import loader
-from .models import Camiseta, CamisetaTamanho, HistoricoEstoque
+from .models import Camiseta, CamisetaTamanho, HistoricoEstoque, Time, Liga
 import json
 from django.shortcuts import render, get_object_or_404
 from collections import defaultdict
@@ -13,7 +13,7 @@ def obter_opcoes_filtro():
     times_disponiveis = Camiseta.objects.values_list('time', flat=True).distinct()
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
     tipos_produto_disponiveis = TipoProduto.objects.all()
-    ligas_disponiveis = Camiseta.objects.values_list('liga', flat=True).distinct()
+    #ligas_disponiveis = Camiseta.objects.values_list('liga', flat=True).distinct()
 
     
     return {
@@ -22,7 +22,7 @@ def obter_opcoes_filtro():
         'times_disponiveis': times_disponiveis,
         'temporadas_disponiveis': temporadas_disponiveis,
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
-        'ligas_disponiveis': ligas_disponiveis,
+        #'ligas_disponiveis': ligas_disponiveis,
 
     }
 
@@ -38,22 +38,31 @@ def store(request):
     return HttpResponse(template.render(context, request))
 
 
-def produto(request, time, estilo, temporada):
+def produto(request, time_nome, estilo, temporada):
     try:
-        # Usando get() para buscar uma única camiseta
+        # Buscar o time pelo nome, que agora é uma chave estrangeira
+        time = get_object_or_404(Time, nome=time_nome)
+        
+        # Usando get() para buscar a camiseta que corresponde ao time, estilo e temporada
         camiseta = Camiseta.objects.get(time=time, estilo=estilo, temporada=temporada)
         tamanhos = CamisetaTamanho.objects.filter(camiseta=camiseta)
     except Camiseta.DoesNotExist:
         raise Http404("Camiseta não encontrada.")
     
+    # Carregar o template
     template = loader.get_template('produto.html')
+    
+    # Obter as opções de filtro
     opcoes_filtro = obter_opcoes_filtro()
+    
+    # Contexto com a camiseta, tamanhos e as opções de filtro
     context = {
         'camiseta': camiseta, 
         'tamanhos': tamanhos,
         **opcoes_filtro,
-
     }
+    
+    # Retornar a resposta com o contexto
     return HttpResponse(template.render(context, request))
 
 def grafico_estoque(request, produto_id):
@@ -104,7 +113,7 @@ def filtrar_camisetas(request):
         'time': request.GET.get('time'),
         'temporada': request.GET.get('temporada'),
         'tipo_produto': request.GET.get('tipo_produto'),
-        'liga': request.GET.get('liga'),
+      #  'liga': request.GET.get('liga'),
     }
 
     # Remover filtros que não estão preenchidos
@@ -122,8 +131,8 @@ def filtrar_camisetas(request):
         camisetas = camisetas.filter(temporada=filtros_aplicados['temporada'])
     if 'tipo_produto' in filtros_aplicados:
         camisetas = camisetas.filter(tipo_produto__id=filtros_aplicados['tipo_produto'])
-    if 'liga' in filtros_aplicados:
-        camisetas = camisetas.filter(liga=filtros_aplicados['liga'])
+  #  if 'liga' in filtros_aplicados:
+     #   camisetas = camisetas.filter(liga=filtros_aplicados['liga'])
 
     # Obter opções únicas para filtro
     cores_disponiveis = Camiseta.objects.values_list('cor_principal', flat=True).distinct()
@@ -131,7 +140,7 @@ def filtrar_camisetas(request):
     times_disponiveis = Camiseta.objects.values_list('time', flat=True).distinct()
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
     tipos_produto_disponiveis = TipoProduto.objects.all()
-    ligas_disponiveis = Camiseta.objects.values_list('liga', flat=True).distinct()
+    #ligas_disponiveis = Camiseta.objects.values_list('liga', flat=True).distinct()
 
     # Renderizar o template
     return render(request, 'home.html', {
@@ -141,7 +150,7 @@ def filtrar_camisetas(request):
         'times_disponiveis': times_disponiveis,
         'temporadas_disponiveis': temporadas_disponiveis,
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
-        'ligas_disponiveis': ligas_disponiveis,
+      #  'ligas_disponiveis': ligas_disponiveis,
         'filtros_aplicados': filtros_aplicados,  # Enviar os filtros ativos
     })
 
