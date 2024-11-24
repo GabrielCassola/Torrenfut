@@ -97,37 +97,43 @@ def grafico_estoque(request, produto_id):
 
 
 def filtrar_camisetas(request):
-    cor = request.GET.get('cor')
-    marca = request.GET.get('marca')
-    time = request.GET.get('time')
-    temporada = request.GET.get('temporada')
-    tipo_produto = request.GET.get('tipo_produto')
-    liga = request.GET.get('liga')
+    # Obter filtros da requisição
+    filtros_aplicados = {
+        'cor': request.GET.get('cor'),
+        'marca': request.GET.get('marca'),
+        'time': request.GET.get('time'),
+        'temporada': request.GET.get('temporada'),
+        'tipo_produto': request.GET.get('tipo_produto'),
+        'liga': request.GET.get('liga'),
+    }
 
-    # Buscar todas as camisetas
+    # Remover filtros que não estão preenchidos
+    filtros_aplicados = {chave: valor for chave, valor in filtros_aplicados.items() if valor}
+
+    # Buscar todas as camisetas e aplicar filtros
     camisetas = Camiseta.objects.all()
-    if cor:
-        camisetas = camisetas.filter(cor_principal=cor)
-    if marca:
-        camisetas = camisetas.filter(marca=marca)
-    if time:
-        camisetas = camisetas.filter(time=time)
-    if temporada:
-        camisetas = camisetas.filter(temporada=temporada)
-    if tipo_produto:
-        camisetas = camisetas.filter(tipo_produto__id=tipo_produto)
-    if liga:
-        camisetas = camisetas.filter(liga=liga)
-
+    if 'cor' in filtros_aplicados:
+        camisetas = camisetas.filter(cor_principal=filtros_aplicados['cor'])
+    if 'marca' in filtros_aplicados:
+        camisetas = camisetas.filter(marca=filtros_aplicados['marca'])
+    if 'time' in filtros_aplicados:
+        camisetas = camisetas.filter(time=filtros_aplicados['time'])
+    if 'temporada' in filtros_aplicados:
+        camisetas = camisetas.filter(temporada=filtros_aplicados['temporada'])
+    if 'tipo_produto' in filtros_aplicados:
+        camisetas = camisetas.filter(tipo_produto__id=filtros_aplicados['tipo_produto'])
+    if 'liga' in filtros_aplicados:
+        camisetas = camisetas.filter(liga=filtros_aplicados['liga'])
 
     # Obter opções únicas para filtro
     cores_disponiveis = Camiseta.objects.values_list('cor_principal', flat=True).distinct()
     marcas_disponiveis = Camiseta.objects.values_list('marca', flat=True).distinct()
     times_disponiveis = Camiseta.objects.values_list('time', flat=True).distinct()
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
-    tipos_produto_disponiveis = TipoProduto.objects.all() 
+    tipos_produto_disponiveis = TipoProduto.objects.all()
     ligas_disponiveis = Camiseta.objects.values_list('liga', flat=True).distinct()
 
+    # Renderizar o template
     return render(request, 'home.html', {
         'camisetas': camisetas,
         'cores_disponiveis': cores_disponiveis,
@@ -135,8 +141,10 @@ def filtrar_camisetas(request):
         'times_disponiveis': times_disponiveis,
         'temporadas_disponiveis': temporadas_disponiveis,
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
-        'ligas_disponiveis': ligas_disponiveis
+        'ligas_disponiveis': ligas_disponiveis,
+        'filtros_aplicados': filtros_aplicados,  # Enviar os filtros ativos
     })
+
 
 def sobre(request):
     return render(request, 'sobre.html')  # Carrega a página 'sobre.html'
