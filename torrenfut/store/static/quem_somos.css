@@ -98,3 +98,11 @@ p {
     margin: 10px 0;
     text-align: justify;
 }
+h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+h1 a:hover {
+    text-decoration: none;
+}

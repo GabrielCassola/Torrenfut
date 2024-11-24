@@ -210,3 +210,11 @@ td button:hover {
 #carrinho-indicador {
     font-weight: bold;
 }
+h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+h1 a:hover {
+    text-decoration: none;
+}
