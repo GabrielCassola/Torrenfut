@@ -1,6 +1,6 @@
 from django.http import HttpResponse, Http404
 from django.template import loader
-from .models import Camiseta, CamisetaTamanho, HistoricoEstoque, Time, Liga
+from .models import Camiseta, CamisetaTamanho, HistoricoEstoque, Time, Liga, Marca
 import json
 from django.shortcuts import render, get_object_or_404
 from collections import defaultdict
@@ -9,8 +9,8 @@ from .models import Camiseta, CamisetaTamanho, TipoProduto
 def obter_opcoes_filtro():
     # Obter opções únicas para filtro
     cores_disponiveis = Camiseta.objects.values_list('cor_principal', flat=True).distinct()
-    marcas_disponiveis = Camiseta.objects.values_list('marca', flat=True).distinct()
-    times_disponiveis = Camiseta.objects.values_list('time', flat=True).distinct()
+    marcas_disponiveis = Marca.objects.all()
+    times_disponiveis = Time.objects.all()
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
     tipos_produto_disponiveis = TipoProduto.objects.all()
     #ligas_disponiveis = Camiseta.objects.values_list('liga', flat=True).distinct()
@@ -136,8 +136,8 @@ def filtrar_camisetas(request):
 
     # Obter opções únicas para filtro
     cores_disponiveis = Camiseta.objects.values_list('cor_principal', flat=True).distinct()
-    marcas_disponiveis = Camiseta.objects.values_list('marca', flat=True).distinct()
-    times_disponiveis = Camiseta.objects.values_list('time', flat=True).distinct()
+    marcas_disponiveis = Marca.objects.all()
+    times_disponiveis = Time.objects.all()
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
     tipos_produto_disponiveis = TipoProduto.objects.all()
     #ligas_disponiveis = Camiseta.objects.values_list('liga', flat=True).distinct()

@@ -36,6 +36,7 @@
     </header>
 
     <!-- Conteúdo restante do site -->
+
     <div class="listaProdutosContainer">
         <ul id="listaProdutos">
             {% for camiseta in camisetas %}
@@ -97,63 +98,111 @@
         <div class="filters">
             <form method="get" action="{% url 'filtrar_camisetas' %}">
                 <ul>
+                    <!-- Filtro de Tipo de Produto -->
                     <li>
                         <label for="tipo_produto">Produto:</label>
                         <select name="tipo_produto" id="tipo_produto">
                             <option value="">Selecione um tipo de produto</option>
                             {% for tipo in tipos_produto_disponiveis %}
-                                <option value="{{ tipo.id }}">{{ tipo }}</option>
+                                <option value="{{ tipo.id }}" 
+                                    {% if tipo.id|stringformat:"s" == request.GET.tipo_produto %} selected {% endif %}>
+                                    {{ tipo.nome }}
+                                </option>
                             {% endfor %}
                         </select>
                     </li>
+
+                    <!-- Filtro de Time -->
                     <li>
                         <label for="time">Time:</label>
                         <select name="time" id="time">
                             <option value="">Selecione um time</option>
                             {% for time in times_disponiveis %}
-                                <option value="{{ time }}">{{ time }}</option>
+                                <option value="{{ time.id }}" 
+                                    {% if time.id|stringformat:"s" == request.GET.time %} selected {% endif %}>
+                                    {{ time.nome }}
+                                </option>
                             {% endfor %}
                         </select>
                     </li>
+
+                    <!-- Filtro de Marca -->
                     <li>
                         <label for="marca">Marca:</label>
                         <select name="marca" id="marca">
                             <option value="">Selecione uma marca</option>
                             {% for marca in marcas_disponiveis %}
-                                <option value="{{ marca }}">{{ marca }}</option>
+                                <option value="{{ marca.id }}" 
+                                    {% if marca.id|stringformat:"s" == request.GET.marca %} selected {% endif %}>
+                                    {{ marca.nome }}
+                                </option>
                             {% endfor %}
                         </select>
                     </li>
+
+                    <!-- Filtro de Cor -->
                     <li>
                         <label for="cor">Cor:</label>
                         <select name="cor" id="cor">
                             <option value="">Selecione uma cor</option>
                             {% for cor in cores_disponiveis %}
-                                <option value="{{ cor }}">{{ cor }}</option>
+                                <option value="{{ cor }}" 
+                                    {% if cor == request.GET.cor %} selected {% endif %}>
+                                    {{ cor }}
+                                </option>
                             {% endfor %}
                         </select>
                     </li>
+
+                    <!-- Filtro de Temporada -->
                     <li>
                         <label for="temporada">Temporada:</label>
                         <select name="temporada" id="temporada">
                             <option value="">Selecione uma temporada</option>
                             {% for temporada in temporadas_disponiveis %}
-                                <option value="{{ temporada }}">{{ temporada }}</option>
+                                <option value="{{ temporada }}" 
+                                    {% if temporada == request.GET.temporada %} selected {% endif %}>
+                                    {{ temporada }}
+                                </option>
                             {% endfor %}
                         </select>
                     </li>
+
                 </ul>
                 <button type="submit">Filtrar</button>
             </form>
 
             <div class="filtros-ativos">
-    {% for filtro, valor in filtros_aplicados.items %}
-        <span class="filtro-tag">
-            {{ filtro|capfirst }}: {{ valor }}
-            <a href="{% url 'filtrar_camisetas' %}?{% for key, val in request.GET.items %}{% if key != filtro %}{{ key }}={{ val }}&{% endif %}{% endfor %}" class="remover-filtro">×</a>
-        </span>
-    {% endfor %}
-</div>
+                {% for filtro, valor in filtros_aplicados.items %}
+                    <span class="filtro-tag">
+                        {% if filtro == 'time' %}
+                            Time: 
+                            {% for time in times_disponiveis %}
+                                {% if time.id|stringformat:"s" == valor %}
+                                    {{ time.nome }}
+                                {% endif %}
+                            {% endfor %}
+                        {% elif filtro == 'marca' %}
+                            Marca: 
+                            {% for marca in marcas_disponiveis %}
+                                {% if marca.id|stringformat:"s" == valor %}
+                                    {{ marca.nome }}
+                                {% endif %}
+                            {% endfor %}
+                            {% elif filtro == 'tipo_produto' %}
+                            Tipo: 
+                            {% for tipo in tipos_produto_disponiveis %}
+                                {% if tipo.id|stringformat:"s" == valor %}
+                                    {{ tipo.nome }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {{ filtro|capfirst }}: {{ valor }}
+                        {% endif %}
+                        <a href="{% url 'filtrar_camisetas' %}?{% for key, val in request.GET.items %}{% if key != filtro %}{{ key }}={{ val }}&{% endif %}{% endfor %}" class="remover-filtro">×</a>
+                    </span>
+                {% endfor %}
+            </div>
         </div>
         
         <ul class="gallery">
