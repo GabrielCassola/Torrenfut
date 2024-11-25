@@ -22,8 +22,7 @@ jobs:
       - name: Instalar dependências (com Poetry) # Gerenciador de dependências e empacotamento em Python
         run: | # Instalando bibliotecas e dependencias de desenvolvimento
           python -m pip install --upgrade pip
-          python -m pip install poetry
-          poetry install --with dev --sync
+          pip install -r requirements.txt
 
       - name: Executar testes
         env:
