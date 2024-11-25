@@ -12,6 +12,7 @@ sqlparse = "^0.5.1"
 tzdata = "^2024.2"
 openpyxl = "^3.0.10"
 matplotlib = "^3.0.0"
+pytest = "^8.3.3"
 
 
 [tool.poetry.group.dev]
