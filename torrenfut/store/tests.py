@@ -9,6 +9,8 @@ from io import BytesIO
 from PIL import Image
 import os
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'torrenfut.settings')
+
 @pytest.mark.django_db
 def test_home_status_code(client): #Teste 1
     resposta = client.get('/store/')

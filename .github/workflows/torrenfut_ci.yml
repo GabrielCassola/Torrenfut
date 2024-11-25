@@ -26,5 +26,10 @@ jobs:
           python -m pip install poetry
           poetry install --with dev --sync # Depêndencias de desenvolvimento
 
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_EN
+
       - name: Executar testes
+        env:
+          DJANGO_SETTINGS_MODULE: torrenfut.settings
         run: poetry run pytest devpro --cov=devpro --cov-fail-under=50 # Vai dar erro se a cobertura de teste for menor que 50%
