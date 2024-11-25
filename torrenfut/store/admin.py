@@ -2,7 +2,7 @@ from django.contrib import admin
 import openpyxl
 from openpyxl.styles import Font
 from django.http import HttpResponse
-from .models import Camiseta, CamisetaTamanho
+from .models import Camiseta, CamisetaTamanho, Time, Liga, Marca
 from .utils import  gerar_grafico
 from django.utils.html import format_html
 from django.urls import reverse
@@ -89,3 +89,8 @@ class CamisetasAdmin(admin.ModelAdmin):
     
 # Register your models here.
 admin.site.register(Camiseta, CamisetasAdmin)
+admin.site.register(Time)
+admin.site.register(Liga)
+admin.site.register(Marca)
+
+

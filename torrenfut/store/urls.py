@@ -7,7 +7,7 @@ from .views import filtrar_camisetas
 
 urlpatterns = [
     path('store/', views.store, name='store'),
-    path('store/produto/<str:time>/<str:estilo>/<str:temporada>', views.produto, name='produto'),
+    path('store/produto/<str:time_nome>/<str:estilo>/<str:temporada>', views.produto, name='produto'),
     re_path(r'^store/produto/(?P<time>[^/]+)/(?P<estilo>[^/]+)/(?P<temporada>.+)$', views.produto, name='produto'),
     path('grafico_estoque/<int:produto_id>/', views.grafico_estoque, name='grafico_estoque'),
     path('store/filtrar-camisetas/', filtrar_camisetas, name='filtrar_camisetas'),
