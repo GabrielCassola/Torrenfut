@@ -8,9 +8,10 @@ from django.core.files import File
 from io import BytesIO
 from PIL import Image
 
+@pytest.mark.django_db
 def test_home_status_code(client): #Teste 1
-    resposta = client.get('/store')
-    assert resposta.status_code == 301 # Não sei porque é 301
+    resposta = client.get('/store/')
+    assert resposta.status_code == 200 # Código 200 no protocolo HTTP indica que a requisição foi bem sucedida
 
 # Teste com Models
 @pytest.mark.django_db
@@ -54,7 +55,6 @@ def test_camiseta_creation(): # Teste 2
 
 # Teste com uma view
 class ProdutoViewTest(TestCase):
-    
     
     @staticmethod
     def create_fake_image():
