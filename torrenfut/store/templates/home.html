@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Torrenfut</title>
     <link rel="stylesheet" href="{% static 'home.css' %}">
+    <link rel="icon" type="image/x-icon" href="/media/icone.png">
 </head>
 <body>
 
@@ -92,7 +93,7 @@
             ul.style.display = count === 0 ? "none" : "block";
         }
     </script>
-
+    {% block sidebar %}
     <!-- Restante do conteúdo da página -->
     <div class="container">
         <div class="filters">
@@ -223,7 +224,8 @@
                 {% endfor %}
             </div>
         </div>
-        
+        {% endblock %}
+
         <ul class="gallery">
             {% for camiseta in camisetas %}
                 <li>
