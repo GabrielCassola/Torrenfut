@@ -3,15 +3,36 @@ from django.db import models
 from fornecedores.models import Fornecedor, TipoProduto, Taxa
 from django.utils import timezone
 
+class Liga(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+    logo = models.ImageField(upload_to='logos_ligas/', blank=True, null=True) 
+
+    def __str__(self):
+        return self.nome
+
+class Time(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+    liga = models.ForeignKey(Liga, on_delete=models.CASCADE, related_name='times')
+    escudo = models.ImageField(upload_to='escudos/', blank=True, null=True)
+
+    def __str__(self):
+        return self.nome
+
+class Marca(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+    logo = models.ImageField(upload_to='logos_marcas/', blank=True, null=True)
+
+    def __str__(self):
+        return self.nome
+
 class Camiseta(models.Model):
     tipo_produto = models.ForeignKey(TipoProduto, default=1, on_delete=models.CASCADE)  # Supondo que o ID 1 exista em TipoProduto
-    time = models.CharField(max_length=100)
-    liga = models.CharField(max_length=100, null=True)
+    time = models.ForeignKey(Time, on_delete=models.SET_NULL, null=True)
     temporada = models.CharField(max_length=50)
     estilo = models.CharField(max_length=50)
     cor_principal = models.CharField(max_length=50)
     patrocinador = models.CharField(max_length=100, blank=True, null=True) 
-    marca = models.CharField(max_length=100, blank=True, null=True)
+    marca = models.ForeignKey(Marca, on_delete=models.SET_NULL, null=True, blank=True)
     preco_custo = models.DecimalField(max_digits=10, decimal_places=2)
     imagem = models.ImageField(upload_to='camisetas/', blank=True, null=True)
     fornecedor = models.ForeignKey(Fornecedor, on_delete=models.SET_NULL, null=True, blank=True)
