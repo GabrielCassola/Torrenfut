@@ -1,0 +1,30 @@
+name: Torrenfut CI
+
+on:
+  pull request:
+  push:
+    branches:
+      -main
+
+jobs:
+  build:
+    runs-on: windows-latest  # Sistema operacional
+
+    steps:
+      - uses: actions/checkout@v4 # Puxa o codigo
+        with:
+          fetch-depth: 1 # Pega o ultimo commit
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12' 1 # Pega a versão do Python
+
+      - name: Instalar dependências (com Poetry) # Gerenciador de dependências e empacotamento em Python
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt # Bibliotecas
+          python -m pip install poetry
+          poetry install --with dev --sync # Depêndencias de desenvolvimento
+
+      - name: Executar testes
+        run: poetry run pytest devpro --cov=devpro --cov-fail-under=50 # Vai dar erro se a cobertura de teste for menor que 50%

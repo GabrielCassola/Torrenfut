@@ -7,6 +7,7 @@ from django.test import TestCase
 from django.core.files import File
 from io import BytesIO
 from PIL import Image
+import os
 
 @pytest.mark.django_db
 def test_home_status_code(client): #Teste 1
@@ -89,6 +90,12 @@ class ProdutoViewTest(TestCase):
             imagem = fake_image,
             fornecedor=fornecedor
         )
+
+    def tearDown(self):
+        # Remove a imagem da camiseta após os testes
+        if self.camiseta.imagem and os.path.exists(self.camiseta.imagem.path):
+            print(f"Excluindo imagem criada para o teste: {self.camiseta.imagem.path}")
+            os.remove(self.camiseta.imagem.path)  # Remove a imagem criada para o teste
 
     def test_produto_view_success(self): # Teste 3
         # Criando a URL com os parâmetros
