@@ -1,7 +1,7 @@
 name: Torrenfut CI
 
 on:
-  pull request:
+  pull_request:
   push:
     branches:
       -main
