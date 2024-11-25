@@ -13,7 +13,7 @@ def obter_opcoes_filtro():
     times_disponiveis = Time.objects.all()
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
     tipos_produto_disponiveis = TipoProduto.objects.all()
-    #ligas_disponiveis = Camiseta.objects.values_list('liga', flat=True).distinct()
+    ligas_disponiveis = Liga.objects.all()
 
     
     return {
@@ -22,7 +22,7 @@ def obter_opcoes_filtro():
         'times_disponiveis': times_disponiveis,
         'temporadas_disponiveis': temporadas_disponiveis,
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
-        #'ligas_disponiveis': ligas_disponiveis,
+        'ligas_disponiveis': ligas_disponiveis,
 
     }
 
@@ -113,7 +113,7 @@ def filtrar_camisetas(request):
         'time': request.GET.get('time'),
         'temporada': request.GET.get('temporada'),
         'tipo_produto': request.GET.get('tipo_produto'),
-      #  'liga': request.GET.get('liga'),
+        'liga': request.GET.get('liga'),
     }
 
     # Remover filtros que não estão preenchidos
@@ -131,8 +131,8 @@ def filtrar_camisetas(request):
         camisetas = camisetas.filter(temporada=filtros_aplicados['temporada'])
     if 'tipo_produto' in filtros_aplicados:
         camisetas = camisetas.filter(tipo_produto__id=filtros_aplicados['tipo_produto'])
-  #  if 'liga' in filtros_aplicados:
-     #   camisetas = camisetas.filter(liga=filtros_aplicados['liga'])
+    if 'liga' in filtros_aplicados:
+        camisetas = camisetas.filter(time__liga=filtros_aplicados['liga'])
 
     # Obter opções únicas para filtro
     cores_disponiveis = Camiseta.objects.values_list('cor_principal', flat=True).distinct()
@@ -140,7 +140,7 @@ def filtrar_camisetas(request):
     times_disponiveis = Time.objects.all()
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
     tipos_produto_disponiveis = TipoProduto.objects.all()
-    #ligas_disponiveis = Camiseta.objects.values_list('liga', flat=True).distinct()
+    ligas_disponiveis = Liga.objects.all()
 
     # Renderizar o template
     return render(request, 'home.html', {
@@ -150,7 +150,7 @@ def filtrar_camisetas(request):
         'times_disponiveis': times_disponiveis,
         'temporadas_disponiveis': temporadas_disponiveis,
         'tipos_produto_disponiveis': tipos_produto_disponiveis,
-      #  'ligas_disponiveis': ligas_disponiveis,
+        'ligas_disponiveis': ligas_disponiveis,
         'filtros_aplicados': filtros_aplicados,  # Enviar os filtros ativos
     })
 

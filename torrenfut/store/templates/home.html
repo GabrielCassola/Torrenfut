@@ -111,7 +111,19 @@
                             {% endfor %}
                         </select>
                     </li>
-
+                <!-- Filtro de liga-->
+                <li>
+                    <label for="liga">Liga:</label>
+                    <select name="liga" id="liga">
+                        <option value="">Selecione uma liga</option>
+                        {% for liga in ligas_disponiveis %}
+                            <option value="{{ liga.id }}" 
+                                {% if liga.id|stringformat:"s" == request.GET.liga %} selected {% endif %}>
+                                {{ liga.nome }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </li>
                     <!-- Filtro de Time -->
                     <li>
                         <label for="time">Time:</label>
