@@ -17,7 +17,7 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12' 1 # Pega a versão do Python
+          python-version: '3.12' # Pega a versão do Python
 
       - name: Instalar dependências (com Poetry) # Gerenciador de dependências e empacotamento em Python
         run: |
