@@ -42,8 +42,59 @@
         {% csrf_token %}
         <button type="submit" class="btn-logout">Sair</button>
       </form>
+      <div class="compras-usuario">
+        <h3 id="toggle-historico" class="clickable">Histórico de Compras</h3>
+        <div id="historico-compras" class="compras-usuario">
+
+        {% if compras_com_totais %}
+            <ul>
+                {% for compra_obj in compras_com_totais %}
+                    <li>
+                      <div class="item-detalhes">
+                        <strong>Data:</strong>{{ compra_obj.compra.data_compra|date:"d/m/Y" }}<br>
+                      </div> 
+                        <ul class="itens-compra">
+                          <strong>Itens:</strong>
+                            {% for item in compra_obj.compra.itens_compra.all %}
+                                <li>
+                                    {{ item.camiseta.time.nome }} - {{ item.camiseta.estilo }} ({{ item.camiseta.temporada }}) 
+                                    - Tamanho: {{ item.tamanho.tamanho }} 
+                                    - Quantidade: {{ item.quantidade }} 
+                                    - Preço: R$ {{ item.preco_unitario|floatformat:2 }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="item-total">
+                          <strong>Total:</strong> R$ {{ compra_obj.total|floatformat:2 }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Você ainda não realizou nenhuma compra.</p>
+        {% endif %}
     </div>
+    </div>
+  </div>
+
     <p class="back-link">Voltar para <a href="/store">página inicial</a></p>
   {% endblock %}
+
+  <script>
+    // Pega o elemento de título (Histórico de Compras)
+    const toggleHistorico = document.getElementById('toggle-historico');
+    // Pega a div que contém o histórico
+    const historicoCompras = document.getElementById('historico-compras');
+
+    // Adiciona um evento de clique ao título
+    toggleHistorico.addEventListener('click', function() {
+        // Alterna a visibilidade da div do histórico
+        if (historicoCompras.style.display === "none" || historicoCompras.style.display === "") {
+            historicoCompras.style.display = "block"; // Exibe a div
+        } else {
+            historicoCompras.style.display = "none"; // Esconde a div
+        }
+    });
+</script>
 </body>
 </html>

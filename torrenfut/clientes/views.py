@@ -3,7 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import ClienteRegistrationForm, EditarPerfilForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Sum, F
 from .models import Cliente
+from vendas.models import Compra
 
 # View de cadastro de cliente
 from django.shortcuts import render, redirect
@@ -48,7 +50,26 @@ def logout_cliente(request):
 
 @login_required
 def perfil_cliente(request):
-    return render(request, 'perfil.html')  # Renderiza um template de perfil
+    if not request.user.is_authenticated:
+        return redirect('login')  # Redirecionar se o usuário não estiver logado
+
+    # Obter todas as compras do usuário logado
+    compras = Compra.objects.filter(usuario=request.user).prefetch_related('itens_compra', 'itens_compra__camiseta')
+
+    # Calcular o total de cada compra
+    compras_com_totais = []
+    for compra in compras:
+        total = compra.itens_compra.aggregate(total=Sum(F('quantidade') * F('preco_unitario')))['total'] or 0
+        compras_com_totais.append({
+            'compra': compra,
+            'total': total
+        })
+
+    context = {
+        'user': request.user,
+        'compras_com_totais': compras_com_totais,
+    }
+    return render(request, 'perfil.html', context)
 
 
 @login_required
