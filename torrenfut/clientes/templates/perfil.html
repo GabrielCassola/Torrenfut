@@ -51,7 +51,7 @@
                 {% for compra_obj in compras_com_totais %}
                     <li>
                       <div class="item-detalhes">
-                        <strong>Data:</strong>{{ compra_obj.compra.data_compra|date:"d/m/Y" }}<br>
+                        <strong>Data:&nbsp</strong>{{ compra_obj.compra.data_compra|date:"d/m/Y" }}<br>
                       </div> 
                         <ul class="itens-compra">
                           <strong>Itens:</strong>
@@ -65,7 +65,7 @@
                             {% endfor %}
                         </ul>
                         <div class="item-total">
-                          <strong>Total:</strong> R$ {{ compra_obj.total|floatformat:2 }}
+                          <strong>Total:&nbsp</strong>  R$ {{ compra_obj.total|floatformat:2 }}
                         </div>
                     </li>
                 {% endfor %}

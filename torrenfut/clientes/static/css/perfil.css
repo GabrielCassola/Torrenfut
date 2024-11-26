@@ -233,7 +233,6 @@ h1 a:hover {
 
 .compras-usuario ul li .item-detalhes {
     display: flex; /* Layout flexível para organizar conteúdo */
-    justify-content: space-between; /* Espaça os elementos horizontalmente */
     align-items: center; /* Alinha verticalmente no centro */
     width: 100%; /* Garante que os itens ocupem toda a largura */
     margin-bottom: 10px; /* Espaço entre a data e o total */
@@ -246,7 +245,6 @@ h1 a:hover {
 
 .compras-usuario ul li .item-total {
     display: flex; /* Layout flexível para alinhar texto e valores */
-    justify-content: space-between; /* Espaça o rótulo e o valor */
     align-items: center; /* Alinha verticalmente no centro */
     font-weight: bold; /* Destaque para o total */
     color: #333; /* Cor do texto */
