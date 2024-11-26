@@ -159,3 +159,7 @@ a {
 a:hover {
     text-decoration: underline; /* Efeito de hover no link */
 }
+
+.social {
+    width: 30px;
+}
