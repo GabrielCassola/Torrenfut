@@ -58,3 +58,4 @@ def atualizar_historico_estoque(sender, instance, created, **kwargs):
             email_usuario=email_usuario,
             tamanho=instance.tamanho,
         )
+        
