@@ -152,11 +152,25 @@
                     if (!state.id) {
                         return state.text; // Retorna o texto se não houver `id`
                     }
-                    var baseUrl = "/media/escudos"; // Cada imagem deverá ter o nome igual ao value correspondente no option
+                    var baseUrl = "/media"; // Cada imagem deverá ter o nome igual ao value correspondente no option
+                    var selectId = $(state.element).closest('select').attr('id');  // Obtém o id do select
+                    if (selectId === "time") {
                     var $state = $( 
-                        '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
+                        '<span><img src="' + baseUrl + '/escudos/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
                     );
-            
+                    }
+
+                    else if (selectId === "liga") {
+                    var $state = $( 
+                        '<span><img src="' + baseUrl + '/logos_ligas/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
+                    );
+                    }
+
+                    else if (selectId === "marca") {
+                    var $state = $( 
+                        '<span><img src="' + baseUrl + '/logos_marcas/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
+                    );
+                    }
                     return $state;
                 }
             
@@ -165,9 +179,16 @@
                     $('#time').select2({
                         templateResult: formatState
                     });
-                    $('#tipo_produto, #liga, #marca, #cor, #temporada').select2(); // Inicializa os outros filtros com select2
+                    $('#liga').select2({
+                        templateResult: formatState
+                    });
+                    $('#marca').select2({
+                        templateResult: formatState
+                    });
+                    $('#tipo_produto, #cor, #temporada').select2(); // Inicializa os outros filtros com select2
                 });
             </script>
+
             <div class="filtros-ativos">
                 {% for filtro, valor in filtros_aplicados.items %}
                     <span class="filtro-tag">
