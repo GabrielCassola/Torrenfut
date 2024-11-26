@@ -1,6 +1,6 @@
 import pytest
 from django.db import IntegrityError
-from .models import Camiseta, TipoProduto, Fornecedor
+from .models import Camiseta, TipoProduto, Fornecedor,Time,Liga,Marca
 from .views import produto
 from django.urls import reverse
 from django.test import TestCase
@@ -21,6 +21,22 @@ def test_home_status_code(client): #Teste 1
 def test_camiseta_creation(): # Teste 2
     # Criando um TipoProduto para o campo ForeignKey
     tipo_produto = TipoProduto.objects.create(nome="Camiseta Oficial")
+
+    # Criando uma Liga para o campo ForeignKey
+    liga = Liga.objects.create(
+        nome = 'Liga A',
+    )
+
+    # Criando um Time para o campo ForeignKey
+    time = Time.objects.create(
+        nome = "Flamengo",
+        liga = liga,
+    )
+
+    # Criando uma Marca para o campo ForeignKey
+    marca = Marca.objects.create(
+        nome = 'Adidas',
+    )
     
     # Criando um Fornecedor para o campo ForeignKey
     fornecedor = Fornecedor.objects.create(
@@ -34,25 +50,24 @@ def test_camiseta_creation(): # Teste 2
     # Criando uma camiseta
     camiseta = Camiseta.objects.create(
         tipo_produto=tipo_produto,
-        time="Time A",
-        liga="Liga A",
+        time=time,
         temporada="2024",
         estilo="Estilo A",
         cor_principal="Azul",
         patrocinador="Patrocinador A",
-        marca="Marca A",
+        marca=marca,
         preco_custo=100.00,
         fornecedor=fornecedor
     )
     
     # Validando que o objeto camiseta foi criado e salvo corretamente
-    assert camiseta.time == "Time A"
-    assert camiseta.liga == "Liga A"
+    assert camiseta.time.nome == "Flamengo"
+    assert camiseta.time.liga.nome == "Liga A"
     assert camiseta.temporada == "2024"
     assert camiseta.estilo == "Estilo A"
     assert camiseta.cor_principal == "Azul"
     assert camiseta.patrocinador == "Patrocinador A"
-    assert camiseta.marca == "Marca A"
+    assert camiseta.marca.nome == "Adidas"
     assert camiseta.preco_custo == 100.00
     assert camiseta.fornecedor == fornecedor
 
@@ -73,7 +88,29 @@ class ProdutoViewTest(TestCase):
         # Criando os dados necessários para o teste
         tipo_produto = TipoProduto.objects.create(nome="Camisetas Esportivas")
 
-        fornecedor = Fornecedor.objects.create(nome="Fornecedor A", email="fornecedor@exemplo.com", telefone="123456789", cnpj="00.000.000/0000-00", tipo_produto=tipo_produto)
+        fornecedor = Fornecedor.objects.create(
+            nome="Fornecedor A", 
+            email="fornecedor@exemplo.com", 
+            telefone="123456789", 
+            cnpj="00.000.000/0000-00", 
+            tipo_produto=tipo_produto
+            )
+        
+        # Criando uma Liga para o campo ForeignKey
+        liga = Liga.objects.create(
+            nome = 'Liga A',
+        )
+
+        # Criando um Time para o campo ForeignKey
+        time = Time.objects.create(
+            nome = "Flamengo",
+            liga = liga,
+        )
+
+        # Criando uma Marca para o campo ForeignKey
+        marca = Marca.objects.create(
+            nome = 'Adidas',
+        )
 
         # Usando uma imagvem ficticia
         fake_image = cls.create_fake_image()
@@ -81,13 +118,12 @@ class ProdutoViewTest(TestCase):
 
         cls.camiseta = Camiseta.objects.create(
             tipo_produto=tipo_produto,
-            time="flamengo",
-            liga="Brasileirão",
+            time= time,
             temporada="2024",
             estilo="away",
             cor_principal="preto",
             patrocinador="Patrocinador X",
-            marca="Marca Y",
+            marca=marca,
             preco_custo=150.00,
             imagem = fake_image,
             fornecedor=fornecedor
@@ -101,7 +137,7 @@ class ProdutoViewTest(TestCase):
 
     def test_produto_view_success(self): # Teste 3
         # Criando a URL com os parâmetros
-        url = reverse('produto', args=[self.camiseta.time, self.camiseta.estilo, self.camiseta.temporada])
+        url = reverse('produto', args=[self.camiseta.time.nome, self.camiseta.estilo, self.camiseta.temporada])
         
         # Simulando a requisição GET para a URL
         response = self.client.get(url)
@@ -110,7 +146,7 @@ class ProdutoViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         
         # Verificando se o nome da camiseta está no contexto da resposta
-        self.assertContains(response, self.camiseta.time)
+        self.assertContains(response, self.camiseta.time.nome)
         self.assertContains(response, self.camiseta.estilo)
         
         # Verificando se os dados da camiseta estão sendo renderizados corretamente
