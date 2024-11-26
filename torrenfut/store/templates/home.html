@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="icon" type="image/x-icon" href="/media/icone.png">
     <script src='{% static "js/home.js" %}'></script>
+    
+    <!-- Dropdown com imagem -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
+    
 </head>
 <body>
 
@@ -86,17 +92,16 @@
                     <!-- Filtro de Time -->
                     <li>
                         <label for="time">Time:</label>
-                        <select name="time" id="time">
+                        <select name="time" id="time" style="width:100%;">
                             <option value="">Selecione um time</option>
                             {% for time in times_disponiveis %}
-                                <option value="{{ time.id }}" data-image="{{ time.escudo }}" 
+                                <option value="{{ time.id }}" data-image="{{ time.escudo }}"
                                     {% if time.id|stringformat:"s" == request.GET.time %} selected {% endif %}>
                                     {{ time.nome }}
                                 </option>
                             {% endfor %}
                         </select>
                     </li>
-
                     <!-- Filtro de Marca -->
                     <li>
                         <label for="marca">Marca:</label>
@@ -138,10 +143,31 @@
                             {% endfor %}
                         </select>
                     </li>
+                    
                 </ul>
                 <button type="submit">Filtrar</button>
             </form>
-
+            <script>
+                function formatState(state) {
+                    if (!state.id) {
+                        return state.text; // Retorna o texto se não houver `id`
+                    }
+                    var baseUrl = "/media/escudos"; // Cada imagem deverá ter o nome igual ao value correspondente no option
+                    var $state = $( 
+                        '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
+                    );
+            
+                    return $state;
+                }
+            
+                // Inicializa o Select2 em todos os selects com o id correspondente
+                $(document).ready(function() {
+                    $('#time').select2({
+                        templateResult: formatState
+                    });
+                    $('#tipo_produto, #liga, #marca, #cor, #temporada').select2(); // Inicializa os outros filtros com select2
+                });
+            </script>
             <div class="filtros-ativos">
                 {% for filtro, valor in filtros_aplicados.items %}
                     <span class="filtro-tag">

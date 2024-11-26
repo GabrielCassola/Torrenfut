@@ -38,3 +38,4 @@ function filtrar() {
     // Exibir ou ocultar a lista dependendo do número de correspondências
     ul.style.display = count === 0 ? "none" : "block";
 }
+

@@ -419,30 +419,6 @@ h1 a:hover {
     width: 100%; /* Para ajustar ao layout responsivo */
 }
 
-/* Ajustando o botão de escolha do time */
-.dropdown-toggle {
-    width: 100%;
-    padding: 10px; /* Espaçamento interno */
-    border: 1px solid #c6e3c6; /* Mesma borda verde clara usada no <select> */
-    background-color: #fff;
-    text-align: left;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 4px;
-    transition: border-color 0.3s;
-}
-
-.dropdown-toggle:hover {
-    border-color: #5cb85c; /* Borda verde mais escura ao passar o mouse */
-    background-color: #f9f9f9;
-}
-
-.dropdown-toggle:focus {
-    outline: none;
-    border-color: #5cb85c;
-    box-shadow: 0 0 0 0.2rem rgba(92, 184, 92, 0.25); /* Sombra ao focar */
-}
-
 /* Ajustando tamanho dos escudos */
 .time-option img {
     width: 40px; /* Dimensão menor e proporcional */
@@ -453,6 +429,11 @@ h1 a:hover {
 
 .time-option span {
     margin-top: 5px;
-    font-size: 12px; /* Texto menor para acompanhar o tamanho do escudo */
+    font-size: 14px; /* Texto menor para acompanhar o tamanho do escudo */
     color: #333;
+}
+.img-flag {
+    width: auto; /* Mantém a proporção da largura da imagem */
+    height: 25px; /* Define a altura fixa da imagem */
+    max-width: 100%; /* Garante que a imagem não ultrapasse a largura do container */
 }

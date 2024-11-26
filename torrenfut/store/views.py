@@ -141,6 +141,7 @@ def filtrar_camisetas(request):
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
     tipos_produto_disponiveis = TipoProduto.objects.all()
     ligas_disponiveis = Liga.objects.all()
+    print(temporadas_disponiveis)
 
     # Renderizar o template
     return render(request, 'home.html', {

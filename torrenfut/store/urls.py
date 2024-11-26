@@ -14,5 +14,6 @@ urlpatterns = [
 
     path('sobre/', views.sobre, name='sobre'),  # Página "Sobre o Projeto"
     path('quem-somos/', views.quem_somos, name='quem_somos'),  # Página "Quem Somos Nós"
+
 ]
 
