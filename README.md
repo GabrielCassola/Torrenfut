@@ -29,17 +29,17 @@
    ```bash
     pytest torrent/
       ```
-  **Executar cobertura de teste**
+   **Executar cobertura de teste**
 
    ```bash
     pytest torrenfut/ --cov=torrenfut
       ```
-  **Executar cobertura de testes**
+   **Executar cobertura de testes**
 
    ```bash
     pytest torrenfut/ --cov=torrenfut --cov-fail-under=taxa-minima
       ```
-      
+
 4. **Inicie o servidor:**
 
    ```bash
