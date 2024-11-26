@@ -169,7 +169,7 @@ a:hover {
 }
 
 .header-right .button:hover {
-    background-color: #4CAF50; /* Fundo verde ao passar o mouse */
+    background-color: #276629; /* Fundo verde ao passar o mouse */
     color: white; /* Cor do texto branca ao passar o mouse */
 }
 
@@ -188,7 +188,7 @@ a:hover {
 }
 
 .header-right a:hover {
-    background-color: #4CAF50; /* Fundo verde ao passar o mouse */
+    background-color: #276629; /* Fundo verde ao passar o mouse */
     color: white; /* Cor do texto branca ao passar o mouse */
 }
 
@@ -198,6 +198,7 @@ a:hover {
 }
 
 .header-right a:hover span {
+    background-color: #276629; /* Fundo verde ao passar o mouse */
     color: white; /* Garante que o nome do usuário continue branco ao passar o mouse */
 }
 

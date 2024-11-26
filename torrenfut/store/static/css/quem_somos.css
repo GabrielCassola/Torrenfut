@@ -36,7 +36,7 @@ body {
 }
 
 .header-right .button:hover {
-    background-color: #4CAF50;
+    background-color: #276629; /* Fundo verde ao passar o mouse */
     color: white;
 }
 
@@ -54,7 +54,7 @@ body {
 }
 
 .header-right a:hover {
-    background-color: #4CAF50;
+    background-color: #276629; /* Fundo verde ao passar o mouse */
     color: white;
 }
 
@@ -63,6 +63,7 @@ body {
 }
 
 .header-right a:hover span {
+    background-color: #276629; /* Fundo verde ao passar o mouse */
     color: white;
 }
 
