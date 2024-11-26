@@ -12,27 +12,34 @@ body {
 }
 
 .filters {
-    width: 100%;   
-    flex: 1;  /* Permite que os filtros ocupem 1 parte do espaço */
-    padding: 10px;             /* Espaçamento interno */
-    border-radius: 8px;       /* Bordas arredondadas */ 
+    position: sticky;        /* Fixa o elemento na tela, mas ele rola com o conteúdo */
+    top: 150px;               /* Distância do topo da tela (pode ajustar conforme necessário) */
+    left: 30px;              /* Distância da esquerda da tela */
+    width: 20%;            /* Largura do container */
+    height: 30%;
+    padding: 10px;           /* Espaçamento interno */
+    border-radius: 8px;      /* Bordas arredondadas */ 
     background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    z-index: 1000;
 }
 
 .filters label {
     flex: 1;
     width: 100%;
-    margin-left: -17px;
     font-weight: bold;         /* Texto em negrito */
     margin-top: 10px;         /* Espaçamento acima das labels */
     display: block;            /* Cada label em uma nova linha */
 }
 
+.filters ul {
+    margin: 0;
+    padding: 0;
+}
+
 .filters select {
     flex: 1;
     width: 100%;               /* Largura total do campo */
-    margin-left: -17px;
     padding: 10px;            /* Espaçamento interno do select */
     border: 1px solid #c6e3c6; /* Borda verde clara */
     border-radius: 4px;       /* Bordas arredondadas */
@@ -281,12 +288,16 @@ footer {
 
 /* Cabeçalho */
 .header {
+    position: sticky;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
     background-color: #4CAF50;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1100;
 }
 
 /* Nome do site à esquerda */
@@ -411,29 +422,29 @@ h1 a:hover {
     color: rgb(0, 0, 0);
 }
 
-
-/* Estilo para o botão de seleção */
-.time-selector {
-    position: relative;
-    display: inline-block;
-    width: 100%; /* Para ajustar ao layout responsivo */
-}
-
-/* Ajustando tamanho dos escudos */
-.time-option img {
-    width: 40px; /* Dimensão menor e proporcional */
-    height: 40px;
-    border-radius: 50%; /* Escudo circular */
-    border: 1px solid #ddd;
-}
-
-.time-option span {
-    margin-top: 5px;
-    font-size: 14px; /* Texto menor para acompanhar o tamanho do escudo */
-    color: #333;
-}
 .img-flag {
     width: auto; /* Mantém a proporção da largura da imagem */
-    height: 25px; /* Define a altura fixa da imagem */
+    height: 30px; /* Define a altura fixa da imagem */
     max-width: 100%; /* Garante que a imagem não ultrapasse a largura do container */
+}
+
+.select2-container {
+    width: 100% !important; /* Garante que o container do select2 ocupe 100% da largura */
+}
+
+.select2-container .select2-selection {
+    display: flex; /* Alinha corretamente os elementos dentro do select */
+    align-items: center;
+    height: 40px; /* Altura consistente */
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Espaçamento entre imagem e texto */
+}
+
+.select2-results__option span {
+    display: inline-block;       /* Garante que o texto respeite o espaço */
+    vertical-align: middle;      /* Centraliza o texto ao lado da imagem */
 }
