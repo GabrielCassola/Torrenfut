@@ -141,7 +141,7 @@ def relatorio_vendas(modeladmin, request, queryset): # Action no admin exige 3 a
     compras = Compra.objects.prefetch_related('itens_compra').filter(id__in=queryset)
 
     # Calcular o total de cada produto vendido e o total arrecadado
-    totais_por_produto = itens.values('camiseta__time', 'tamanho__tamanho').annotate(
+    totais_por_produto = itens.values('camiseta__time__nome', 'tamanho__tamanho', 'camiseta__estilo').annotate(
     total_quantidade=Sum('quantidade'),
     total_arrecadado=Sum(F('quantidade') * F('preco_unitario'))
     )
