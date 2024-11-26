@@ -24,6 +24,12 @@
    ```bash
    pip install -r requirements.txt
    ```
+   Para instalar as dependências de desenvolvimento, instale o poetry e use o comando
+
+   ```bash
+      poetry install --with dev
+      ```
+
 
 4. **Inicie o servidor:**
 
