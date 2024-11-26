@@ -16,4 +16,3 @@ urlpatterns = [
     path('quem-somos/', views.quem_somos, name='quem_somos'),  # Página "Quem Somos Nós"
 
 ]
-

@@ -106,3 +106,56 @@ h1 a {
 h1 a:hover {
     text-decoration: none;
 }
+
+.team {
+    display: flex;
+    flex-direction: column;  /* Mantém os membros na coluna */
+    justify-content: flex-start; /* Alinha os membros à esquerda */
+    align-items: flex-start;  /* Garante que tudo fique alinhado à esquerda */
+    width: 100%;
+}
+
+.team-member {
+    display: flex;
+    flex-direction: row;  /* Organiza a imagem e as informações na mesma linha */
+    align-items: center;  /* Alinha a imagem e as informações verticalmente */
+    margin: 20px 0;  /* Espaço entre os membros (vertical) */
+    width: 100%;  /* A largura ocupará 100% da área disponível */
+    max-width: 100%; /* Garante que o membro ocupe toda a largura possível */
+}
+
+.member-image {
+    width: 100px; /* Tamanho da imagem */
+    height: 100px; /* Tamanho da imagem */
+    border-radius: 50%; /* Faz a imagem ficar redonda */
+    object-fit: cover; /* Ajusta a imagem para cobrir a área sem distorção */
+    margin-right: 15px; /* Espaço entre a imagem e as informações */
+}
+
+.member-info h3 {
+    text-align: left; /* Alinha as informações à esquerda */
+}
+
+.member-info h3 {
+    margin: 0; /* Remove a margem do nome */
+    font-size: 16px; /* Tamanho do nome */
+}
+
+.contributions {
+    padding: 0;
+    margin: 10px 0; /* Espaço entre a lista de colaborações e o link */
+}
+
+.contributions li {
+    margin: 10px 0 0 50px;
+    
+}
+
+a {
+    text-decoration: none;
+    color: #007bff; /* Cor do link */
+}
+
+a:hover {
+    text-decoration: underline; /* Efeito de hover no link */
+}
