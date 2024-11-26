@@ -1,0 +1,33 @@
+name: Torrenfut CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      -main
+
+jobs:
+  build:
+    runs-on: windows-latest  # Sistema operacional
+
+    steps:
+      - uses: actions/checkout@v4 # Puxa o codigo
+        with:
+          fetch-depth: 1 # Pega o ultimo commit
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12' # Pega a versão do Python
+
+      - name: Instalar dependências # Gerenciador de dependências e empacotamento em Python
+        run: | # Instalando bibliotecas e dependencias de desenvolvimento
+          python -m pip install --upgrade pip
+          python -m pip install poetry
+          pip install -r requirements.txt
+
+      - name: Executar testes
+        env:
+          DJANGO_SETTINGS_MODULE: torrenfut.settings
+          PYTHONPATH: ${{ github.workspace }}/torrenfut
+        run: |
+          poetry run pytest torrenfut/ --cov=torrenfut --cov-fail-under=50

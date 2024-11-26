@@ -38,9 +38,9 @@ def exportar_estoque_csv(modeladmin, request, queryset):
         # Itera sobre os tamanhos associados a cada camiseta
         for tamanho_instance in camiseta.tamanhos.all():
             row = [
-                camiseta.time,
+                camiseta.time.nome,
                 camiseta.cor_principal,
-                camiseta.marca,
+                camiseta.marca.nome,
                 camiseta.patrocinador,
                 tamanho_instance.tamanho,
                 tamanho_instance.quantidade_em_estoque,
