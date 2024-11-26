@@ -27,7 +27,7 @@
    Para instalar as dependências de desenvolvimento, instale o poetry e use o comando
 
    ```bash
-      poetry install --with dev
+   poetry install --with dev
       ```
 
 

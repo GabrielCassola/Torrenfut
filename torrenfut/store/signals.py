@@ -31,7 +31,7 @@ destinatarios =[
     'pirs.pedrinhoo@gmail.com'
 ]
 
-# Este sinal é executado antes da instância ser salva, então podemos capturar o valor atual
+# Este sinal é executado antes da instância ser salva no bd, então podemos capturar o valor atual
 @receiver(pre_save, sender=CamisetaTamanho)
 def capturar_quantidade_anterior(sender, instance, **kwargs):
     if instance.pk:  # Verifica se a instância já existe no banco de dados
@@ -41,7 +41,7 @@ def capturar_quantidade_anterior(sender, instance, **kwargs):
         instance.estoque_anterior = original_instance.quantidade_em_estoque
 
 
-# Cria um sinal para a funcao HistoricoEstoque saber que o estoque foi modificado
+# Cria um sinal para a funcao HistoricoEstoque saber que o estoque foi modificado, depois de salvar no bd
 @receiver(post_save, sender=CamisetaTamanho)
 def atualizar_historico_estoque(sender, instance, created, **kwargs):
     if not created:  # Apenas para atualizações
