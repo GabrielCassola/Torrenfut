@@ -208,6 +208,13 @@
                                     {{ tipo.nome }}
                                 {% endif %}
                             {% endfor %}
+                        {% elif filtro == 'liga' %}
+                            Liga: 
+                            {% for liga in ligas_disponiveis %}
+                                {% if liga.id|stringformat:"s" == valor %}
+                                    {{ liga.nome }}
+                                {% endif %}
+                            {% endfor %}
                         {% else %}
                             {{ filtro|capfirst }}: {{ valor }}
                         {% endif %}
