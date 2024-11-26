@@ -34,7 +34,7 @@
    ```bash
     pytest torrenfut/ --cov=torrenfut
       ```
-   **Executar cobertura de testes**
+   **Executar cobertura de testes com taxa de cobertura mínima**
 
    ```bash
     pytest torrenfut/ --cov=torrenfut --cov-fail-under=taxa-minima
