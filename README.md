@@ -24,13 +24,22 @@
    ```bash
    pip install -r requirements.txt
    ```
-   Para instalar as dependências de desenvolvimento, instale o poetry e use o comando
+   **Executar os testes unitários**
 
    ```bash
-   poetry install --with dev
+    pytest torrent/
       ```
+  **Executar cobertura de teste**
 
+   ```bash
+    pytest torrenfut/ --cov=torrenfut
+      ```
+  **Executar cobertura de testes**
 
+   ```bash
+    pytest torrenfut/ --cov=torrenfut --cov-fail-under=taxa-minima
+      ```
+      
 4. **Inicie o servidor:**
 
    ```bash
