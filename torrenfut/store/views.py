@@ -73,7 +73,7 @@ def grafico_estoque(request, produto_id):
     # Obtém a camiseta específica usando o produto_id
     camiseta = get_object_or_404(Camiseta, id=produto_id)
 
-     # Obtendo valores
+     # Obtendo valores para a página html
     time = camiseta.time
     cor_principal = camiseta.cor_principal
     marca = camiseta.marca
@@ -83,7 +83,7 @@ def grafico_estoque(request, produto_id):
     # Obtém todos os dados do histórico de estoque
     historico = HistoricoEstoque.objects.all().filter(camiseta=camiseta).order_by('data_alteracao')
 
-    # Organizar os dados por tamanho
+    # Organizar os dados por tamanho e data de alteração
     dados_grafico = defaultdict(list)
     for entrada in historico:
         dados_grafico[entrada.produto.tamanho].append([
