@@ -138,13 +138,12 @@ def filtrar_camisetas(request):
         camisetas = camisetas.filter(time__liga=filtros_aplicados['liga'])
 
     # Obter opções únicas para filtro
-    cores_disponiveis = Camiseta.objects.values_list('cor_principal', flat=True).distinct()
-    marcas_disponiveis = Marca.objects.all()
-    times_disponiveis = Time.objects.all()
+    cores_disponiveis = Camiseta.objects.values_list('cor_principal', flat=True).distinct().order_by('cor_principal')
+    marcas_disponiveis = Marca.objects.all().order_by('nome')
+    times_disponiveis = Time.objects.all().order_by('nome')
     temporadas_disponiveis = Camiseta.objects.values_list('temporada', flat=True).distinct()
     tipos_produto_disponiveis = TipoProduto.objects.all()
-    ligas_disponiveis = Liga.objects.all()
-    print(temporadas_disponiveis)
+    ligas_disponiveis = Liga.objects.all().order_by('nome')
 
     # Renderizar o template
     return render(request, 'home.html', {
