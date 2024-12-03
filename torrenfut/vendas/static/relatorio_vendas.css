@@ -43,7 +43,7 @@ table {
 }
 
 th, td {
-    padding: 10px;
+    padding: 4px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
@@ -74,11 +74,6 @@ button:hover {
     background-color: #388E3C;
 }
 
-.highlight {
-    color: #4CAF50;
-    font-weight: bold;
-}
-
 footer {
     text-align: center;
     padding: 10px 0;
@@ -90,4 +85,14 @@ footer {
     .button-imprimir{
         display: none;
     }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #2c3e50;
 }

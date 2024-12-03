@@ -37,18 +37,33 @@
         </section>
 
         <section>
-            <h2><i class="fas fa-chart-bar"></i> Venda dos Produtos</h2>
-            <ul>
-                {% for produto in totais_por_produto %}
-                    <li>
-                        {{ produto.camiseta__time__nome }} {{ produto.camiseta__estilo}} {{ produto.tamanho__tamanho }} - 
-                        Quantidade Vendida: <span class="highlight">{{ produto.total_quantidade }}</span> - 
-                        Total Vendido: <span class="highlight">R$ {{ produto.total_arrecadado|floatformat:2 }}</span> - 
-                        Lucro Bruto: <span class="highlight">R$ {{ produto.lucro_bruto|floatformat:2 }}</span>
-                    </li>
-                {% endfor %}
-            </ul>
+            <h2><i class="fas fa-chart-bar"></i> Vendas Totais por Produto</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Estilo</th>
+                        <th>Tamanho</th>
+                        <th>Quantidade Vendida</th>
+                        <th>Total Vendido</th>
+                        <th>Lucro Bruto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in totais_por_produto %}
+                        <tr>
+                            <td>{{ produto.camiseta__time__nome }}</td>
+                            <td>{{ produto.camiseta__estilo }}</td>
+                            <td>{{ produto.tamanho__tamanho }}</td>
+                            <td><span>{{ produto.total_quantidade }}</span></td>
+                            <td><span>R$ {{ produto.total_arrecadado|floatformat:2 }}</span></td>
+                            <td><span>R$ {{ produto.lucro_bruto|floatformat:2 }}</span></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </section>
+        
 
         <section>
             <h2>Histórico de Vendas</h2>
