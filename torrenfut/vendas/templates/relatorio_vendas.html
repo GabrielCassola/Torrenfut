@@ -3,56 +3,92 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório de Vendas</title>
     <link rel="stylesheet" href="{% static 'relatorio_vendas.css' %}">
     <link rel="icon" type="image/x-icon" href="/media/icones/icone.png">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <h1>Relatório de Vendas</h1>
-    <p>Histórico de Vendas</p>
-    {% for compra in compras %}
-        <h2>Compra ID: {{ compra.id }} - Usuário: {{ compra.usuario.username }} - Data: {{ compra.data_compra }}</h2>
-        <p>Total: <span class="highlight">R$ {{ compra.total }}</span></p>
+    <header>
+        <h1><i class="fas fa-file-alt"></i> Relatório de Vendas</h1>
+    </header>
+    <main>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Camiseta</th>
-                    <th>Tamanho</th>
-                    <th>Quantidade</th>
-                    <th>Preço Unitário</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in itens %}
-                    {% if item.compra_id == compra.id %}
-                        <tr>
-                            <td>{{ item.camiseta.time }}</td>
-                            <td>{{ item.tamanho.tamanho }}</td>
-                            <td>{{ item.quantidade }}</td>
-                            <td>R$ {{ item.preco_unitario }}</td>
-                            <td>R$ {{ item.subtotal }}</td>
-                        </tr>
-                    {% endif %}
+        <section>
+            <h2><i class="fas fa-money-bill-wave"></i> Faturamento</h2>
+            <p>Total Geral: <span class="highlight">R$ {{ total_geral }}</span></p>
+        </section>
+        <section>
+            <h2><i class="fas fa-money-bill-wave"></i> Custo Total</h2>
+            <p>Total: <span class="highlight">R$ {{ custo_geral }}</span></p>
+        </section>
+        <section>
+            <h2><i class="fas fa-money-bill-wave"></i> Lucro gerado</h2>
+            <p>Total: <span class="highlight">R$ {{ lucro_bruto|floatformat:2 }}</span></p>
+        </section>
+        <section>
+            <h2><i class="fas fa-money-bill-wave"></i> Margem de lucro</h2>
+            <p><span class="highlight"> {{ margem_lucro|floatformat:2 }}%</span></p>
+        </section>
+        <section>
+            <h2><i class="fas fa-money-bill-wave"></i> Ticket Medio</h2>
+            <p><span class="highlight"> {{ ticket_medio|floatformat:2 }}</span></p>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-chart-bar"></i> Venda dos Produtos</h2>
+            <ul>
+                {% for produto in totais_por_produto %}
+                    <li>
+                        {{ produto.camiseta__time__nome }} {{ produto.camiseta__estilo}} {{ produto.tamanho__tamanho }} - 
+                        Quantidade Vendida: <span class="highlight">{{ produto.total_quantidade }}</span> - 
+                        Total Vendido: <span class="highlight">R$ {{ produto.total_arrecadado|floatformat:2 }}</span> - 
+                        Lucro Bruto: <span class="highlight">R$ {{ produto.lucro_bruto|floatformat:2 }}</span>
+                    </li>
                 {% endfor %}
-            </tbody>
-        </table>
-    {% endfor %}
+            </ul>
+        </section>
 
-    <h2>Venda dos Produtos</h2>
-    <ul>
-        {% for produto in totais_por_produto %}
-            <li>
-                {{ produto.camiseta__time__nome }} {{ produto.camiseta__estilo}} {{ produto.tamanho__tamanho }} - 
-                Total Vendido: <span class="highlight">{{ produto.total_quantidade }}</span> - 
-                Total Arrecadado: <span class="highlight">R$ {{ produto.total_arrecadado|floatformat:2 }}</span>
-            </li>
-        {% endfor %}
-    </ul>
-
-    <h2>Faturamento</h2>
-    <p>Total Geral: <span class="highlight">R$ {{ total_geral }}</span></p>
+        <section>
+            <h2>Histórico de Vendas</h2>
+            {% for compra in compras %}
+                <div class="compra">
+                    <h3>Compra ID: {{ compra.id }} - Usuário: {{ compra.usuario.username }} - Data: {{ compra.data_compra }}</h3>
+                    <p>Total: <span class="highlight">R$ {{ compra.total }}</span></p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Camiseta</th>
+                                <th>Tamanho</th>
+                                <th>Quantidade</th>
+                                <th>Preço Unitário</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in itens %}
+                                {% if item.compra_id == compra.id %}
+                                    <tr>
+                                        <td>{{ item.camiseta.time }} {{item.camiseta.estilo}}</td>
+                                        <td>{{ item.tamanho.tamanho }}</td>
+                                        <td>{{ item.quantidade }}</td>
+                                        <td>R$ {{ item.preco_unitario }}</td>
+                                        <td>R$ {{ item.subtotal }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        </section>
+       
+    </main>
+    <footer>
+        <b><p>Relatório gerado em {{ agora|date:"d/m/Y - H:i" }}</p></b>
+        <button class="button-imprimir" onclick="window.print()">Imprimir Relatório</button>
+    </footer>
 </body>
 </html>
+
