@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.template import loader
 from django.http import HttpResponse
 from django.db.models import Sum, F
-
+from django.utils.timezone import now
 
 @login_required
 def adicionar_ao_carrinho(request, camiseta_id):
@@ -134,26 +134,57 @@ def remover_item(request, item_id):
     
     return redirect('ver_carrinho')
 
-def relatorio_vendas(modeladmin, request, queryset): # Action no admin exige 3 argumentos, mesmo que não sejam usados
+def obter_ultima_venda():
+    ultimo_registro = Compra.objects.last()
 
-     # Obter os itens de compra apenas das compras selecionadas
+    if ultimo_registro:
+        ultimo_id = ultimo_registro.id
+        return ultimo_id
+    else:
+        print("A tabela está vazia.")
+    
+def relatorio_vendas(modeladmin, request, queryset):  # Action no admin exige 3 argumentos, mesmo que não sejam usados
+    # Obter os itens de compra apenas das compras selecionadas
     itens = ItemCompra.objects.filter(compra__in=queryset)
     compras = Compra.objects.prefetch_related('itens_compra').filter(id__in=queryset)
 
-    # Calcular o total de cada produto vendido e o total arrecadado
-    totais_por_produto = itens.values('camiseta__time__nome', 'tamanho__tamanho', 'camiseta__estilo').annotate(
-    total_quantidade=Sum('quantidade'),
-    total_arrecadado=Sum(F('quantidade') * F('preco_unitario'))
+    # Calcular totais por produto (quantidade, arrecadação e lucro bruto)
+    totais_por_produto = itens.values(
+        'camiseta__time__nome', 'tamanho__tamanho', 'camiseta__estilo'
+    ).annotate(
+        total_quantidade=Sum('quantidade'),
+        total_arrecadado=Sum(F('quantidade') * F('preco_unitario')),
+        total_custo=Sum(F('quantidade') * F('camiseta__preco_custo')),  # Preço de custo total (quantidade+preço de custo)
+        lucro_bruto=F('total_arrecadado') - F('total_custo')  # Calcula o lucro bruto
     )
 
+    # Calcular o total geral arrecadado
     total_geral = sum(item.subtotal() for item in itens)
 
-    # Carregar o template e passar apenas os itens filtrados
+    # Calcular o lucro bruto total
+    total_custo_geral = itens.aggregate(
+        total_custo=Sum(F('quantidade') * F('camiseta__preco_custo'))
+    )['total_custo'] or 0 # Previne erros caso um valor seja nulo, atribuindo o valor 0 para o custo caso seja
+
+    lucro_bruto_geral = total_geral - total_custo_geral
+
+    margem_lucro = (lucro_bruto_geral/total_geral) * 100
+
+    numero_vendas = obter_ultima_venda()
+
+    ticket_medio = total_geral/numero_vendas # Valor médio que cada cliente gasta em uma empresa
+
+    # Carregar o template e passar os dados
     template = loader.get_template('relatorio_vendas.html')
     context = {
         'compras': compras,
         'itens': itens,  # Somente itens das compras selecionadas
-        'totais_por_produto': totais_por_produto, # Total vendido por produto
-        'total_geral': total_geral  # Total arrecado
+        'totais_por_produto': totais_por_produto,  # Total vendido por produto
+        'total_geral': total_geral,  # Total arrecadado
+        'agora': now(),  # Data atual
+        'lucro_bruto': lucro_bruto_geral, # Lucro bruto
+        'margem_lucro': margem_lucro,
+        'custo_geral': total_custo_geral,
+        'ticket_medio': ticket_medio
     }
     return HttpResponse(template.render(context, request))
