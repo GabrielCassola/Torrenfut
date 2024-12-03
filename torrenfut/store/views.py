@@ -93,7 +93,7 @@ def grafico_estoque(request, produto_id):
 
     # Converter para formato JSON adequado para Google Charts
     dados_formatados = json.dumps({
-        tamanho: [["Data", "Estoque Novo"]] + entradas
+        tamanho: [["Data", "Estoque"]] + entradas
         for tamanho, entradas in dados_grafico.items()
     })
 
