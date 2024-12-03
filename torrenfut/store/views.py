@@ -191,7 +191,7 @@ def exportar_estoque_csv(modeladmin, request, queryset):
                 tamanho_instance.estoque_minimo,
                 camiseta.fornecedor.nome if camiseta.fornecedor else 'Não definido',
                 camiseta.tipo_produto.nome,
-                camiseta.preco_custo
+                camiseta.valor_final
             ]
             # Adiciona a linha ao arquivo Excel
             ws.append(row)
