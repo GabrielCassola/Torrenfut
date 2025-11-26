@@ -1,0 +1,111 @@
+/* store/static/css/planos.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.pricing-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 50px 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    border-top: 5px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card.destaque {
+    border-top: 5px solid #4CAF50;
+    transform: scale(1.05);
+    position: relative;
+    z-index: 1;
+}
+
+.tag-destaque {
+    background: #4CAF50;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.price {
+    font-size: 2.5em;
+    color: #333;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.price span {
+    font-size: 0.4em;
+    color: #666;
+}
+
+.features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.features li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.btn-plan {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    box-sizing: border-box;
+    transition: background 0.3s;
+}
+
+.btn-plan:hover {
+    background-color: #555;
+}
+
+.btn-plan.primary {
+    background: #4CAF50;
+}
+
+.btn-plan.primary:hover {
+    background-color: #45a049;
+}
+
+.intro-text {
+    text-align: center;
+    margin-top: 40px;
+    padding: 0 20px;
+}
+
+.intro-text h2 {
+    color: #333;
+    font-size: 2em;
+}

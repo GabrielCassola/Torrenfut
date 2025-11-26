@@ -8,6 +8,7 @@ from .models import Camiseta, CamisetaTamanho, TipoProduto
 import openpyxl
 from openpyxl.styles import Font
 from django.http import HttpResponse
+import random
 
 def obter_opcoes_filtro():
     # Obter opções únicas para filtro
@@ -40,6 +41,18 @@ def store(request):
     }
     return HttpResponse(template.render(context, request))
 
+def planos(request):
+    return render(request, 'planos.html')
+
+def mystery_box(request):
+    camisas_disponiveis = Camiseta.objects.filter(tamanhos__quantidade_em_estoque__gt=0).distinct()
+    
+    if camisas_disponiveis.exists():
+        camisa_sorteada = random.choice(camisas_disponiveis)
+    else:
+        camisa_sorteada = None
+
+    return render(request, 'mystery_box.html', {'camisa': camisa_sorteada})
 
 def produto(request, time_nome, estilo, temporada):
     try:

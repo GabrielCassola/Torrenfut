@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assinaturas TorrenFut</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/planos.css' %}">
+    <link rel="icon" type="image/x-icon" href="/media/logo/logo_torrenfut.png">
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <div class="intro-text">
+        <h2>Escolha sua Jornada</h2>
+        <p>Receba caixas misteriosas todos os meses e viva a emoção.</p>
+    </div>
+
+    <div class="pricing-container">
+        <div class="card">
+            <h3>Starter Box</h3>
+            <div class="price">R$ 79,90<span>/mês</span></div>
+            <ul class="features">
+                <li>⚽ 1 Camisa Oficial (Times Nacionais)</li>
+                <li>🎲 Fator Surpresa: Básico</li>
+                <li>🚚 Frete Grátis Sul/Sudeste</li>
+            </ul>
+            <a href="#" onclick="alert('Simulação: Redirecionando para Pagamento...')" class="btn-plan">Assinar Starter</a>
+        </div>
+
+        <div class="card destaque">
+            <div class="tag-destaque">MAIS POPULAR</div>
+            <h3>Pro Box</h3>
+            <div class="price">R$ 149,90<span>/mês</span></div>
+            <ul class="features">
+                <li>🌎 1 Camisa Oficial (Times Internacionais)</li>
+                <li>🧢 +1 Acessório Exclusivo</li>
+                <li>🎲 Fator Surpresa: Alto</li>
+                <li>🚚 Frete Grátis Brasil</li>
+            </ul>
+            <a href="#" onclick="alert('Simulação: Redirecionando para Pagamento...')" class="btn-plan primary">Assinar Pro</a>
+        </div>
+
+        <div class="card">
+            <h3>Elite Box</h3>
+            <div class="price">R$ 299,90<span>/mês</span></div>
+            <ul class="features">
+                <li>💎 1 Camisa Rara/Retrô ou Edição Limitada</li>
+                <li>🎁 +2 Itens Premium</li>
+                <li>🎟️ Sorteios de Ingressos</li>
+                <li>🚚 Frete Expresso</li>
+            </ul>
+            <a href="#" onclick="alert('Simulação: Redirecionando para Pagamento...')" class="btn-plan">Assinar Elite</a>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+</body>
+</html>

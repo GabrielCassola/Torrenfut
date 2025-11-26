@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Torrenfut</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <link rel="icon" type="image/x-icon" href="/media/icones/icone.png">
+    <link rel="icon" type="image/x-icon" href="/media/logo/logo_torrenfut.png">
     <script src='{% static "js/home.js" %}'></script>
     
     <!-- Dropdown com imagem -->
@@ -17,18 +17,24 @@
     
 </head>
 <body>
-
-    <!-- Cabeçalho -->
     <header class="header">
         <div class="header-left">
-            <h1><a href="/store">Torrenfut</a></h1> <!-- Nome do site à esquerda -->
-        </div>
+            <a href="/store" style="display: flex; align-items: center; text-decoration: none; color: white;">
+                <img src="/media/logo/logo_torrenfut.png" alt="Logo TorrenFut" style="height: 40px; margin-right: 10px;">
+                <div>
+                    <h1 style="margin: 0; font-size: 24px;">TORRENFUT</h1>
+                    <span style="font-size: 12px; font-weight: normal; letter-spacing: 1px;">A EMOÇÃO DO ESPORTE EM CADA CAIXA</span>
+                </div>
+            </a>
+    </div>
         <div class="header-center">
             <div class="buscar">
                 <input id="inputBusca" onkeyup="filtrar()" type="text" placeholder="O que você procura?">
             </div>
         </div>
         <div class="header-right">
+            <a href="{% url 'planos' %}" class="button">Clube de Assinatura</a>
+            <a href="{% url 'mystery_box' %}" class="button">Mystery Box</a>
             <!-- Botões de login e cadastro -->
             {% if user.is_authenticated %}
                 <a href="{% url 'perfil' %}" style="text-decoration: none; color: black;">

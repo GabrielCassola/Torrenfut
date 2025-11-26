@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrir Mystery Box</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mystery_box.css' %}">
+    <link rel="icon" type="image/x-icon" href="/media/logo/logo_torrenfut.png">
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <div class="box-wrapper">
+        <div id="initial-state" style="text-align: center;">
+            <h1 style="color: #4CAF50;">Sua Mystery Box está pronta!</h1>
+            <p>Nosso algoritmo selecionou um item baseado no seu perfil.</p>
+            
+            <div class="mystery-crate" id="crate">📦</div>
+            
+            <button class="btn-open" onclick="abrirCaixa()">ABRIR AGORA</button>
+        </div>
+
+        <div id="reveal-state" class="reveal-content">
+            <h2 style="color: #FFD700; font-size: 2em;">VOCÊ RECEBEU:</h2>
+            {% if camisa %}
+                <img src="{{ camisa.imagem.url }}" alt="Camisa Sorteada">
+                <h3>{{ camisa.time.nome }} - {{ camisa.temporada }}</h3>
+                <p style="color: #ccc;">Estilo: {{ camisa.estilo }}</p>
+                <br>
+                <a href="/store" class="btn-back">Voltar para a Loja</a>
+            {% else %}
+                <p>O estoque está vazio! Tente novamente mais tarde.</p>
+                <a href="/store" class="btn-back">Voltar</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function abrirCaixa() {
+            const crate = document.getElementById('crate');
+            const btn = document.querySelector('.btn-open');
+            
+            // 1. Adiciona animação de tremer e some o botão
+            crate.classList.add('shaking');
+            btn.style.display = 'none'; 
+            
+            // 2. Espera 2.5 segundos e revela o item
+            setTimeout(() => {
+                document.getElementById('initial-state').style.display = 'none';
+                document.getElementById('reveal-state').style.display = 'block';
+            }, 2500);
+        }
+    </script>
+
+    </body>
+</html>
